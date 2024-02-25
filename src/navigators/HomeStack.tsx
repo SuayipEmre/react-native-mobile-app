@@ -5,10 +5,11 @@ import { colors } from '../styles/colors';
 import LaunchScreen from '../screens/launchScreen';
 import { useLayoutEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { CustomHomeHeader } from './custom/homeHeader';
+import { Dimensions, View } from 'react-native';
 
 
 const Stack = createNativeStackNavigator()
-
 export const HomeStack: React.FC<any> = ({ navigation, route }) => {
 
 
@@ -40,11 +41,8 @@ export const HomeStack: React.FC<any> = ({ navigation, route }) => {
         name='HomeScreen'
         component={HomeScreen}
         options={{
-          headerStyle: {
-            backgroundColor: third,
-          },
-          headerLeft: () => <></>,
-          headerTitle: ''
+         headerShown : false,
+         
         }}
       />
 

@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
 type initialStateTypes = {
-    currentTheme : string
+    currentTheme : 'lightTheme' | 'darkTheme'
 }
 
 const initialState : initialStateTypes = {
@@ -14,7 +14,7 @@ export const theme  = createSlice({
     name : 'theme',
     initialState,
     reducers : {
-        _setCurrentTheme : (state, action : PayloadAction<string>) => {
+        _setCurrentTheme : (state, action : PayloadAction<'lightTheme' | 'darkTheme'>) => {
           state.currentTheme = action.payload
         }
     }

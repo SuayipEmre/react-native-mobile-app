@@ -1,21 +1,19 @@
-import {useLayoutEffect} from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import HomeScreen from '../screens/home';
+import { NavigationContainer } from '@react-navigation/native';
 import { useCurrentTheme } from '../store/features/theme/hooks';
 import { colors } from '../styles/colors';
 import ProfileScreen from '../screens/profile';
-import LaunchScreen from '../screens/launchScreen';
 import { HomeStack } from './HomeStack';
+import { HomeIcon, UserIcon } from '../icons';
 
 const Tab = createBottomTabNavigator()
 
-const RootNavigator : React.FC = () => {
+const RootNavigator: React.FC = () => {
 
   const currentTheme = useCurrentTheme()
-  const {primary, secondary, third} = colors[currentTheme]
+  const { primary, secondary, third } = colors[currentTheme]
 
-  
+
 
   return (
     <NavigationContainer>
@@ -28,13 +26,29 @@ const RootNavigator : React.FC = () => {
           tabBarInactiveTintColor: secondary,
           tabBarActiveBackgroundColor: third,
           tabBarInactiveBackgroundColor: third,
-          headerShown : false,
+          headerShown: false,
         }}
       >
 
-        <Tab.Screen name='HomeNavigator' component={HomeStack} />
+        <Tab.Screen
+          name='HomeNavigator'
+          component={HomeStack}
+          options={{
+            tabBarIcon : ({color}) =>(
+             <HomeIcon color={color} />
+            )
+          }}
+        />
 
-        <Tab.Screen name='ProfileScreen' component={ProfileScreen} />
+        <Tab.Screen
+         name='ProfileScreen'
+          component={ProfileScreen}
+          options={{
+            tabBarIcon : ({color}) =>(
+              <UserIcon color={color} />
+            )
+          }}
+          />
 
 
       </Tab.Navigator>

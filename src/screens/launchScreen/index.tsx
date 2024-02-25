@@ -21,9 +21,7 @@ const LaunchScreen: React.FC<any> = ({ navigation }) => {
     setTimeout(() => secondRingpadding.value = withSpring(secondRingpadding.value + height * 0.045), 100)
 
 
-    setTimeout(() => {
-      /*   navigation.navigate('HomeScreen') */
-    }, 3000)
+    setTimeout(() =>  navigation.navigate('HomeScreen') , 3000)
   }, [])
   return (
     <View style={[{ backgroundColor: third }, styles.container]}>
