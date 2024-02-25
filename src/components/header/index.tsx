@@ -26,9 +26,9 @@ const Header = () => {
             </View>
             
             <View style={styles.bottom_content}>
-                <HeaderItem text='TV-Series' />
-                <HeaderItem text='Movies' />
-                <HeaderItem text='Categories' />
+                <HeaderItem text='TV-Series' isCategoryButton={false} />
+                <HeaderItem text='Movies' isCategoryButton={false} />
+                <HeaderItem text='Categories' isCategoryButton />
             </View>
 
         </View>

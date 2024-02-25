@@ -7,7 +7,7 @@ type initialStateTypes = {
 }
 
 const initialState : initialStateTypes = {
-    currentTheme : 'lightTheme',
+    currentTheme : 'darkTheme',
 }
 
 export const theme  = createSlice({

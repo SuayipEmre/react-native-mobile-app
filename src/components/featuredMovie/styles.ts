@@ -3,7 +3,6 @@ import { Dimensions, StyleSheet } from "react-native"
 const {  height } = Dimensions.get('screen')
 export default  StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         marginTop: 15,
     },
