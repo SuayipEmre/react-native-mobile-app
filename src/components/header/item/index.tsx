@@ -7,20 +7,28 @@ import { commonStyles } from "../../../styles/commonStyle"
 
 type HeaderItemPropsType = {
     text: string,
-    isCategoryButton: boolean
+    isCategoryButton: boolean,
+    modalVisible? : boolean,
+    setModalVisible? : (modalVisible : boolean) => void 
 }
 
 
-const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton }) => {
+const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, modalVisible, setModalVisible}) => {
     const currentTheme = useCurrentTheme()
     const { primary, secondary } = colors[currentTheme]
+
+    const handleModalClick = () => {
+      console.log(modalVisible);
+      setModalVisible && setModalVisible(!modalVisible)
+      
+    }
     return (
         <View style={[{
             borderColor: secondary,
         }, styles.item_container]}>
 
             {
-                isCategoryButton ? <TouchableOpacity activeOpacity={.7}>
+                isCategoryButton ? <TouchableOpacity activeOpacity={.7} onPress={handleModalClick}>
                      <Text style={[{ color: primary }, styles.item]}>{text}</Text>
                 </TouchableOpacity> : (
 
