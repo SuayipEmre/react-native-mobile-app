@@ -4,6 +4,8 @@ import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import { MovieTypes } from '../../types/movie'
 import MovieList from '../../components/movieList'
+import GenresModal from '../../components/genresModal'
+import { useModalVisible } from '../../store/features/modals/movieGenres/hooks'
 
 
 type HomeScreenContainerPropsType = {
@@ -21,6 +23,9 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
     upComing = [],
     
 }) => {
+
+
+    const isModalVisible: boolean = useModalVisible()
 
     return (
         <ScrollView contentContainerStyle={{ alignItems: 'center', marginTop: 16, }}>
@@ -47,9 +52,10 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
                     <Text style={{ color: '#fff', fontSize: 18, fontWeight: '600' }}>Upcoming</Text>
                     <MovieList movies={upComing} />
                 </View>
-
-                
             </View>
+            {
+                isModalVisible && <GenresModal />
+            }
         </ScrollView >
     )
 }

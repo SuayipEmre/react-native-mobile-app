@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {  Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { commonStyles } from '../../styles/commonStyle'
 import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
-import { CloseIcon } from '../../icons';
+import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
+import Ant from 'react-native-vector-icons/AntDesign';
 
 
-type CategoriesModalPropsType = {
-    setModalVisible: (modalVisible: boolean) => void
-}
-const CategoriesModal: React.FC<CategoriesModalPropsType> = ({ setModalVisible }) => {
+const GenresModal: React.FC = () => {
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
     const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
 
@@ -22,7 +20,7 @@ const CategoriesModal: React.FC<CategoriesModalPropsType> = ({ setModalVisible }
 
 
     const handleCloseModal = () => {
-        setModalVisible(false)
+        setIsModalVisible(false)
     }
     return (
         <Modal animationType="slide" transparent={true}>
@@ -37,7 +35,7 @@ const CategoriesModal: React.FC<CategoriesModalPropsType> = ({ setModalVisible }
                 }
 
                 <TouchableOpacity onPress={handleCloseModal} >
-                    <CloseIcon color='#fff' />
+                    <Ant  name="close" color='#fff' size={24} />
                 </TouchableOpacity>
 
             </ScrollView>
@@ -46,7 +44,7 @@ const CategoriesModal: React.FC<CategoriesModalPropsType> = ({ setModalVisible }
     )
 }
 
-export default CategoriesModal
+export default GenresModal
 
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({

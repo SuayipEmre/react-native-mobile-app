@@ -1,39 +1,41 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../../styles/colors'
 import { useCurrentTheme } from '../../../store/features/theme/hooks'
-const { width, height } = Dimensions.get('screen')
 import { commonStyles } from "../../../styles/commonStyle"
+import { setIsModalVisible } from '../../../store/features/modals/movieGenres/actions'
 
 type HeaderItemPropsType = {
     text: string,
     isCategoryButton: boolean,
-    modalVisible? : boolean,
-    setModalVisible? : (modalVisible : boolean) => void 
+    modalVisible?: boolean,
 }
 
 
-const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, modalVisible, setModalVisible}) => {
+const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, modalVisible}) => {
     const currentTheme = useCurrentTheme()
     const { primary, secondary } = colors[currentTheme]
 
     const handleModalClick = () => {
-      console.log(modalVisible);
-      setModalVisible && setModalVisible(!modalVisible)
-      
+        setIsModalVisible(!modalVisible)
     }
+
+
     return (
         <View style={[{
             borderColor: secondary,
         }, styles.item_container]}>
 
             {
-                isCategoryButton ? <TouchableOpacity activeOpacity={.7} onPress={handleModalClick}>
-                     <Text style={[{ color: primary }, styles.item]}>{text}</Text>
-                </TouchableOpacity> : (
+                isCategoryButton ?
+                    <TouchableOpacity activeOpacity={.7} onPress={handleModalClick}>
+                        <Text style={[{ color: primary }, styles.item]}>{text}</Text>
+                    </TouchableOpacity>
+                    :
+                    (
 
-                    <Text style={[{ color: primary }, styles.item]}>{text}</Text>
-                )
+                        <Text style={[{ color: primary }, styles.item]}>{text}</Text>
+                    )
             }
 
 

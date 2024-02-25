@@ -29,14 +29,9 @@ const HomeScreen = () => {
   else if (isPopularMoviesLoading || isTopRatedLoading || isNowPlayingLoading || isUpComingLoading) return <ActivityIndicator />
 
   return (
-    <SafeAreaView style={{
-      backgroundColor: third,
-      flex: 1,
-    }}>
+    <SafeAreaView style={{backgroundColor: third,flex: 1,}}>
       <StatusBar barStyle={currentTheme == 'darkTheme' ? 'light-content' : 'dark-content'} />
       <HomeScreenContainer popularMovies={popularMovies.results} topRated={topRated.results} nowPlaying={nowPlaying.results} upComing={upComing.results} />
-
-
     </SafeAreaView>
   )
 }

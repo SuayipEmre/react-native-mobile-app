@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux'
 import theme from '../features/theme'
 import moviesApi from '../features/APIs/movies'
 import genresApi from '../features/APIs/genres'
+import movieGenres from '../features/modals/movieGenres'
 
 const store = configureStore({
 
     reducer : {
         theme : theme,
+        movieGenres :movieGenres,
         [moviesApi.reducerPath] : moviesApi.reducer,
         [genresApi.reducerPath] : genresApi.reducer
     },

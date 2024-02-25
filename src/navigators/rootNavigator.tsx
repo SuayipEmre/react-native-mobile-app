@@ -4,7 +4,8 @@ import { useCurrentTheme } from '../store/features/theme/hooks';
 import { colors } from '../styles/colors';
 import ProfileScreen from '../screens/profile';
 import { HomeStack } from './HomeStack';
-import { HomeIcon, UserIcon } from '../icons';
+import { UserIcon } from '../icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator()
 
@@ -35,7 +36,7 @@ const RootNavigator: React.FC = () => {
           component={HomeStack}
           options={{
             tabBarIcon : ({color}) =>(
-             <HomeIcon color={color} />
+              <Icon name="home" color={color} size={24}  />
             )
           }}
         />
