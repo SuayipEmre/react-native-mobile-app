@@ -1,6 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { useCurrentTheme } from '../../../store/features/theme/hooks'
 import { commonStyles } from "../../../styles/commonStyle"
 import { setIsModalVisible } from '../../../store/features/modals/movieGenres/actions'
 import { colors } from '../../../styles/colors'
@@ -13,7 +12,6 @@ type HeaderItemPropsType = {
 
 
 const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, modalVisible}) => {
-    const currentTheme = useCurrentTheme()
 
     const handleModalClick = () => {
         setIsModalVisible(!modalVisible)

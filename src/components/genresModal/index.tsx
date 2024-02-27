@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import {  Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
+import { Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { commonStyles } from '../../styles/commonStyle'
 import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
 import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
 import Ant from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 
 const GenresModal: React.FC = () => {
+    const navigation = useNavigation()
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
     const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
 
@@ -16,26 +18,36 @@ const GenresModal: React.FC = () => {
         }
     }, [data, isError, isLoading])
 
-    console.log(genres);
 
 
-    const handleCloseModal = () => {
+    const handleCloseModal = () => setIsModalVisible(false)
+    
+
+    const selectGenre = (genreid : string, genreName:string) => {
+        //@ts-ignore
+        navigation.navigate('MoviesScreen', {
+            isMoviesBySearch:false,
+            isMoviesByGenre: true,
+            genreid,
+            value :genreName
+        })
         setIsModalVisible(false)
     }
+
     return (
         <Modal animationType="slide" transparent={true}>
             <ScrollView contentContainerStyle={styles.modalView}>
 
                 {
                     genres.map(item => (
-                        <TouchableOpacity key={item.id} style={styles.genre_button} activeOpacity={.8}>
+                        <TouchableOpacity key={item.id} style={styles.genre_button} activeOpacity={.8} onPress={() => selectGenre(String(item.id), item.name)}>
                             <Text style={styles.genre_text}>{item.name}</Text>
                         </TouchableOpacity>
                     ))
                 }
 
                 <TouchableOpacity onPress={handleCloseModal} >
-                    <Ant  name="close" color='#fff' size={24} />
+                    <Ant name="close" color='#fff' size={24} />
                 </TouchableOpacity>
 
             </ScrollView>
@@ -55,12 +67,12 @@ const styles = StyleSheet.create({
         height: height,
         ...commonStyles.centerElements
     },
-    genre_button:{
-        marginBottom : 12,
+    genre_button: {
+        marginBottom: 12,
     },
-    genre_text : {
-        fontSize : 20,
-        color:'#fff',
+    genre_text: {
+        fontSize: 20,
+        color: '#fff',
     },
 
 });
