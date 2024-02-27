@@ -1,6 +1,8 @@
 import { Dimensions, StyleSheet } from "react-native"
-
+import { colors } from "../../styles/colors"
 const {  height } = Dimensions.get('screen')
+
+
 export default  StyleSheet.create({
     container: {
         alignItems: 'center',
@@ -40,6 +42,7 @@ export default  StyleSheet.create({
         borderRadius : 15,
     },
     top_text: {
+        color : colors.primary,
         fontSize : 20,
         fontWeight :'bold'
     },

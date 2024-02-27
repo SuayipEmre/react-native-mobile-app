@@ -1,7 +1,5 @@
-import { Dimensions, Image, ListRenderItem, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, ListRenderItem, StyleSheet,  View } from "react-native";
 import { MovieTypes } from "../../types/movie";
-import { useCurrentTheme } from "../../store/features/theme/hooks";
-import { colors } from "../../styles/colors";
 
 export const renderMovies: ListRenderItem<MovieTypes> = ({ item }) => {
 

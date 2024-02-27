@@ -1,6 +1,5 @@
 import { Text, ActivityIndicator, SafeAreaView, StatusBar } from 'react-native'
 import React from 'react'
-import { useCurrentTheme } from '../../store/features/theme/hooks'
 import { colors } from '../../styles/colors'
 import HomeScreenContainer from '../../containers/homeScreenContainer'
 import {
@@ -20,8 +19,6 @@ const HomeScreen = () => {
   const { data: upComing, isLoading: isUpComingLoading, isError: isUpComingError } = useFetchUpComingMoviesQuery({})
 
 
-  const currentTheme = useCurrentTheme()
-  const {third} = colors[currentTheme]
 
 
 
@@ -29,8 +26,8 @@ const HomeScreen = () => {
   else if (isPopularMoviesLoading || isTopRatedLoading || isNowPlayingLoading || isUpComingLoading) return <ActivityIndicator />
 
   return (
-    <SafeAreaView style={{backgroundColor: third,flex: 1,}}>
-      <StatusBar barStyle={currentTheme == 'darkTheme' ? 'light-content' : 'dark-content'} />
+    <SafeAreaView style={{backgroundColor: colors.third,flex: 1,}}>
+      <StatusBar barStyle={ 'light-content'} />
       <HomeScreenContainer popularMovies={popularMovies.results} topRated={topRated.results} nowPlaying={nowPlaying.results} upComing={upComing.results} />
     </SafeAreaView>
   )

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../../styles/colors'
 import { useCurrentTheme } from '../../../store/features/theme/hooks'
 import { commonStyles } from "../../../styles/commonStyle"
 import { setIsModalVisible } from '../../../store/features/modals/movieGenres/actions'
+import { colors } from '../../../styles/colors'
 
 type HeaderItemPropsType = {
     text: string,
@@ -14,7 +14,6 @@ type HeaderItemPropsType = {
 
 const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, modalVisible}) => {
     const currentTheme = useCurrentTheme()
-    const { primary, secondary } = colors[currentTheme]
 
     const handleModalClick = () => {
         setIsModalVisible(!modalVisible)
@@ -23,18 +22,18 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isCategoryButton, mod
 
     return (
         <View style={[{
-            borderColor: secondary,
+            borderColor: colors.secondary,
         }, styles.item_container]}>
 
             {
                 isCategoryButton ?
                     <TouchableOpacity activeOpacity={.7} onPress={handleModalClick}>
-                        <Text style={[{ color: primary }, styles.item]}>{text}</Text>
+                        <Text style={[{ color: colors.primary }, styles.item]}>{text}</Text>
                     </TouchableOpacity>
                     :
                     (
 
-                        <Text style={[{ color: primary }, styles.item]}>{text}</Text>
+                        <Text style={[{ color: colors.primary }, styles.item]}>{text}</Text>
                     )
             }
 

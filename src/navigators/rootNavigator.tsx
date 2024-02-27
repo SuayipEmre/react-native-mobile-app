@@ -1,33 +1,33 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { useCurrentTheme } from '../store/features/theme/hooks';
-import { colors } from '../styles/colors';
 import ProfileScreen from '../screens/profile';
 import { HomeStack } from './HomeStack';
 import { UserIcon } from '../icons';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { colors } from '../styles/colors';
 
 const Tab = createBottomTabNavigator()
 
 const RootNavigator: React.FC = () => {
 
-  const currentTheme = useCurrentTheme()
-  const { primary, secondary, third } = colors[currentTheme]
 
 
 
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName='HomeNavigator'
         screenOptions={{
           tabBarHideOnKeyboard: true,
           tabBarShowLabel: false,
-          tabBarActiveTintColor: primary,
-          tabBarInactiveTintColor: secondary,
-          tabBarActiveBackgroundColor: third,
-          tabBarInactiveBackgroundColor: third,
+          tabBarActiveTintColor: colors.primary,
+          tabBarInactiveTintColor: colors.secondary,
+          tabBarActiveBackgroundColor:colors.third,
+          tabBarInactiveBackgroundColor: colors.third,
           headerShown: false,
+          tabBarStyle : {
+            backgroundColor:colors.third,
+          }
+          
         }}
       >
 
@@ -37,7 +37,9 @@ const RootNavigator: React.FC = () => {
           options={{
             tabBarIcon : ({color}) =>(
               <Icon name="home" color={color} size={24}  />
-            )
+            ),
+           
+          
           }}
         />
 

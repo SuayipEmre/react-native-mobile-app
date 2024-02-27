@@ -1,10 +1,9 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image,  Text, View } from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
-import { useCurrentTheme } from '../../store/features/theme/hooks'
-import { colors } from '../../styles/colors'
 import Buttons from './buttons'
 import styles from './styles'
+import Animated, { FadeInRight } from 'react-native-reanimated'
 
 
 type FeaturedMoviePropsTypes = {
@@ -12,11 +11,9 @@ type FeaturedMoviePropsTypes = {
 }
 
 const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ movie }) => {
-    const currentTheme = useCurrentTheme()
-    const { primary, secondary, third } = colors[currentTheme]
 
     return (
-        <View style={[{}, styles.container]}>
+        <Animated.View entering={FadeInRight.delay(100).delay(100).springify().damping(12)} style={styles.container}>
 
 
             <View style={styles.info_container}>
@@ -26,7 +23,7 @@ const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ movie }) => {
                     <Text style={[{ color: '#fff' }, styles.title]}>{movie.original_title}</Text>
                     
                     <View style={styles.top_text_container}>
-                        <Text style={[{color : primary},styles.top_text]}>TOP 10!</Text>
+                        <Text style={styles.top_text}>TOP 10!</Text>
                     </View>
                     
                     
@@ -35,7 +32,7 @@ const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ movie }) => {
             </View>
 
 
-        </View>
+        </Animated.View>
     )
 }
 

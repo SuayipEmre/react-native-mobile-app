@@ -1,15 +1,12 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { useCurrentTheme } from '../../store/features/theme/hooks'
 import { colors } from '../../styles/colors'
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated'
 const { width, height } = Dimensions.get('window')
-import {commonStyles} from '../../styles/commonStyle'
+import { commonStyles } from '../../styles/commonStyle'
 
 const LaunchScreen: React.FC<any> = ({ navigation }) => {
 
-  const currentTheme = useCurrentTheme()
-  const { primary, secondary, third } = colors[currentTheme]
 
 
   const firstRingpadding = useSharedValue(0)
@@ -21,26 +18,20 @@ const LaunchScreen: React.FC<any> = ({ navigation }) => {
     setTimeout(() => secondRingpadding.value = withSpring(secondRingpadding.value + height * 0.045), 100)
 
 
-    setTimeout(() =>  navigation.navigate('HomeScreen') , 3000)
+     setTimeout(() => navigation.navigate('HomeScreen'), 3000) 
   }, [])
   return (
-    <View style={[{ backgroundColor: third }, styles.container]}>
+    <View style={styles.container}>
 
       <Animated.View style={[{
         padding: firstRingpadding,
-        backgroundColor: secondary,
       }, styles.first_ring]}>
 
-        <Animated.View style={[{ padding: secondRingpadding, backgroundColor:primary }, styles.second_ring]}>
-          
-       <View style={[{
-            backgroundColor:third,
+        <Animated.View style={styles.second_ring}>
 
-       }, styles.title_container]}>
-       <Text style={[{
-            color : primary,
-          }, styles.title]}>MCMOVIE</Text>
-       </View>
+          <View style={styles.title_container}>
+            <Text style={styles.title}>MM</Text>
+          </View>
 
 
         </Animated.View>
@@ -54,6 +45,7 @@ export default LaunchScreen
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.third,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
@@ -61,19 +53,23 @@ const styles = StyleSheet.create({
   first_ring: {
     alignItems: 'center',
     borderRadius: width / 2,
+    backgroundColor: colors.secondary,
   },
   second_ring: {
+    backgroundColor: colors.primary,
     alignItems: 'center',
     borderRadius: width / 2,
   },
-  title_container:{
-    width : width / 2,
+  title_container: {
+    backgroundColor: colors.primary,
+    width: width / 2,
     ...commonStyles.centerElements,
-    borderRadius : width / 2,
-    padding : 15,
+    borderRadius: width / 2,
+    padding: 15,
   },
   title: {
-    fontSize : 30,
+    color: colors.third,
+    fontSize: 30,
   },
 
 

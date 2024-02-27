@@ -9,10 +9,7 @@ type MovieListPropsType = {
 }
 const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
 
-  
-
     return (
-        <View>
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
@@ -21,7 +18,6 @@ const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
                 decelerationRate={'normal'}
                 renderItem={renderMovies}
             />
-        </View>
     )
 }
 
