@@ -6,7 +6,7 @@ import MovieCard from '../../components/movieCard'
 type moviesScreenContainerProps = {
     movie : Array<MovieTypes> | [],
 }
-const MoviesScreenContainer : React.FC<moviesScreenContainerProps> = ({movie = []}) => {
+const MovieScreensContainer : React.FC<moviesScreenContainerProps> = ({movie = []}) => {
 
 
 
@@ -25,6 +25,6 @@ const MoviesScreenContainer : React.FC<moviesScreenContainerProps> = ({movie = [
   )
 }
 
-export default MoviesScreenContainer
+export default MovieScreensContainer
 
 const styles = StyleSheet.create({})

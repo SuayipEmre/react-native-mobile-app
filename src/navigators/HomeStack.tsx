@@ -1,16 +1,18 @@
-import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import { colors } from '../styles/colors';
 import LaunchScreen from '../screens/launchScreen';
 import { useEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import MoviesScreen from '../screens/movies';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import MoviesByGenreScreen from '../screens/moviesByGenre';
+import MoviesBySearch from '../screens/moviesBySearchValue';
 
 export type RootStackParamList = {
   LaunchScreen: undefined;
   HomeScreen: undefined
-  MoviesScreen: { isMoviesBySearch: boolean, isMoviesByGenre: boolean, value: string, genreid? : string  }
+  MoviesByGenreScreen: {value: string, genreid? : string  } | undefined,
+  MoviesBySearch : {value:string} | undefined
 }
 
 
@@ -51,8 +53,8 @@ export const HomeStack: React.FC<any> = ({ route, navigation }) => {
       />
 
       <Stack.Screen
-        name="MoviesScreen"
-        component={MoviesScreen}
+        name="MoviesByGenreScreen"
+        component={MoviesByGenreScreen}
         options={({ route }: { route: any }) => (
           {
             headerTitle: route?.params?.value || '',
@@ -68,11 +70,35 @@ export const HomeStack: React.FC<any> = ({ route, navigation }) => {
 
           }
         )
-
-
         }
       />
+      <Stack.Screen
+        name="MoviesBySearch"
+        component={MoviesBySearch}
+        options={({ route }: { route: any }) => (
+          {
+            headerTitle: route?.params?.value || '',
+            headerTitleStyle: {
+              fontSize: 18,
+            },
+            headerLeft : () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
+            headerTintColor : colors.primary,
+            headerStyle: {
+              backgroundColor: colors.third,
+
+            },
+
+          }
+        )
+        }
+      />
+
+
+      
 
     </Stack.Navigator>
   )
 }
+
+
+//

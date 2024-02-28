@@ -1,15 +1,27 @@
-import { Dimensions, StyleSheet,  TextInput, View } from 'react-native'
+import { Dimensions, StyleSheet,  TextInput, } from 'react-native'
 import React from 'react'
 import { useSearchValue } from '../../store/features/search/hooks'
 import { colors } from '../../styles/colors'
 import { setSearchValue } from '../../store/features/search/actions'
+import { NavigationContainerRef, useNavigation } from '@react-navigation/native'
+import { RootStackParamList } from '../../types/screenTypes'
+
+export type RootNavigationProp = NavigationContainerRef<RootStackParamList>
 
 const SearchInput: React.FC = () => {
 
     const searchValue: string = useSearchValue()
 
+    
+    const navigation : RootNavigationProp = useNavigation()
 
-    const handleSubmit = () => {}
+    const handleSubmit = () => {
+        navigation.navigate('MoviesBySearch', {
+            value : searchValue
+        })
+
+        setSearchValue('')
+    }
 
     return (
             <TextInput
