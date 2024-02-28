@@ -3,9 +3,15 @@ import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import AuthenticationInput from '../../components/authenticationInput'
 import { commonStyles } from '../../styles/commonStyle'
+import {  useNavigation } from '@react-navigation/native'
+
 
 
 const LoginScreen: React.FC = () => {
+
+  const navigation : any = useNavigation()
+
+
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -20,11 +26,14 @@ const LoginScreen: React.FC = () => {
 
 
       <View style={styles.bottom_content}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.button_text}>Login</Text>
+        <TouchableOpacity style={styles.login_button}>
+          <Text style={styles.login_button_text}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.signup_button}>
+        <TouchableOpacity
+          style={styles.signup_button}
+          onPress={() => navigation.navigate('SignupScreen')}
+        >
 
           <Text style={styles.account_text}>
             Don't have an account yet?
@@ -57,14 +66,14 @@ const styles = StyleSheet.create({
     marginTop: 15,
     gap: 14,
   },
-  button: {
+  login_button: {
     ...commonStyles.centerElements,
     backgroundColor: '#292928',
     width: width * 0.3,
     height: height * 0.04,
 
   },
-  button_text: {
+  login_button_text: {
     color: colors.primary
   },
   signup_button: {},
