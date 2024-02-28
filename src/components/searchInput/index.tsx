@@ -5,6 +5,7 @@ import { colors } from '../../styles/colors'
 import { setSearchValue } from '../../store/features/search/actions'
 import { NavigationContainerRef, useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../types/screenTypes'
+import Animated, { FadeInRight } from 'react-native-reanimated'
 
 export type RootNavigationProp = NavigationContainerRef<RootStackParamList>
 
@@ -24,7 +25,10 @@ const SearchInput: React.FC = () => {
     }
 
     return (
-            <TextInput
+           <Animated.View
+           entering={FadeInRight.delay(100).duration(100).springify().damping(12)}
+           style={styles.container}>
+             <TextInput
                 style={styles.input}
                 value={searchValue}
                 autoCapitalize='none'
@@ -36,6 +40,7 @@ const SearchInput: React.FC = () => {
                 onSubmitEditing={handleSubmit}
                 selectionColor={colors.primary}
             />
+           </Animated.View>
     )
 }
 
@@ -45,8 +50,12 @@ export default SearchInput
 const {  height } = Dimensions.get('window')
 const styles = StyleSheet.create({
 
-    input: {
+    container:{
        flex:1,
+
+    },
+    input: {
+        
         color: colors.primary,
         zIndex: 12,
         height: height *0.04,

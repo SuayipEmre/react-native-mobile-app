@@ -30,7 +30,6 @@ export default StyleSheet.create({
     icon_container: {
         height: height * 0.04,
         ...commonStyles.centerElements,
-        backgroundColor:'red',
 
     },
 
