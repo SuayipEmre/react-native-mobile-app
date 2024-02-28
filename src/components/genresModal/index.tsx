@@ -4,11 +4,25 @@ import { commonStyles } from '../../styles/commonStyle'
 import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
 import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
 import Ant from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationContainerRef, useNavigation } from '@react-navigation/native';
+
+export type RootStackParamList = {
+    MoviesScreen: {
+      isMoviesBySearch: boolean;
+      isMoviesByGenre: boolean;
+      genreid: string;
+      value: string;
+    }
+    
+  }
+
+export type RootNavigationProp = NavigationContainerRef<RootStackParamList>;
 
 
 const GenresModal: React.FC = () => {
-    const navigation = useNavigation()
+
+    
+    const navigation : RootNavigationProp = useNavigation()
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
     const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
 
@@ -24,7 +38,7 @@ const GenresModal: React.FC = () => {
     
 
     const selectGenre = (genreid : string, genreName:string) => {
-        //@ts-ignore
+        
         navigation.navigate('MoviesScreen', {
             isMoviesBySearch:false,
             isMoviesByGenre: true,

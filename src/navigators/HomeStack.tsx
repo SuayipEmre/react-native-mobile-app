@@ -7,7 +7,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import MoviesScreen from '../screens/movies';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-type RootStackParamList = {
+export type RootStackParamList = {
   LaunchScreen: undefined;
   HomeScreen: undefined
   MoviesScreen: { isMoviesBySearch: boolean, isMoviesByGenre: boolean, value: string, genreid? : string  }

@@ -3,7 +3,6 @@ import React from 'react'
 import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import { MovieTypes } from '../../types/movie'
-import MovieList from '../../components/movieList'
 import GenresModal from '../../components/genresModal'
 import { useModalVisible } from '../../store/features/modals/movieGenres/hooks'
 import MovieListContainer, { fadeDirection } from '../../components/movieList/movieListContainer'
@@ -15,7 +14,7 @@ type HomeScreenContainerPropsType = {
     nowPlaying: Array<MovieTypes> | [],
     upComing: Array<MovieTypes> | [],
 }
-const { width, height } = Dimensions.get('screen')
+const { width } = Dimensions.get('screen')
 
 const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
     popularMovies = [],
@@ -35,7 +34,7 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
             <View style={{ width: width * 0.9 }}>
 
                 <Header />
-                <FeaturedMovie movie={popularMovies[2]} />
+                <FeaturedMovie movie={popularMovies[1]} />
 
                 <MovieListContainer title='Recently Popular' popularMovies={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
                 <MovieListContainer title='Top Rated' popularMovies={topRated} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />

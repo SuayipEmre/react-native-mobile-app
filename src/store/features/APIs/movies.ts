@@ -62,7 +62,7 @@ const moviesAPi = createApi({
             }
         }),
         fetchMoviesBygenre: builder.query({
-            query: (genreid:string) => {
+            query: (genreid: string) => {
                 return {
                     url: `/genre/${genreid}/movies`,
                     method: 'GET',
@@ -73,6 +73,20 @@ const moviesAPi = createApi({
                 }
             }
         }),
+
+        fetchMoviesBySearch: builder.query({
+            query: (searchValue:string) => {
+                return {
+                    url: '/search/movie',
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                        query : searchValue
+                    }
+                }
+            }
+        })
     })
 })
 
@@ -81,6 +95,7 @@ export const {
     useFetchTopRatedMoviesQuery,
     useFetchNowPlayingMoviesQuery,
     useFetchUpComingMoviesQuery,
-    useFetchMoviesBygenreQuery
+    useFetchMoviesBygenreQuery,
+    useFetchMoviesBySearchQuery
 } = moviesAPi
 export default moviesAPi

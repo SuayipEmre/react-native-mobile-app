@@ -8,9 +8,16 @@ import {
   , useFetchTopRatedMoviesQuery,
   useFetchUpComingMoviesQuery
 } from '../../store/features/APIs/movies'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootStackParamList } from '../../navigators/HomeStack'
 
 
-const HomeScreen = () => {
+
+type ProfileProps = NativeStackScreenProps<RootStackParamList, 'HomeScreen'>
+
+const HomeScreen : React.FC<ProfileProps> = ({route, navigation}) => {
+
+  
 
 
   const { data: popularMovies, isLoading: isPopularMoviesLoading, isError: isPopularMoviesError } = useFetchPopularMoviesQuery({})
