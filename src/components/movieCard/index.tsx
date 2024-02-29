@@ -1,8 +1,10 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { Image } from 'react-native'
 import styles from './styles'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { HomeNavigatorStackParamList } from '../../navigators/types'
 
 type MovieCardPropTypes = {
     movieItem: MovieTypes,
@@ -12,16 +14,23 @@ const {height : hp } = Dimensions.get("window")
 
 const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index }) => {
 
+    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+
+    const handleMovieDetails = () => {
+      navigation.navigate('MovieDetailsScreen',{
+        movie_id : movieItem.id
+      })
+    }
     return (
-        <View style={[{
+        <TouchableOpacity style={[{
             height : index % 3 == 0 ? hp / 4  : hp * 0.30,
-        },   styles.container]} >
+        },   styles.container]} onPress={handleMovieDetails} >
             <Image source={{ uri: `${process.env.IMAGE_PATH}/${movieItem.poster_path}` }}
             
             style={[{
                
             },styles.image]}/>
-        </View>
+        </TouchableOpacity>
     )
 }
 

@@ -19,6 +19,7 @@ const Buttons: React.FC = () => {
         <Text style={{ color:colors.primary }}>My List</Text>
       </View>
 
+
     </View>
   )
 }

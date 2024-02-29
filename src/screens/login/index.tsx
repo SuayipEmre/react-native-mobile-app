@@ -17,8 +17,6 @@ const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  console.log('email : ', email)
-  console.log('password : ', password)
 
   const handleLogin = async() => {
     

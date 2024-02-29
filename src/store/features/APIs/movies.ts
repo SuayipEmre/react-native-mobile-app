@@ -75,19 +75,48 @@ const moviesAPi = createApi({
         }),
 
         fetchMoviesBySearch: builder.query({
-            query: (searchValue:string) => {
+            query: (searchValue: string) => {
                 return {
                     url: '/search/movie',
                     method: 'GET',
                     params: {
                         lanaguage: 'en',
                         api_key: apiKey,
-                        query : searchValue
+                        query: searchValue
+                    }
+                }
+            }
+        }),
+
+        fetchMovieDetails: builder.query({
+            query: (movie_id: number) => {
+                return {
+                    url: `/movie/${movie_id}`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                    }
+                }
+            }
+        }),
+
+        fetchSimilarMovies :builder.query({
+            query: (id: number) => {
+                return {
+                    url: `/movie/${id}/similar`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
                     }
                 }
             }
         })
-    })
+    }),
+    
+  
+    
 })
 
 export const {
@@ -96,6 +125,8 @@ export const {
     useFetchNowPlayingMoviesQuery,
     useFetchUpComingMoviesQuery,
     useFetchMoviesBygenreQuery,
-    useFetchMoviesBySearchQuery
+    useFetchMoviesBySearchQuery,
+    useFetchMovieDetailsQuery,
+    useFetchSimilarMoviesQuery
 } = moviesAPi
 export default moviesAPi

@@ -2,7 +2,8 @@ export type HomeNavigatorStackParamList = {
     LaunchScreen: undefined;
     HomeScreen: undefined
     MoviesByGenreScreen: { value: string, genreid: string } ,
-    MoviesBySearchScreen: { value: string } 
+    MoviesBySearchScreen: { value: string } ,
+    MovieDetailsScreen : {movie_id : number}
 }
 
 

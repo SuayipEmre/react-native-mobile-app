@@ -8,13 +8,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MoviesByGenreScreen from '../screens/moviesByGenre';
 import { HomeNavigatorStackParamList } from './types';
 import MoviesBySearchScreen from '../screens/moviesBySearchValue';
+import MovieDetailsScreen from '../screens/movieDetails';
 
 
 
 const Stack = createNativeStackNavigator<HomeNavigatorStackParamList>()
 
 
-export const HomeStack = ({ route, navigation } : any) => {
+export const HomeStack = ({ route, navigation }: any) => {
 
 
   useEffect(() => {
@@ -56,8 +57,8 @@ export const HomeStack = ({ route, navigation } : any) => {
             headerTitleStyle: {
               fontSize: 18,
             },
-            headerLeft : () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
-            headerTintColor : colors.primary,
+            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
+            headerTintColor: colors.primary,
             headerStyle: {
               backgroundColor: colors.third,
 
@@ -76,8 +77,25 @@ export const HomeStack = ({ route, navigation } : any) => {
             headerTitleStyle: {
               fontSize: 18,
             },
-            headerLeft : () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
-            headerTintColor : colors.primary,
+            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
+            headerTintColor: colors.primary,
+            headerStyle: {
+              backgroundColor: colors.third,
+
+            },
+
+          }
+        )
+        }
+      />
+
+      <Stack.Screen
+        name="MovieDetailsScreen"
+        component={MovieDetailsScreen}
+        options={({ route }: { route: any }) => (
+          {
+            headerTitle : '',
+            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
             headerStyle: {
               backgroundColor: colors.third,
 
@@ -89,10 +107,12 @@ export const HomeStack = ({ route, navigation } : any) => {
       />
 
 
-      
+
+
 
     </Stack.Navigator>
   )
 }
+
 
 
