@@ -5,6 +5,7 @@
 # Xcode
 #
 build/
+GoogleService-Info.plist
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -25,6 +26,7 @@ ios/.xcode.env.local
 # Android/IntelliJ
 #
 build/
+google-services.json
 .idea
 .gradle
 local.properties

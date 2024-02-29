@@ -1,11 +1,11 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import AuthenticationInput from '../../components/authenticationInput'
 import { commonStyles } from '../../styles/commonStyle'
 import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-
+import auth from '@react-native-firebase/auth';
 
 type ProfileProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'LoginScreen'>
 
@@ -20,6 +20,18 @@ const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
   console.log('email : ', email)
   console.log('password : ', password)
 
+  const handleLogin = async() => {
+    
+    try {
+         await auth().signInWithEmailAndPassword(email, password)
+         Alert.alert('MM', 'sucsessfuly')
+    } catch (error : any | undefined) {
+        Alert.alert('MM', error.code)
+    }
+
+    
+}
+
   return (
     <View style={styles.container}>
 
@@ -28,7 +40,7 @@ const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
 
 
       <View style={styles.bottom_content}>
-        <TouchableOpacity style={styles.login_button}>
+        <TouchableOpacity style={styles.login_button} onPress={handleLogin}>
           <Text style={styles.login_button_text}>Login</Text>
         </TouchableOpacity>
 
