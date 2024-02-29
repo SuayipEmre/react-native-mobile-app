@@ -4,11 +4,11 @@ import { colors } from '../../styles/colors';
 import {  useFetchMoviesBygenreQuery } from '../../store/features/APIs/movies';
 import MovieScreensContainer from '../../containers/movieScreensContainer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../types/screenTypes';
+import { HomeNavigatorStackParamList } from '../../navigators/types';
 
-type ProfileProps = NativeStackScreenProps<RootStackParamList, 'MoviesByGenreScreen'>
+type ProfileProps = NativeStackScreenProps<HomeNavigatorStackParamList, 'MoviesByGenreScreen'>
 
-const MoviesByGenreScreen : React.FC<ProfileProps | any> = ({route, navigation}) => {
+const MoviesByGenreScreen : React.FC<ProfileProps> = ({route, navigation}) => {
   
     const{genreid}  = route.params
     const{data, isLoading, isError} = useFetchMoviesBygenreQuery(genreid)

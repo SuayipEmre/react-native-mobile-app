@@ -4,8 +4,8 @@ import { commonStyles } from '../../styles/commonStyle'
 import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
 import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
 import Ant from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
-import { RootNavigationProp } from '../searchInput';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { HomeNavigatorStackParamList } from '../../navigators/types';
 
 
 
@@ -15,7 +15,8 @@ import { RootNavigationProp } from '../searchInput';
 const GenresModal: React.FC = () => {
 
     
-    const navigation : RootNavigationProp = useNavigation()
+    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
     const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
 

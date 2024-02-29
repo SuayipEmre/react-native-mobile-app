@@ -1,4 +1,4 @@
-import { FlatList, Image, ListRenderItem, StyleSheet, Text, View } from 'react-native'
+import { FlatList} from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { renderMovies } from './renderMovies'
