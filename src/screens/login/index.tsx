@@ -3,13 +3,15 @@ import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import AuthenticationInput from '../../components/authenticationInput'
 import { commonStyles } from '../../styles/commonStyle'
-import {  useNavigation } from '@react-navigation/native'
+import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 
+type ProfileProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'LoginScreen'>
 
-const LoginScreen: React.FC = () => {
 
-  const navigation : any = useNavigation()
+const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
+
 
 
   const [email, setEmail] = useState<string>('')

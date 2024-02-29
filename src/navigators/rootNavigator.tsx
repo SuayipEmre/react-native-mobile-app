@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
 import ProfileScreen from '../screens/profile';
 import { HomeStack } from './HomeStack';
 import { UserIcon } from '../icons';
@@ -7,9 +7,27 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../styles/colors';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from './AuthenticationStack';
+import { AuthenticationNavigatorStackParamList, HomeNavigatorStackParamList, ProfileStackParamList } from './types';
 
-const Tab = createBottomTabNavigator()
-const Stack = createNativeStackNavigator()
+
+
+
+
+
+type BottomNavigatorRootStackParamList = {
+  HomeNavigator : NavigatorScreenParams<HomeNavigatorStackParamList>
+  ProfileScreen : NavigatorScreenParams<ProfileStackParamList>
+}
+
+
+type NativeStackNavigatorParamList = {
+  AuthenticationNavigator : NavigatorScreenParams<AuthenticationNavigatorStackParamList>
+}
+
+
+
+const Tab = createBottomTabNavigator<BottomNavigatorRootStackParamList>()
+const Stack = createNativeStackNavigator<NativeStackNavigatorParamList>()
 
 const RootNavigator: React.FC = () => {
 

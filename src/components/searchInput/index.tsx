@@ -3,21 +3,21 @@ import React from 'react'
 import { useSearchValue } from '../../store/features/search/hooks'
 import { colors } from '../../styles/colors'
 import { setSearchValue } from '../../store/features/search/actions'
-import { NavigationContainerRef, useNavigation } from '@react-navigation/native'
-import { RootStackParamList } from '../../types/screenTypes'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import Animated, { FadeInRight } from 'react-native-reanimated'
+import { HomeNavigatorStackParamList } from '../../navigators/types'
 
-export type RootNavigationProp = NavigationContainerRef<RootStackParamList>
+
 
 const SearchInput: React.FC = () => {
 
     const searchValue: string = useSearchValue()
 
     
-    const navigation : RootNavigationProp = useNavigation()
+    const navigation  = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
 
     const handleSubmit = () => {
-        navigation.navigate('MoviesBySearch', {
+        navigation.navigate('MoviesBySearchScreen', {
             value : searchValue
         })
 

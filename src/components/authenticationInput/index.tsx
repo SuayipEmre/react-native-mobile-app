@@ -9,6 +9,7 @@ type authInputPropsType = {
     setValue : (newValue : string) => void
 }
 const AuthenticationInput : React.FC<authInputPropsType> = ({isSecret, placeholder, value, setValue}) => {
+ 
   return (
     <View>
       <TextInput 

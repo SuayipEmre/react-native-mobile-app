@@ -2,14 +2,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/login';
 import SignupScreen from '../screens/signup';
 import { colors } from '../styles/colors';
-
-export type RootStackParamList = {
-  LoginScreen: undefined;
-  SignupScreen: undefined
-}
+import { AuthenticationNavigatorStackParamList } from './types';
 
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+const Stack = createNativeStackNavigator<AuthenticationNavigatorStackParamList>()
 
 
 export const AuthenticationStack: React.FC = () => {

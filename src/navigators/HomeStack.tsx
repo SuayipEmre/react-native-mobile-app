@@ -1,4 +1,4 @@
-import {createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import { colors } from '../styles/colors';
 import LaunchScreen from '../screens/launchScreen';
@@ -6,20 +6,15 @@ import { useEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MoviesByGenreScreen from '../screens/moviesByGenre';
-import MoviesBySearch from '../screens/moviesBySearchValue';
-
-export type RootStackParamList = {
-  LaunchScreen: undefined;
-  HomeScreen: undefined
-  MoviesByGenreScreen: {value: string, genreid? : string  } | undefined,
-  MoviesBySearch : {value:string} | undefined
-}
+import { HomeNavigatorStackParamList } from './types';
+import MoviesBySearchScreen from '../screens/moviesBySearchValue';
 
 
-const Stack = createNativeStackNavigator<RootStackParamList>()
+
+const Stack = createNativeStackNavigator<HomeNavigatorStackParamList>()
 
 
-export const HomeStack: React.FC<any> = ({ route, navigation }) => {
+export const HomeStack = ({ route, navigation } : any) => {
 
 
   useEffect(() => {
@@ -73,8 +68,8 @@ export const HomeStack: React.FC<any> = ({ route, navigation }) => {
         }
       />
       <Stack.Screen
-        name="MoviesBySearch"
-        component={MoviesBySearch}
+        name="MoviesBySearchScreen"
+        component={MoviesBySearchScreen}
         options={({ route }: { route: any }) => (
           {
             headerTitle: route?.params?.value || '',
@@ -101,4 +96,3 @@ export const HomeStack: React.FC<any> = ({ route, navigation }) => {
 }
 
 
-//
