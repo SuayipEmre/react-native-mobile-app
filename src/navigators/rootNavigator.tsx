@@ -8,7 +8,8 @@ import { colors } from '../styles/colors';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from './AuthenticationStack';
 import { AuthenticationNavigatorStackParamList, HomeNavigatorStackParamList, ProfileStackParamList } from './types';
-
+import { useEffect, useState } from 'react';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
 
 
@@ -31,7 +32,14 @@ const Stack = createNativeStackNavigator<NativeStackNavigatorParamList>()
 
 const RootNavigator: React.FC = () => {
 
-  const user:boolean = false
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null)
+
+
+  useEffect(() => {
+    auth().onAuthStateChanged(userState => {
+      setUser(userState)
+    })
+  }, [])
 
 
   if (user){
