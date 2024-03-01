@@ -6,21 +6,21 @@ import { useEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MoviesByGenreScreen from '../screens/moviesByGenre';
-import { HomeNavigatorStackParamList } from './types';
+import { MainNavigatorStackParamList } from './types';
 import MoviesBySearchScreen from '../screens/moviesBySearchValue';
 import MovieDetailsScreen from '../screens/movieDetails';
 
 
 
-const Stack = createNativeStackNavigator<HomeNavigatorStackParamList>()
+const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
 
 
-export const HomeStack = ({ route, navigation }: any) => {
+export const MainStack = ({ route, navigation }: any) => {
 
 
   useEffect(() => {
     const routeName = getFocusedRouteNameFromRoute(route)
-    routeName == undefined ? navigation.setOptions({ tabBarStyle: { display: "none" } }) : navigation.setOptions({ tabBarStyle: { display: "true", backgroundColor: "black" } })
+    routeName == undefined ? navigation.setOptions({ tabBarStyle: { display: "none" } }) : navigation.setOptions({ tabBarStyle: { display: "true", backgroundColor: colors.third } })
 
   }, [navigation, route]);
 

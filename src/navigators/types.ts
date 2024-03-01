@@ -1,4 +1,4 @@
-export type HomeNavigatorStackParamList = {
+export type MainNavigatorStackParamList = {
     LaunchScreen: undefined;
     HomeScreen: undefined
     MoviesByGenreScreen: { value: string, genreid: string } ,

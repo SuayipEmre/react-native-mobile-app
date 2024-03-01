@@ -4,7 +4,7 @@ import { MovieTypes } from '../../types/movie'
 import { Image } from 'react-native'
 import styles from './styles'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 
 type MovieCardPropTypes = {
     movieItem: MovieTypes,
@@ -14,7 +14,7 @@ const {height : hp } = Dimensions.get("window")
 
 const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index }) => {
 
-    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+    const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleMovieDetails = () => {
       navigation.navigate('MovieDetailsScreen',{

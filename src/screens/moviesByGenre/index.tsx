@@ -4,9 +4,9 @@ import { colors } from '../../styles/colors';
 import {  useFetchMoviesBygenreQuery } from '../../store/features/APIs/movies';
 import MovieScreensContainer from '../../containers/movieScreensContainer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { HomeNavigatorStackParamList } from '../../navigators/types';
+import { MainNavigatorStackParamList } from '../../navigators/types';
 
-type ProfileProps = NativeStackScreenProps<HomeNavigatorStackParamList, 'MoviesByGenreScreen'>
+type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MoviesByGenreScreen'>
 
 const MoviesByGenreScreen : React.FC<ProfileProps> = ({route, navigation}) => {
   

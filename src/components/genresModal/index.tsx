@@ -5,7 +5,8 @@ import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
 import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
 import Ant from 'react-native-vector-icons/AntDesign';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { HomeNavigatorStackParamList } from '../../navigators/types';
+import { MainNavigatorStackParamList } from '../../navigators/types';
+import { colors } from '../../styles/colors';
 
 
 
@@ -15,7 +16,7 @@ import { HomeNavigatorStackParamList } from '../../navigators/types';
 const GenresModal: React.FC = () => {
 
     
-    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+    const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
     const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
@@ -53,7 +54,7 @@ const GenresModal: React.FC = () => {
                 }
 
                 <TouchableOpacity onPress={handleCloseModal} >
-                    <Ant name="close" color='#fff' size={24} />
+                    <Ant name="close" color={colors.primary} size={24} />
                 </TouchableOpacity>
 
             </ScrollView>
@@ -67,8 +68,8 @@ export default GenresModal
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
     modalView: {
-        backgroundColor: '#000',
-        shadowColor: '#fff',
+        backgroundColor: colors.third,
+        shadowColor: colors.primary,
         width: width,
         height: height,
         ...commonStyles.centerElements

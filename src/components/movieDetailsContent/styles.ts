@@ -80,7 +80,7 @@ export default  StyleSheet.create({
         color: '#fff',
         fontSize: 16,
         marginVertical: 14,
-        marginLeft: 7,
+        marginLeft: 12,
 
     },
 

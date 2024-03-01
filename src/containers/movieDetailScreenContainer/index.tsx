@@ -4,7 +4,7 @@ import { MovieTypes, movieDetailsTypes } from '../../types/movie'
 import { useFetchSimilarMoviesQuery } from '../../store/features/APIs/movies'
 import { FlatList } from 'react-native'
 import { MovieDetailsContent } from '../../components/movieDetailsContent'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 type MovieDetailScreenContainerPropsType = {
@@ -14,7 +14,7 @@ type MovieDetailScreenContainerPropsType = {
 
 const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> = ({ movie }) => {
 
-  const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+  const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
   const { data, isLoading, isError } = useFetchSimilarMoviesQuery(movie.id)
 
   const getYear: string[] = movie.release_date.split("-");

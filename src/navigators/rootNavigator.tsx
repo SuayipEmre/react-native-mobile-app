@@ -1,22 +1,22 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
 import ProfileScreen from '../screens/profile';
-import { HomeStack } from './HomeStack';
 import { UserIcon } from '../icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../styles/colors';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from './AuthenticationStack';
-import { AuthenticationNavigatorStackParamList, HomeNavigatorStackParamList, ProfileStackParamList } from './types';
+import { AuthenticationNavigatorStackParamList, MainNavigatorStackParamList, ProfileStackParamList } from './types';
 import { useEffect, useState } from 'react';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import { MainStack } from './HomeStack';
 
 
 
 
 
 type BottomNavigatorRootStackParamList = {
-  HomeNavigator : NavigatorScreenParams<HomeNavigatorStackParamList>
+  MainNavigator : NavigatorScreenParams<MainNavigatorStackParamList>
   ProfileScreen : NavigatorScreenParams<ProfileStackParamList>
 }
 
@@ -62,8 +62,8 @@ const RootNavigator: React.FC = () => {
         >
   
           <Tab.Screen
-            name='HomeNavigator'
-            component={HomeStack}
+            name='MainNavigator'
+            component={MainStack}
             options={{
               tabBarIcon : ({color}) =>(
                 <Icon name="home" color={color} size={24}  />

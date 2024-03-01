@@ -5,7 +5,8 @@ import Buttons from './buttons'
 import styles from './styles'
 import Animated, { FadeInRight } from 'react-native-reanimated'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
+
 
 
 type FeaturedMoviePropsTypes = {
@@ -14,7 +15,7 @@ type FeaturedMoviePropsTypes = {
 
 const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ movie }) => {
 
-    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+    const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleDetail = () => {
      

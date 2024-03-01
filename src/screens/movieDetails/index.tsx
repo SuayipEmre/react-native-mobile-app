@@ -1,17 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 import { colors } from '../../styles/colors'
 import { useFetchMovieDetailsQuery } from '../../store/features/APIs/movies'
-import { movieDetailsTypes } from '../../types/movie'
 import MovieDetailScreenContainer from '../../containers/movieDetailScreenContainer'
 
 
-type ProfileProps = NativeStackScreenProps<HomeNavigatorStackParamList, 'MovieDetailsScreen'>
+type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MovieDetailsScreen'>
 
 
-const MovieDetailsScreen : React.FC<ProfileProps> = ({route, navigation}) => {
+const MovieDetailsScreen : React.FC<ProfileProps> = ({route}) => {
 
 
     const {movie_id} = route.params

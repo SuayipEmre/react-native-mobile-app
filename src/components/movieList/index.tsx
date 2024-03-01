@@ -2,14 +2,14 @@ import { Dimensions, FlatList, Image, ListRenderItem, StyleSheet, TouchableOpaci
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 
 
 type MovieListPropsType = {
     movies: Array<MovieTypes>
 }
 const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
-    const navigation = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+    const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
 
     const handleMovieDetail = (movie_id : number) => {

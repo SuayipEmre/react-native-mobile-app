@@ -4,10 +4,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useFetchMoviesBySearchQuery } from '../../store/features/APIs/movies'
 import MovieScreensContainer from '../../containers/movieScreensContainer'
 import { colors } from '../../styles/colors'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 
 
-type ProfileProps = NativeStackScreenProps<HomeNavigatorStackParamList, 'MoviesBySearchScreen'>
+type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MoviesBySearchScreen'>
 
 const MoviesBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) => {
 

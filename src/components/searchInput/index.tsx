@@ -5,7 +5,7 @@ import { colors } from '../../styles/colors'
 import { setSearchValue } from '../../store/features/search/actions'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import Animated, { FadeInRight } from 'react-native-reanimated'
-import { HomeNavigatorStackParamList } from '../../navigators/types'
+import { MainNavigatorStackParamList } from '../../navigators/types'
 
 
 
@@ -14,7 +14,7 @@ const SearchInput: React.FC = () => {
     const searchValue: string = useSearchValue()
 
     
-    const navigation  = useNavigation<NavigationProp<HomeNavigatorStackParamList>>()
+    const navigation  = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleSubmit = () => {
         navigation.navigate('MoviesBySearchScreen', {

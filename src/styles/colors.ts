@@ -10,5 +10,5 @@ type commonColorsTypes = {
 export const colors: commonColorsTypes = {
         primary: '#fff',
         secondary: '#fff6',
-        third: '#000',
+        third: '#252525',
 }
