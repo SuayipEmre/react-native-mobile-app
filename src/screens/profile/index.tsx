@@ -1,24 +1,31 @@
-import { Alert, SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import { Alert,  SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import auth from '@react-native-firebase/auth';
+import ProfileScreenContainer from '../../containers/profileScreenContainer';
 
 const ProfileScreen = () => {
 
-  const handleSignout = async() => {
-    
-    try{
+
+
+
+  const handleSignout = async () => {
+
+    try {
       await auth().signOut()
-    }catch{
+    } catch {
       Alert.alert('MM', 'An Error occured')
     }
   }
   return (
     <SafeAreaView style={styles.container}>
 
-      <TouchableOpacity onPress={handleSignout}>
-        <Text style={styles.text}>Signout</Text>
-      </TouchableOpacity>
+     
+        <ProfileScreenContainer />
+
+        <TouchableOpacity onPress={handleSignout} style={styles.signout_button}>
+          <Text style={styles.signout_button_text}>Signout</Text>
+        </TouchableOpacity>
 
 
     </SafeAreaView>
@@ -27,12 +34,21 @@ const ProfileScreen = () => {
 
 export default ProfileScreen
 
+
 const styles = StyleSheet.create({
-  container:{
-    backgroundColor:colors.third,
-    flex : 1,
+  container: {
+    backgroundColor: colors.third,
+    alignItems: 'center',
+    flex: 1,
+
   },
-  text:{
-    color : colors.primary
-  }
+
+  signout_button:{
+    position:'absolute',
+    bottom:10,
+    
+  },
+  signout_button_text: {
+    color: colors.primary
+  },
 })
