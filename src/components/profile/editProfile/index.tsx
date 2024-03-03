@@ -1,4 +1,4 @@
-import { Image, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../../styles/colors'
 import { useEditProfileModalVisible } from '../../../store/features/modals/editProfileModal/hooks'
@@ -10,11 +10,12 @@ import styles from './styles'
 
 const EditProfile: React.FC = () => {
 
-    const [userName, setUserName] = useState<string>('')
+    const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
+    const [userName, setUserName] = useState<string>(currentUser?.displayName ? currentUser?.displayName : '')
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
     const modalVisible = useEditProfileModalVisible()
 
-    const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
+    
 
 
     const openImagePicker = (): void => {
@@ -26,21 +27,55 @@ const EditProfile: React.FC = () => {
             maxWidth: 2000,
         };
 
-      try{
-        launchImageLibrary(options, (response: ImagePickerResponse) => {
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.errorCode) {
-                console.log('Image picker error: ', response.errorCode);
-            } else {
-                let imageUri = response.assets?.[0]?.uri;
-                setSelectedImage(imageUri);
-            }
-        })
-      }catch{
+        try {
+            launchImageLibrary(options, (response: ImagePickerResponse) => {
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.errorCode) {
+                    console.log('Image picker error: ', response.errorCode);
+                } else {
+                    let imageUri = response.assets?.[0]?.uri;
+                    setSelectedImage(imageUri);
+                }
+            })
+        } catch {
 
-      }
+        }
     }
+
+
+
+    const showAlert = () => (
+        Alert.alert(
+            'MM',
+            'Which one do you want to use to edit your profile ? ',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Camera',
+                    onPress: () => handleCameraLaunch(),
+                    style: 'default',
+                },
+                {
+                    text: 'Gallery',
+                    onPress: () => openImagePicker(),
+                    style: 'default',
+                },
+
+            ],
+            {
+                cancelable: true,
+                onDismiss: () =>
+                    Alert.alert(
+                        'This alert was dismissed by tapping outside of the alert dialog.',
+                    ),
+            }
+
+        )
+    )
 
 
 
@@ -50,9 +85,9 @@ const EditProfile: React.FC = () => {
             includeBase64: false,
             maxHeight: 2000,
             maxWidth: 2000,
-        };
+        }
 
-        launchCamera(options, (response : ImagePickerResponse) => {
+        launchCamera(options, (response: ImagePickerResponse) => {
             if (response.didCancel) {
                 console.log('User cancelled camera');
             } else if (response.errorCode) {
@@ -60,9 +95,9 @@ const EditProfile: React.FC = () => {
             } else {
                 let imageUri = response.assets?.[0]?.uri;
                 setSelectedImage(imageUri);
-                console.log('asd' ,imageUri);
+                console.log('asd', imageUri);
             }
-        });
+        })
     }
 
 
@@ -84,6 +119,11 @@ const EditProfile: React.FC = () => {
         }
     }
 
+    const handleCloseModal = () => {
+        setIsEditProfileModalVisible(false)
+        setSelectedImage(undefined)
+    }
+
     return (
         <Modal
             animationType="slide"
@@ -94,9 +134,9 @@ const EditProfile: React.FC = () => {
             <View style={styles.modal_container}>
                 <View style={styles.modal_View}>
 
-                    <Evil name='close' color={colors.primary} size={24} style={styles.close_icon} onPress={() => setIsEditProfileModalVisible(false)} />
+                    <Evil name='close' color={colors.primary} size={24} style={styles.close_icon} onPress={handleCloseModal} />
 
-                    <TouchableOpacity onPress={handleCameraLaunch} style={styles.image_container}>
+                    <TouchableOpacity onPress={showAlert} style={styles.image_container}>
                         {
                             currentUser?.photoURL && selectedImage == undefined ?
                                 <Image source={{ uri: currentUser?.photoURL }} style={styles.image} /> :
@@ -126,6 +166,8 @@ const EditProfile: React.FC = () => {
 
                 </View>
             </View>
+
+
 
         </Modal>
     )
