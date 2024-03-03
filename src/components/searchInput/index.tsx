@@ -55,10 +55,9 @@ const styles = StyleSheet.create({
 
     },
     input: {
-        
         color: colors.primary,
         zIndex: 12,
-        height: height *0.04,
+        height: height *0.05,
         borderColor: colors.secondary,
         borderWidth :1,
         borderRadius : 12,

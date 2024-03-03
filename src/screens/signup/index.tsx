@@ -21,7 +21,7 @@ const SignupScreen = () => {
       if (password == repassword){
         
       await  auth()
-        .createUserWithEmailAndPassword(email, password)
+        .createUserWithEmailAndPassword(email, password) 
         .then(() => {
           Alert.alert('MM', 'User account created. Thank you')
         })
