@@ -50,7 +50,7 @@ const EditProfile: React.FC = () => {
             setSelectedImage('')
             setIsEditProfileModalVisible(false)
 
-        } catch (e: any) {
+        } catch (e) {
             console.log(e)
 
         }

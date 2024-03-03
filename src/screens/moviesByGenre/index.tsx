@@ -5,6 +5,8 @@ import {  useFetchMoviesBygenreQuery } from '../../store/features/APIs/movies';
 import MovieScreensContainer from '../../containers/movieScreensContainer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MainNavigatorStackParamList } from '../../navigators/types';
+import Error from '../../components/errorAnimation';
+import Loading from '../../components/loading';
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MoviesByGenreScreen'>
 
@@ -17,8 +19,8 @@ const MoviesByGenreScreen : React.FC<ProfileProps> = ({route, navigation}) => {
 
 
 
-    if (isError) return <Text>Err</Text>
-    else if (isLoading) return <Text>Loading</Text>
+    if (isError) return <Error />
+    else if (isLoading) return <Loading />
     
   
     return (

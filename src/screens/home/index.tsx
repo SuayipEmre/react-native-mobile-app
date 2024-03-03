@@ -8,6 +8,8 @@ import {
   , useFetchTopRatedMoviesQuery,
   useFetchUpComingMoviesQuery
 } from '../../store/features/APIs/movies'
+import Error from '../../components/errorAnimation'
+import Loading from '../../components/loading'
 
 
 
@@ -26,8 +28,8 @@ const HomeScreen : React.FC = () => {
 
 
 
-  if (isPopularMoviesError || isTopRatedError || isNowPlayingError || isUpComingError) return <Text></Text>
-  else if (isPopularMoviesLoading || isTopRatedLoading || isNowPlayingLoading || isUpComingLoading) return <ActivityIndicator />
+  if (isPopularMoviesError || isTopRatedError || isNowPlayingError || isUpComingError) return <Error />
+  else if (isPopularMoviesLoading || isTopRatedLoading || isNowPlayingLoading || isUpComingLoading) return  <Loading />
 
   return (
     <SafeAreaView style={{backgroundColor: colors.third,flex: 1,}}>

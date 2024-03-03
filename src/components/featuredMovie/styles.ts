@@ -9,7 +9,6 @@ export default  StyleSheet.create({
         marginTop: 15,
     },
     info_container: {
-        backgroundColor: 'red',
         width: '100%',
         height: height * 0.5,
         borderRadius: 20,

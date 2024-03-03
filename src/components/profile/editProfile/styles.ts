@@ -16,8 +16,8 @@ export default StyleSheet.create({
         borderRadius: 15,
         borderWidth: 1,
         borderColor: colors.primary,
-        width: width * 0.8,
-        height: height * 0.8,
+        width: width * 0.9,
+        height: height * 0.7,
         alignItems: 'center',
         paddingVertical: 12,
     },
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     },
     image_container: {
         width: '80%',
-        height: '40%',
+        height: '60%',
         marginTop : 14,
     },
     image: {

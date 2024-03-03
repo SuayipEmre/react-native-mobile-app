@@ -5,6 +5,8 @@ import { useFetchMoviesBySearchQuery } from '../../store/features/APIs/movies'
 import MovieScreensContainer from '../../containers/movieScreensContainer'
 import { colors } from '../../styles/colors'
 import { MainNavigatorStackParamList } from '../../navigators/types'
+import Error from '../../components/errorAnimation'
+import Loading from '../../components/loading'
 
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MoviesBySearchScreen'>
@@ -16,8 +18,8 @@ const MoviesBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) => 
   const { data, isLoading, isError } = useFetchMoviesBySearchQuery(value)
 
 
-  if (isError) return <Text>Error</Text>
-  else if (isLoading) return <Text>Loading</Text>
+  if (isError) return <Error />
+  else if (isLoading) return <Loading />
 
 
   return (
