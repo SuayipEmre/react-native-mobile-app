@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import { colors } from '../../../styles/colors'
 import { useEditProfileModalVisible } from '../../../store/features/modals/editProfileModal/hooks'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-import { launchImageLibrary, ImageLibraryOptions, ImagePickerResponse } from 'react-native-image-picker';
+import { launchImageLibrary, ImageLibraryOptions, ImagePickerResponse, launchCamera, CameraOptions } from 'react-native-image-picker';
 import { setIsEditProfileModalVisible } from '../../../store/features/modals/editProfileModal/actions'
 import Evil from 'react-native-vector-icons/EvilIcons'
 import styles from './styles'
 
 const EditProfile: React.FC = () => {
-    
+
     const [userName, setUserName] = useState<string>('')
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
     const modalVisible = useEditProfileModalVisible()
@@ -18,6 +18,7 @@ const EditProfile: React.FC = () => {
 
 
     const openImagePicker = (): void => {
+
         const options: ImageLibraryOptions = {
             mediaType: 'photo',
             includeBase64: false,
@@ -25,6 +26,7 @@ const EditProfile: React.FC = () => {
             maxWidth: 2000,
         };
 
+      try{
         launchImageLibrary(options, (response: ImagePickerResponse) => {
             if (response.didCancel) {
                 console.log('User cancelled image picker');
@@ -35,7 +37,34 @@ const EditProfile: React.FC = () => {
                 setSelectedImage(imageUri);
             }
         })
+      }catch{
+
+      }
     }
+
+
+
+    const handleCameraLaunch = () => {
+        const options: CameraOptions = {
+            mediaType: 'photo',
+            includeBase64: false,
+            maxHeight: 2000,
+            maxWidth: 2000,
+        };
+
+        launchCamera(options, (response : ImagePickerResponse) => {
+            if (response.didCancel) {
+                console.log('User cancelled camera');
+            } else if (response.errorCode) {
+                console.log('Camera Error: ', response.errorCode)
+            } else {
+                let imageUri = response.assets?.[0]?.uri;
+                setSelectedImage(imageUri);
+                console.log('asd' ,imageUri);
+            }
+        });
+    }
+
 
     const handleUpdateProfile = async (): Promise<void> => {
         const update = {
@@ -45,7 +74,6 @@ const EditProfile: React.FC = () => {
 
         try {
             await currentUser?.updateProfile(update)
-            console.log('Well Done !');
             setUserName('')
             setSelectedImage('')
             setIsEditProfileModalVisible(false)
@@ -55,8 +83,6 @@ const EditProfile: React.FC = () => {
 
         }
     }
-
-
 
     return (
         <Modal
@@ -70,7 +96,7 @@ const EditProfile: React.FC = () => {
 
                     <Evil name='close' color={colors.primary} size={24} style={styles.close_icon} onPress={() => setIsEditProfileModalVisible(false)} />
 
-                    <TouchableOpacity onPress={openImagePicker} style={styles.image_container}>
+                    <TouchableOpacity onPress={handleCameraLaunch} style={styles.image_container}>
                         {
                             currentUser?.photoURL && selectedImage == undefined ?
                                 <Image source={{ uri: currentUser?.photoURL }} style={styles.image} /> :
