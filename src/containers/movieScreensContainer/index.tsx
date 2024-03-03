@@ -18,6 +18,7 @@ const MovieScreensContainer : React.FC<moviesScreenContainerProps> = ({movie = [
         data={movie}
         renderItem={renderMovies}
         numColumns={2}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={{alignItems:'center'}}
     
         />

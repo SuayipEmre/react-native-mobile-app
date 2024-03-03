@@ -4,7 +4,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 type initialStateType = {
     isModalVisible:boolean
 }
-const initialState = {
+const initialState : initialStateType = {
     isModalVisible: false
 }
 
