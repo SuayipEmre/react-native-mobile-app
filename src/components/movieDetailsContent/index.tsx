@@ -13,6 +13,11 @@ type MovieDetailsContentPropsType = {
 
 export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ movie, year }) => {
 
+    const runtime = movie.runtime;
+    const hours = Math.floor(runtime / 60);
+    const minute = runtime % 60;
+    console.log(hours, minute);
+
     return (
         <>
             <View style={styles.image_container}>
@@ -27,6 +32,9 @@ export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ mo
                     <Text style={styles.release_year}>{year}</Text>
                     <Text style={styles.tagline}>{movie.tagline}</Text>
                 </View>
+
+                <Text style={styles.runtime_info}>{hours} hrs. {minute} mins.</Text>
+
 
                 <View style={styles.button}>
 

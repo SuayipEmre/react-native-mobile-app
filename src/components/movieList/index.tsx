@@ -11,17 +11,19 @@ type MovieListPropsType = {
 const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
+    
 
-    const handleMovieDetail = (movie_id : number) => {
+    const handleMovieDetail = (movie_id : number, movie_title:string) => {
       navigation.navigate('MovieDetailsScreen',{
         movie_id,
+        movie_title,
       })
     }
 
      const renderMovies: ListRenderItem<MovieTypes> = ({ item }) => {
 
         return (
-            <TouchableOpacity style={styles.container} onPress={() => handleMovieDetail(item.id)}>
+            <TouchableOpacity style={styles.container} onPress={() => handleMovieDetail(item.id, item.title)}>
                <Image source={{uri : `${process.env.IMAGE_PATH}/${item.poster_path}`}} style={styles.image} />
             </TouchableOpacity>
         )

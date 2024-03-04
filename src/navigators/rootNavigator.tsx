@@ -9,7 +9,7 @@ import { AuthenticationStack } from './AuthenticationStack';
 import { AuthenticationNavigatorStackParamList, MainNavigatorStackParamList, ProfileStackParamList } from './types';
 import { useEffect, useState } from 'react';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-import { MainStack } from './HomeStack';
+import { MainStack } from './MainStack';
 
 
 

@@ -23,20 +23,23 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
 
 
 
-  const handleMovieDetail = (movie_id: number) => {
+  const handleMovieDetail = (movie_id: number, movie_title : string) => {
     navigation.navigate('MovieDetailsScreen', {
       movie_id,
+      movie_title,
     })
   }
 
 
   const renderMovies: ListRenderItem<MovieTypes> = ({ item }) => {
+   
+    
     if (isError) return <Text>Err</Text>
     else if (isLoading) return <Text>Loading</Text>
 
     return (
       <TouchableOpacity
-        style={styles.button} onPress={() => handleMovieDetail(item.id)}  >
+        style={styles.button} onPress={() => handleMovieDetail(item.id, item.title)}  >
         <Image source={{ uri: `${process.env.IMAGE_PATH}/${item.poster_path}` }}
           style={styles.image}
         />
@@ -45,6 +48,7 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
   }
 
 
+  /*The details is  on the header of the flat list.  */
 
   return (
     <View>

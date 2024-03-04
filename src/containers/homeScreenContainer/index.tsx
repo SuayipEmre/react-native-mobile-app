@@ -36,10 +36,10 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
                 <Header />
                 <FeaturedMovie movie={popularMovies[1]} />
 
-                <MovieListContainer title='Recently Popular' popularMovies={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                <MovieListContainer title='Top Rated' popularMovies={topRated} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                <MovieListContainer title='Now Playing' popularMovies={nowPlaying} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} />
-                <MovieListContainer title='Upcoming' popularMovies={upComing} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
+                <MovieListContainer title='Recently Popular' movies={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                <MovieListContainer title='Top Rated' movies={topRated} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
+                <MovieListContainer title='Now Playing' movies={nowPlaying} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} />
+                <MovieListContainer title='Upcoming' movies={upComing} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
             </View>
             {
                 isModalVisible && <GenresModal />

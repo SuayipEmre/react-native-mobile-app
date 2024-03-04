@@ -29,12 +29,16 @@ export default  StyleSheet.create({
         justifyContent: 'space-between',
     },
     release_year: {
-        color: '#eee'
+        color: '#eee',
+        width: '20%',
     },
     tagline: {
         color: '#eee',
         fontWeight: 'bold',
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+    },
+    runtime_info:{
+        color: '#eee'
     },
     button: {
         ...commonStyles.centerElements,

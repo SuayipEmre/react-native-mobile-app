@@ -31,8 +31,10 @@ const EditProfile: React.FC = () => {
             launchImageLibrary(options, (response: ImagePickerResponse) => {
                 if (response.didCancel) {
                     console.log('User cancelled image picker');
+                    setIsEditProfileModalVisible(false)
                 } else if (response.errorCode) {
                     console.log('Image picker error: ', response.errorCode);
+                    setIsEditProfileModalVisible(false)
                 } else {
                     let imageUri = response.assets?.[0]?.uri;
                     setSelectedImage(imageUri);
@@ -90,8 +92,10 @@ const EditProfile: React.FC = () => {
         launchCamera(options, (response: ImagePickerResponse) => {
             if (response.didCancel) {
                 console.log('User cancelled camera');
+                setIsEditProfileModalVisible(false)
             } else if (response.errorCode) {
                 console.log('Camera Error: ', response.errorCode)
+                setIsEditProfileModalVisible(false)
             } else {
                 let imageUri = response.assets?.[0]?.uri;
                 setSelectedImage(imageUri);

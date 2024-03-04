@@ -1,4 +1,4 @@
-import { Text, ActivityIndicator, SafeAreaView, StatusBar } from 'react-native'
+import {  SafeAreaView, StatusBar } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import HomeScreenContainer from '../../containers/homeScreenContainer'

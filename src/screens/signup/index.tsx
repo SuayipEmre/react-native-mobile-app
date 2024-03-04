@@ -13,6 +13,7 @@ const SignupScreen = () => {
 
 
 
+
   const handleSignUp = async() => {
 
     
@@ -20,7 +21,7 @@ const SignupScreen = () => {
       
       if (password == repassword){
         
-      await  auth()
+      await auth()
         .createUserWithEmailAndPassword(email, password) 
         .then(() => {
           Alert.alert('MM', 'User account created. Thank you')

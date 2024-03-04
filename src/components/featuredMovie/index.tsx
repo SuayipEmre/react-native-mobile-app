@@ -17,10 +17,12 @@ const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ movie }) => {
 
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
+    
     const handleDetail = () => {
      
         navigation.navigate('MovieDetailsScreen',{
-            movie_id : movie.id
+            movie_id : movie.id,
+            movie_title : movie.title
         })
     }
 

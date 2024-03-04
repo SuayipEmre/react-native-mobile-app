@@ -53,7 +53,7 @@ export const MainStack = ({ route, navigation }: any) => {
         component={MoviesByGenreScreen}
         options={({ route }: { route: any }) => (
           {
-            headerTitle: route?.params?.value || '',
+            headerTitle: route.params.value ?? "",
             headerTitleStyle: {
               fontSize: 18,
             },
@@ -94,7 +94,8 @@ export const MainStack = ({ route, navigation }: any) => {
         component={MovieDetailsScreen}
         options={({ route }: { route: any }) => (
           {
-            headerTitle : '',
+            headerTitle : route.params.movie_title ?? "",
+            headerTintColor : colors.primary,
             headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
             headerStyle: {
               backgroundColor: colors.third,

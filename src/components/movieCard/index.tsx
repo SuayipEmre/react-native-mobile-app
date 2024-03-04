@@ -17,8 +17,11 @@ const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleMovieDetails = () => {
+        console.log("title on func : ", movieItem.title);
+        
       navigation.navigate('MovieDetailsScreen',{
-        movie_id : movieItem.id
+        movie_id : movieItem.id,
+        movie_title : movieItem.title
       })
     }
     return (
