@@ -4,8 +4,8 @@ import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import { MovieTypes } from '../../types/movie'
 import GenresModal from '../../components/genresModal'
-import { useModalVisible } from '../../store/features/modals/movieGenres/hooks'
 import MovieListContainer, { fadeDirection } from '../../components/movieList/movieListContainer'
+import { useGenresModalVisible } from '../../store/features/modals/genres/hooks'
 
 
 type HomeScreenContainerPropsType = {
@@ -25,7 +25,7 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
 }) => {
 
 
-    const isModalVisible: boolean = useModalVisible()
+    const isModalVisible: boolean = useGenresModalVisible()
 
     return (
         <ScrollView

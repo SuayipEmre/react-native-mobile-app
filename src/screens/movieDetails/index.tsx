@@ -1,5 +1,5 @@
-import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { colors } from '../../styles/colors'
@@ -14,10 +14,11 @@ type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'MovieDe
 
 const MovieDetailsScreen : React.FC<ProfileProps> = ({route}) => {
 
+  const [skip, setSkip] = useState(false)
 
     const {movie_id} = route.params
 
-    const {data, isLoading, isError } = useFetchMovieDetailsQuery(movie_id)
+    const {data, isLoading, isError } = useFetchMovieDetailsQuery(movie_id, {skip})
     
 
     if  (isError) return <Error />
@@ -27,7 +28,9 @@ const MovieDetailsScreen : React.FC<ProfileProps> = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <MovieDetailScreenContainer movie={data}  />
+    {
+      data  ?  <MovieDetailScreenContainer movie={data}  />  : <Text style={{color : '#fff'}}> NO DATA</Text>
+    }
     </View>
   )
 }

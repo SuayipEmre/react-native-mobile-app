@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import moviesApi from '../features/APIs/movies'
 import genresApi from '../features/APIs/genres'
-import movieGenres from '../features/modals/movieGenres'
+import movieGenres from '../features/modals/genres'
 import searchMovie from '../features/search'
 import editProfileModal from '../features/modals/editProfileModal'
 
 const store = configureStore({
 
     reducer : {
-        movieGenres :movieGenres,
+        genres :movieGenres,
         searchMovie : searchMovie,
         editProfileModal : editProfileModal,
         [moviesApi.reducerPath] : moviesApi.reducer,

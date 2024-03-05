@@ -2,16 +2,17 @@ import { Text, TextInput, View } from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles'
 import HeaderItem from './item'
-import { useModalVisible } from '../../store/features/modals/movieGenres/hooks'
+
 import Ant from 'react-native-vector-icons/AntDesign'
 import SearchInput from '../searchInput'
+import { useGenresModalVisible } from '../../store/features/modals/genres/hooks'
 
 
 const Header = () => {
 
     const [isSearch, setIsSearch] = useState<boolean>(false)
 
-    const modalVisible = useModalVisible()
+    const modalVisible = useGenresModalVisible()
 
 
 
@@ -37,9 +38,9 @@ const Header = () => {
             </View>
 
             <View style={styles.bottom_content}>
-                <HeaderItem text='TV-Series' isCategoryButton={false} />
-                <HeaderItem text='Movies' isCategoryButton={false} />
-                <HeaderItem text='Categories' modalVisible={modalVisible} isCategoryButton />
+                <HeaderItem text='TV-Series' isGenreModalButton={false} />
+                <HeaderItem text='Movies' isGenreModalButton={false} />
+                <HeaderItem text='Categories' modalVisible={modalVisible} isGenreModalButton />
             </View>
 
 

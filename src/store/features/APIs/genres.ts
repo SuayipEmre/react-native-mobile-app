@@ -24,11 +24,23 @@ const genresApi = createApi({
                 }
             }
         }),
+        fetchGenresOfTvList: builder.query({
+            query: () => {
+                return {
+                    url: '/genre/tv/list',
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey
+                    }
+                }
+            }
+        }),
       
     })
 })
-
 export const {
     useFetchGenresOfMoviesQuery,  
+    useFetchGenresOfTvListQuery
 } = genresApi
 export default genresApi

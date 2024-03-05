@@ -16,7 +16,6 @@ import Loading from '../../components/loading'
 
 const HomeScreen : React.FC = () => {
 
-  
 
 
   const { data: popularMovies, isLoading: isPopularMoviesLoading, isError: isPopularMoviesError } = useFetchPopularMoviesQuery({})

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { commonStyles } from '../../styles/commonStyle'
-import { useFetchGenresOfMoviesQuery } from '../../store/features/APIs/genres';
-import { setIsModalVisible } from '../../store/features/modals/movieGenres/actions';
+import { useFetchGenresOfMoviesQuery, useFetchGenresOfTvListQuery } from '../../store/features/APIs/genres';
 import Ant from 'react-native-vector-icons/AntDesign';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MainNavigatorStackParamList } from '../../navigators/types';
 import { colors } from '../../styles/colors';
+import { useIsMovieModal } from '../../store/features/modals/genres/hooks';
+import { setIsGenresModalVisible } from '../../store/features/modals/genres/actions';
 
 
 
@@ -15,30 +16,47 @@ import { colors } from '../../styles/colors';
 
 const GenresModal: React.FC = () => {
 
-    
+
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
+    const isMovie = useIsMovieModal()
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
-    const { data, isLoading, isError } = useFetchGenresOfMoviesQuery({})
+    const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery({}, {
+        skip: !isMovie
+    })
+
+    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery({})
 
     useEffect(() => {
-        if (!isLoading && !isError && data) {
-            setGenres(data.genres)
+        if (isMovie) {
+            if (!movieGenresLoading && !movieGenresError && movieGenres) {
+                setGenres(movieGenres.genres)
+            }
+        } 
+
+    }, [movieGenres, movieGenresError, movieGenresLoading])
+
+    useEffect(() => {
+
+        if (!isMovie){
+            if (!tvListLoading && !tvListError && tvListData) {
+                setGenres(tvListData.genres)
+            }  
         }
-    }, [data, isError, isLoading])
+    }, [tvListData, tvListLoading, tvListError])
 
 
 
-    const handleCloseModal = () => setIsModalVisible(false)
-    
+    const handleCloseModal = () => setIsGenresModalVisible(false)
 
-    const selectGenre = (genreid : string, genreName:string) => {
-        
+
+    const selectGenre = (genreid: string, genreName: string) => {
+
         navigation.navigate('MoviesByGenreScreen', {
             genreid,
-            value :genreName
+            value: genreName
         })
-        setIsModalVisible(false)
+        setIsGenresModalVisible(false)
     }
 
     return (
