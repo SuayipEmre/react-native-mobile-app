@@ -24,6 +24,18 @@ const moviesAPi = createApi({
                 }
             }
         }),
+        fetchTrendingMovies: builder.query({
+            query: () => {
+                return {
+                    url: '/trending/movie/day',
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey
+                    }
+                }
+            }
+        }),
         fetchTopRatedMovies: builder.query({
             query: () => {
                 return {
@@ -112,8 +124,11 @@ const moviesAPi = createApi({
                     }
                 }
             }
-        })
-    }),
+        }),
+       
+
+    })
+    
     
   
     
@@ -121,6 +136,7 @@ const moviesAPi = createApi({
 
 export const {
     useFetchPopularMoviesQuery,
+    useFetchTrendingMoviesQuery,
     useFetchTopRatedMoviesQuery,
     useFetchNowPlayingMoviesQuery,
     useFetchUpComingMoviesQuery,

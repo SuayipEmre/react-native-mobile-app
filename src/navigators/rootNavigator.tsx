@@ -43,6 +43,8 @@ const RootNavigator: React.FC = () => {
 
 
   if (user){
+    console.log(user.uid);
+    
     return (
       <NavigationContainer>
         <Tab.Navigator

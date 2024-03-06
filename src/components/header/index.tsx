@@ -38,8 +38,8 @@ const Header = () => {
             </View>
 
             <View style={styles.bottom_content}>
-                <HeaderItem text='TV-Series' isGenreModalButton={false} />
                 <HeaderItem text='Movies' isGenreModalButton={false} />
+                <HeaderItem text='TV-Series' isGenreModalButton={false} />
                 <HeaderItem text='Categories' modalVisible={modalVisible} isGenreModalButton />
             </View>
 

@@ -6,8 +6,8 @@ import Ant from 'react-native-vector-icons/AntDesign';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MainNavigatorStackParamList } from '../../navigators/types';
 import { colors } from '../../styles/colors';
-import { useIsMovieModal } from '../../store/features/modals/genres/hooks';
 import { setIsGenresModalVisible } from '../../store/features/modals/genres/actions';
+import { useActiveContent } from '../../store/features/activeContent/hooks';
 
 
 
@@ -19,16 +19,19 @@ const GenresModal: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
-    const isMovie = useIsMovieModal()
     const [genres, setGenres] = useState<[GenresTypes] | []>([])
+    const activeContent = useActiveContent()
+
     const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery({}, {
-        skip: !isMovie
+        skip: activeContent == 'Movies' ? false : true
     })
 
-    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery({})
+    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery({},{
+        skip: activeContent == 'TV-Series' ? false : true
+    })
 
     useEffect(() => {
-        if (isMovie) {
+        if (activeContent == 'Movies') {
             if (!movieGenresLoading && !movieGenresError && movieGenres) {
                 setGenres(movieGenres.genres)
             }
@@ -37,8 +40,7 @@ const GenresModal: React.FC = () => {
     }, [movieGenres, movieGenresError, movieGenresLoading])
 
     useEffect(() => {
-
-        if (!isMovie){
+        if (activeContent == 'TV-Series' ){
             if (!tvListLoading && !tvListError && tvListData) {
                 setGenres(tvListData.genres)
             }  

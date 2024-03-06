@@ -3,12 +3,13 @@ import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
+import { TvShowsTypes } from '../../types/tvshows'
 
 
 type MovieListPropsType = {
-    movies: Array<MovieTypes>
+    content: Array<MovieTypes | TvShowsTypes>
 }
-const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
+const MovieList: React.FC<MovieListPropsType> = ({ content }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     
@@ -33,7 +34,7 @@ const MovieList: React.FC<MovieListPropsType> = ({ movies }) => {
             <FlatList
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={movies}
+                data={content}
                 snapToAlignment='center'
                 decelerationRate={'normal'}
                 renderItem={renderMovies}

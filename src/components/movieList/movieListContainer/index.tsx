@@ -3,11 +3,12 @@ import React from 'react'
 import MovieList from '..'
 import { MovieTypes } from '../../../types/movie'
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated'
+import { TvShowsTypes } from '../../../types/tvshows'
 
 
 type MovieListContainerPropsType = {
     title: string,
-    movies: Array<MovieTypes> | [],
+    content: Array<MovieTypes |TvShowsTypes>,
     fadeDirection: fadeDirection,
     delaytime: number
 }
@@ -18,7 +19,7 @@ export enum fadeDirection {
 }
 const MovieListContainer: React.FC<MovieListContainerPropsType> = ({
     title,
-    movies,
+    content,
     fadeDirection = 'FadeInLeft',
     delaytime }
 ) => {
@@ -27,7 +28,7 @@ const MovieListContainer: React.FC<MovieListContainerPropsType> = ({
             entering={fadeDirection == 'FadeInLeft' ? FadeInLeft.delay(delaytime) : FadeInRight.delay(delaytime).duration(delaytime).springify().damping(12)}
             style={{ marginTop: 12, gap: 7, }}>
             <Text style={{ color: '#fff', fontSize: 18, fontWeight: '600' }}>{title}</Text>
-            <MovieList movies={movies} />
+            <MovieList content={content} />
         </Animated.View>
 
     )

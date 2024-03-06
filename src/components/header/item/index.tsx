@@ -1,8 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { commonStyles } from "../../../styles/commonStyle"
-import {  setIsGenresModalVisible, setIsMovieModal } from '../../../store/features/modals/genres/actions'
+import { setIsGenresModalVisible } from '../../../store/features/modals/genres/actions'
 import { colors } from '../../../styles/colors'
+import Entypo from 'react-native-vector-icons/Entypo'
+import { setActiveContent } from '../../../store/features/activeContent/actions'
+import { useActiveContent } from '../../../store/features/activeContent/hooks'
 
 type HeaderItemPropsType = {
     text: 'TV-Series' | 'Movies' | 'Categories',
@@ -13,21 +16,23 @@ type HeaderItemPropsType = {
 
 const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, modalVisible }) => {
 
+    const activeContent = useActiveContent()
+
+
+
     const handleModalClick = () => {
         setIsGenresModalVisible(!modalVisible)
     }
 
+
+
     const handleContentChange = () => {
-      if (text == 'Movies'){
-        setIsMovieModal(true)
-      } else if (text == 'TV-Series'){
-        setIsMovieModal(false)
-      }
+        setActiveContent(text == 'Movies' ? 'Movies' : 'TV-Series')
     }
 
 
     return (
-        <View style={styles.item_container}>
+        <View style={styles.container}>
 
             {
                 isGenreModalButton ?
@@ -37,8 +42,13 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
                     :
                     (
 
-                        <TouchableOpacity onPress={handleContentChange} >
-                            <Text style={ styles.item}>{text}</Text>
+                        <TouchableOpacity onPress={handleContentChange} style={styles.item_container}>
+                            <Text style={styles.item}>{text}</Text>
+
+                            {
+                                activeContent == text && <Entypo name="check" color='#00FF00' size={18} />
+                            }
+
                         </TouchableOpacity>
                     )
             }
@@ -51,7 +61,7 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 export default HeaderItem
 
 const styles = StyleSheet.create({
-    item_container: {
+    container: {
         borderWidth: 1,
         paddingVertical: 4,
         paddingHorizontal: 6,
@@ -59,9 +69,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: colors.secondary
     },
+    item_container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4
+    },
     item: {
         fontSize: 15,
         fontWeight: '500',
-        color: colors.primary 
+        color: colors.primary
     },
 })
