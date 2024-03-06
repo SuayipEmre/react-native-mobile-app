@@ -20,7 +20,6 @@ import MovieListContainer, { fadeDirection } from '../../components/movieList/mo
 
 const HomeScreen: React.FC = () => {
 
-  const activeContent = useActiveContent()
 
   const { data: trendingMovies, isLoading: isTrendingMoviesLoading, isError: isTrendingMoviesError } = useFetchTrendingMoviesQuery({})
   const { data: trendingTVShows, isLoading: isTrendingTVShowsLoading, isError: isTrendingTVShowsError } = useFetchTrendingTVShowsQuery({})
