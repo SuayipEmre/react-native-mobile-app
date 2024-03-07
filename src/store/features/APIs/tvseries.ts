@@ -59,13 +59,26 @@ const tvShowsApi = createApi({
                     }
                 }
             }
+        }),
+        fetchTVShowsBySearchValue :builder.query({
+            query: (searchValue : string) => {
+                return {
+                    url: `/search/tv`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                        query : searchValue
+                    }
+                }
+            }
         })
      
         
        
     }),
     
-  
+  //search/tv?query=barbie
     
 })
 
@@ -74,6 +87,7 @@ export const {
     useFetchPopularTVShowsQuery,
     useFetchTrendingTVShowsQuery,
     useFetchTopRatedTVShowsQuery,
-    useFetchOnTheAirTVShowsQuery
+    useFetchOnTheAirTVShowsQuery,
+    useFetchTVShowsBySearchValueQuery
 } = tvShowsApi
 export default tvShowsApi

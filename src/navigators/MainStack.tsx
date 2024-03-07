@@ -4,9 +4,10 @@ import { colors } from '../styles/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import MoviesByGenreScreen from '../screens/moviesByGenre';
 import { MainNavigatorStackParamList } from './types';
-import MoviesBySearchScreen from '../screens/moviesBySearchValue';
+import MoviesBySearchScreen from '../screens/contentBySearchValue';
 import MovieDetailsScreen from '../screens/movieDetails';
 import TvShowsScreen from '../screens/tvShowsScreen';
+import ContentBySearchScreen from '../screens/contentBySearchValue';
 
 
 
@@ -34,9 +35,22 @@ export const MainStack = ({ navigation }: any) => {
       <Stack.Screen
         name='TvShowsScreen'
         component={TvShowsScreen}
-        options={{
-          headerShown: false,
-        }}
+        options={  
+          {
+            headerTitle:'TV Shows',
+            headerTitleStyle: {
+              fontSize: 15,
+            },
+            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
+            headerTintColor: colors.primary,
+            headerStyle: {
+              backgroundColor: colors.third,
+
+            },
+
+          }
+        
+        }
       />
 
 
@@ -61,8 +75,8 @@ export const MainStack = ({ navigation }: any) => {
         }
       />
       <Stack.Screen
-        name="MoviesBySearchScreen"
-        component={MoviesBySearchScreen}
+        name="ContentBySearchScreen"
+        component={ContentBySearchScreen}
         options={({ route }: { route: any }) => (
           {
             headerTitle: route?.params?.value || '',

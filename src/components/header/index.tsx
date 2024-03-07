@@ -10,18 +10,15 @@ import GenresModal from '../genresModal'
 
 
 type headerPropsType = {
-    isShowingCategoryButton? : boolean
-    activeScreen : 'Home' | 'Tv'
+    isShowingCategoryButton?: boolean
+    activeScreen: 'Home' | 'Tv'
 }
 
-const Header : React.FC<headerPropsType> = ({isShowingCategoryButton, activeScreen}) => {
+const Header: React.FC<headerPropsType> = ({ isShowingCategoryButton, activeScreen }) => {
 
     const [isSearch, setIsSearch] = useState<boolean>(false)
 
     const isModalVisible = useGenresModalVisible()
-
-
-
     return (
         <View>
 
@@ -31,9 +28,12 @@ const Header : React.FC<headerPropsType> = ({isShowingCategoryButton, activeScre
                     <Text style={styles.title}>MM</Text>
                 </View>
 
-                
+
                 {
-                    isSearch && <SearchInput />
+                    isSearch && <SearchInput
+                     placeholder={activeScreen == 'Tv' ? 'Search A TV Show' : activeScreen == 'Home' ? 'Search something' : ''}
+                     activeSearchContent = {activeScreen}
+                     />
                 }
 
 
@@ -44,15 +44,15 @@ const Header : React.FC<headerPropsType> = ({isShowingCategoryButton, activeScre
             </View>
 
             <View style={styles.bottom_content}>
-                <HeaderItem text='Movies' isGenreModalButton={false} activeScreen={activeScreen} />
-                <HeaderItem text='TV-Series' isGenreModalButton={false} activeScreen={activeScreen} />
+                <HeaderItem text='Movies' isGenreModalButton={false} />
+                <HeaderItem text='TV-Series' isGenreModalButton={false} />
                 {
-                    activeScreen == 'Tv' && <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton activeScreen={activeScreen} />
+                    activeScreen == 'Tv' && <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton />
                 }
             </View>
 
 
-                
+
             {
                 isModalVisible && <GenresModal />
             }

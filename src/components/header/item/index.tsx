@@ -19,7 +19,6 @@ type HeaderItemPropsType = {
 
 const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, modalVisible }) => {
 
-    const activeContent = useActiveContent()
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
 
@@ -49,9 +48,7 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
                         <TouchableOpacity onPress={handleContentChange} style={styles.item_container}>
                             <Text style={styles.item}>{text}</Text>
 
-                            {
-                                activeContent == text && <Entypo name="check" color='#00FF00' size={18} />
-                            }
+                           
 
                         </TouchableOpacity>
                     )

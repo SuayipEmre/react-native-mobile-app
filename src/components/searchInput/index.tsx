@@ -8,17 +8,23 @@ import Animated, { FadeInRight } from 'react-native-reanimated'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 
 
+type SearchInputPropsType = {
+    placeholder:string,
+    activeSearchContent : 'Home' | 'Tv'
+}
 
-const SearchInput: React.FC = () => {
+const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeSearchContent}) => {
 
     const searchValue: string = useSearchValue()
+
 
     
     const navigation  = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleSubmit = () => {
-        navigation.navigate('MoviesBySearchScreen', {
-            value : searchValue
+        navigation.navigate('ContentBySearchScreen', {
+            value : searchValue,
+            activeSearchContent,
         })
 
         setSearchValue('')
@@ -33,7 +39,7 @@ const SearchInput: React.FC = () => {
                 value={searchValue}
                 autoCapitalize='none'
                 autoCorrect={false}
-                placeholder='search a movie'
+                placeholder={placeholder}
                 cursorColor={colors.primary}
                 onChangeText={setSearchValue}
                 placeholderTextColor='#eee9'

@@ -1,13 +1,13 @@
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, ScrollView, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../../components/header'
 import { useFetchOnTheAirTVShowsQuery, useFetchPopularTVShowsQuery, useFetchTopRatedTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../store/features/APIs/tvseries'
 import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
 import FeaturedMovie from '../../components/featuredMovie'
+import ContentLayout from '../../layouts/contentLayout'
 
 
 
@@ -26,25 +26,23 @@ const TvShowsScreen = () => {
     else if (trendingTvShowsLoading || popularTvShowsLoading || topRatedTvShowsLoading || onAirTvShowsLoading) return <Loading />
 
 
-    console.log("trending tv shows aq : ", trendingTvShows[0]);
 
     return (
-        <SafeAreaView style={{ backgroundColor: colors.third, flex: 1, alignItems: 'center' }}>
+        <View style={{ backgroundColor: colors.third, alignItems: 'center' }}>
 
             <ScrollView
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={{ width: width * 0.9 }}>
+                showsVerticalScrollIndicator={false}>
+                <ContentLayout >
+                    <Header activeScreen='Tv' />
+                    <FeaturedMovie content={trendingTvShows.results[0]} />
+                    <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                    <ContentListContainer title='Trend TV Shows' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
+                    <ContentListContainer title='Popular TV Shows' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
+                    <ContentListContainer title='Top Rated TV Shows ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                </ContentLayout>
 
-                <Header activeScreen='Tv' />
-
-                <FeaturedMovie content={trendingTvShows.results[0]} />
-
-                <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                <ContentListContainer title='Trend TV Shows' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                <ContentListContainer title='Popular TV Shows' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-                <ContentListContainer title='Top Rated TV Shows ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
             </ScrollView>
-        </SafeAreaView>
+        </View >
     )
 }
 
