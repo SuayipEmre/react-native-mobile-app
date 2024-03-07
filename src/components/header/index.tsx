@@ -11,7 +11,7 @@ import GenresModal from '../genresModal'
 
 type headerPropsType = {
     isShowingCategoryButton?: boolean
-    activeScreen: 'Home' | 'Tv'
+    activeScreen: 'Home' | 'Tv' | 'Movie'
 }
 
 const Header: React.FC<headerPropsType> = ({ isShowingCategoryButton, activeScreen }) => {
@@ -31,7 +31,7 @@ const Header: React.FC<headerPropsType> = ({ isShowingCategoryButton, activeScre
 
                 {
                     isSearch && <SearchInput
-                     placeholder={activeScreen == 'Tv' ? 'Search A TV Show' : activeScreen == 'Home' ? 'Search something' : ''}
+                     placeholder={activeScreen == 'Tv' ? 'Search A TV Show' : activeScreen == 'Home' ? 'Search something' :  'Search a movie'}
                      activeSearchContent = {activeScreen}
                      />
                 }

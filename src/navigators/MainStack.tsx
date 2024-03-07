@@ -8,6 +8,7 @@ import MoviesBySearchScreen from '../screens/contentBySearchValue';
 import MovieDetailsScreen from '../screens/movieDetails';
 import TvShowsScreen from '../screens/tvShowsScreen';
 import ContentBySearchScreen from '../screens/contentBySearchValue';
+import MoviesScreen from '../screens/moviesScreen';
 
 
 
@@ -35,9 +36,9 @@ export const MainStack = ({ navigation }: any) => {
       <Stack.Screen
         name='TvShowsScreen'
         component={TvShowsScreen}
-        options={  
+        options={
           {
-            headerTitle:'TV Shows',
+            headerTitle: 'TV Shows',
             headerTitleStyle: {
               fontSize: 15,
             },
@@ -49,9 +50,32 @@ export const MainStack = ({ navigation }: any) => {
             },
 
           }
-        
+
         }
       />
+
+      <Stack.Screen
+        name='MoviesScreen'
+        component={MoviesScreen}
+        options={
+          {
+            headerTitle: 'Movies',
+            headerTitleStyle: {
+              fontSize: 15,
+            },
+            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
+            headerTintColor: colors.primary,
+            headerStyle: {
+              backgroundColor: colors.third,
+
+            },
+
+          }
+
+        }
+      />
+
+
 
 
       <Stack.Screen

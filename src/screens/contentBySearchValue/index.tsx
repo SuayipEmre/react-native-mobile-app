@@ -34,13 +34,17 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) =>
   if (activeSearchContent == 'Tv') {
     if (tvError) return <Error />
     else if (tvLoading) return <Loading />
+  } 
+  else if  (activeSearchContent == 'Movie'){
+    if (moviesError) return <Error />
+    else if (moviesLoading) return <Loading />
   }
 
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={tvData.results}
+        data={activeSearchContent == 'Tv' ? tvData.results : moviesData.results}
         renderItem={renderMovies}
         numColumns={2}
         showsVerticalScrollIndicator={false}

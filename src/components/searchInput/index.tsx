@@ -10,7 +10,7 @@ import { MainNavigatorStackParamList } from '../../navigators/types'
 
 type SearchInputPropsType = {
     placeholder:string,
-    activeSearchContent : 'Home' | 'Tv'
+    activeSearchContent : 'Home' | 'Tv' | 'Movie'
 }
 
 const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeSearchContent}) => {

@@ -29,7 +29,7 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
 
     const handleContentChange = () => {
-        text == 'TV-Series' && navigation.navigate('TvShowsScreen')
+        text == 'TV-Series' ? navigation.navigate('TvShowsScreen') : text == 'Movies' && navigation.navigate('MoviesScreen')
         setActiveContent(text == 'Movies' ? 'Movies' : 'TV-Series')
     }
 

@@ -11,9 +11,6 @@ import ContentLayout from '../../layouts/contentLayout'
 
 
 
-const { width } = Dimensions.get('screen')
-
-
 const TvShowsScreen = () => {
 
     const { data: trendingTvShows, isError: trendingTvShowsError, isLoading: trendingTvShowsLoading } = useFetchTrendingTVShowsQuery({})
@@ -36,9 +33,9 @@ const TvShowsScreen = () => {
                     <Header activeScreen='Tv' />
                     <FeaturedMovie content={trendingTvShows.results[0]} />
                     <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                    <ContentListContainer title='Trend TV Shows' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                    <ContentListContainer title='Popular TV Shows' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-                    <ContentListContainer title='Top Rated TV Shows ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                    <ContentListContainer title='Trending' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
+                    <ContentListContainer title='Popular' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
+                    <ContentListContainer title='Top Rated  ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
                 </ContentLayout>
 
             </ScrollView>
@@ -47,5 +44,3 @@ const TvShowsScreen = () => {
 }
 
 export default TvShowsScreen
-
-const styles = StyleSheet.create({})
