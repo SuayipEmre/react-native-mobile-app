@@ -35,6 +35,30 @@ const tvShowsApi = createApi({
                     }
                 }
             }
+        }),
+        fetchTopRatedTVShows :builder.query({
+            query: () => {
+                return {
+                    url: `/tv/top_rated`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                    }
+                }
+            }
+        }),
+        fetchOnTheAirTVShows :builder.query({
+            query: () => {
+                return {
+                    url: `/discover/tv`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                    }
+                }
+            }
         })
      
         
@@ -45,8 +69,11 @@ const tvShowsApi = createApi({
     
 })
 
+
 export const {
     useFetchPopularTVShowsQuery,
-    useFetchTrendingTVShowsQuery
+    useFetchTrendingTVShowsQuery,
+    useFetchTopRatedTVShowsQuery,
+    useFetchOnTheAirTVShowsQuery
 } = tvShowsApi
 export default tvShowsApi

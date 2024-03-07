@@ -14,7 +14,9 @@ const MovieList: React.FC<MovieListPropsType> = ({ content }) => {
 
     
 
+
     const handleMovieDetail = (movie_id : number, movie_title:string) => {
+        
       navigation.navigate('MovieDetailsScreen',{
         movie_id,
         movie_title,
@@ -22,10 +24,11 @@ const MovieList: React.FC<MovieListPropsType> = ({ content }) => {
     }
 
      const renderMovies: ListRenderItem<MovieTypes> = ({ item }) => {
+        
 
         return (
             <TouchableOpacity style={styles.container} onPress={() => handleMovieDetail(item.id, item.title)}>
-               <Image source={{uri : `${process.env.IMAGE_PATH}/${item.poster_path}`}} style={styles.image} />
+               <Image source={{uri : `${process.env.IMAGE_PATH}/${item?.poster_path}`}} style={styles.image} />
             </TouchableOpacity>
         )
     }

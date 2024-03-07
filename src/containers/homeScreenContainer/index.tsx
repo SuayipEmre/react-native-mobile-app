@@ -1,49 +1,45 @@
-import { Dimensions, ScrollView,  View } from 'react-native'
+import { Dimensions, ScrollView, View } from 'react-native'
 import React from 'react'
 import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import { MovieTypes } from '../../types/movie'
-import GenresModal from '../../components/genresModal'
-import MovieListContainer, { fadeDirection } from '../../components/movieList/movieListContainer'
-import { useGenresModalVisible } from '../../store/features/modals/genres/hooks'
+
 import { TvShowsTypes } from '../../types/tvshows'
+import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 
 
 type HomeScreenContainerPropsType = {
-    trendingMovies: Array<MovieTypes> ,
-    trendingTVShows: Array<TvShowsTypes> ,
+    trendingMovies: Array<MovieTypes>,
+    trendingTVShows: Array<TvShowsTypes>,
     popularMovies: Array<TvShowsTypes>,
-    popularTVShows: Array<MovieTypes> ,
+    popularTVShows: Array<MovieTypes>,
 }
 const { width } = Dimensions.get('screen')
 
 const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
     popularMovies,
     trendingMovies,
-    popularTVShows ,
+    popularTVShows,
     trendingTVShows,
 }) => {
 
 
-    const isModalVisible: boolean = useGenresModalVisible()
-
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ marginTop: 16, alignItems: 'center' }}>
+            contentContainerStyle={{ marginTop: 16, alignItems: 'center', paddingBottom:30 }}>
+
             <View style={{ width: width * 0.9 }}>
 
-                <Header />
-                <FeaturedMovie movie={popularMovies[1]} />
+                <Header activeScreen='Home' />
+                <FeaturedMovie content={trendingMovies[0]} />
 
-                <MovieListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                <MovieListContainer title='Trend TV Shows' content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-                <MovieListContainer title='Popular Movies' content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                <MovieListContainer title='Now Playing' content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} />
+                <ContentListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
+                <ContentListContainer title='Trend TV Shows' content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
+                <ContentListContainer title='Popular Movies' content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                <ContentListContainer title='Popular TV Shows' content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} />
+
             </View>
-            {
-                isModalVisible && <GenresModal />
-            }
         </ScrollView >
     )
 }

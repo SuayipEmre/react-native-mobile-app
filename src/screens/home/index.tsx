@@ -13,7 +13,7 @@ import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
 import { useActiveContent } from '../../store/features/activeContent/hooks'
 import { useFetchPopularTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../store/features/APIs/tvseries'
-import MovieListContainer, { fadeDirection } from '../../components/movieList/movieListContainer'
+import MovieListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 
 
 

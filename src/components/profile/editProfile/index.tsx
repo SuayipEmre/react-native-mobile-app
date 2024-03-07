@@ -99,7 +99,6 @@ const EditProfile: React.FC = () => {
             } else {
                 let imageUri = response.assets?.[0]?.uri;
                 setSelectedImage(imageUri);
-                console.log('asd', imageUri);
             }
         })
     }

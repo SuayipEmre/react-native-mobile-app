@@ -1,4 +1,4 @@
-import { Text, TextInput, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React, { useState } from 'react'
 import styles from './styles'
 import HeaderItem from './item'
@@ -6,13 +6,19 @@ import HeaderItem from './item'
 import Ant from 'react-native-vector-icons/AntDesign'
 import SearchInput from '../searchInput'
 import { useGenresModalVisible } from '../../store/features/modals/genres/hooks'
+import GenresModal from '../genresModal'
 
 
-const Header = () => {
+type headerPropsType = {
+    isShowingCategoryButton? : boolean
+    activeScreen : 'Home' | 'Tv'
+}
+
+const Header : React.FC<headerPropsType> = ({isShowingCategoryButton, activeScreen}) => {
 
     const [isSearch, setIsSearch] = useState<boolean>(false)
 
-    const modalVisible = useGenresModalVisible()
+    const isModalVisible = useGenresModalVisible()
 
 
 
@@ -38,11 +44,18 @@ const Header = () => {
             </View>
 
             <View style={styles.bottom_content}>
-                <HeaderItem text='Movies' isGenreModalButton={false} />
-                <HeaderItem text='TV-Series' isGenreModalButton={false} />
-                <HeaderItem text='Categories' modalVisible={modalVisible} isGenreModalButton />
+                <HeaderItem text='Movies' isGenreModalButton={false} activeScreen={activeScreen} />
+                <HeaderItem text='TV-Series' isGenreModalButton={false} activeScreen={activeScreen} />
+                {
+                    activeScreen == 'Tv' && <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton activeScreen={activeScreen} />
+                }
             </View>
 
+
+                
+            {
+                isModalVisible && <GenresModal />
+            }
 
 
 

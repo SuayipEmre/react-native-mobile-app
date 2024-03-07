@@ -1,5 +1,6 @@
 export type MainNavigatorStackParamList = {
     HomeScreen: undefined
+    TvShowsScreen: undefined,
     MoviesByGenreScreen: { value: string, genreid: string } ,
     MoviesBySearchScreen: { value: string } ,
     MovieDetailsScreen : {movie_id : number, movie_title : string}

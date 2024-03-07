@@ -3,8 +3,8 @@ import { Image, View } from "react-native"
 import Entypo from 'react-native-vector-icons/Entypo'
 import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from "../../styles/colors"
-import { movieDetailsTypes } from "../../types/movie"
 import styles from "./styles"
+import { movieDetailsTypes } from "../../types/movieDetail"
 
 type MovieDetailsContentPropsType = {
     movie: movieDetailsTypes,
@@ -16,7 +16,6 @@ export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ mo
     const runtime = movie.runtime;
     const hours = Math.floor(runtime / 60);
     const minute = runtime % 60;
-    console.log(hours, minute);
 
     return (
         <>

@@ -6,18 +6,21 @@ import { colors } from '../../../styles/colors'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { setActiveContent } from '../../../store/features/activeContent/actions'
 import { useActiveContent } from '../../../store/features/activeContent/hooks'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { MainNavigatorStackParamList } from '../../../navigators/types'
 
 type HeaderItemPropsType = {
     text: 'TV-Series' | 'Movies' | 'Categories',
     isGenreModalButton: boolean,
     modalVisible?: boolean,
+
 }
 
 
 const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, modalVisible }) => {
 
     const activeContent = useActiveContent()
-
+    const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
 
     const handleModalClick = () => {
@@ -27,6 +30,7 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
 
     const handleContentChange = () => {
+        text == 'TV-Series' && navigation.navigate('TvShowsScreen')
         setActiveContent(text == 'Movies' ? 'Movies' : 'TV-Series')
     }
 
