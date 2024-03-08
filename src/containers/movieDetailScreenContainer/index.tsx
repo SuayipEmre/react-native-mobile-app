@@ -1,41 +1,63 @@
-import { Dimensions, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Dimensions, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { MovieTypes, movieDetailsTypes } from '../../types/movie'
+import { MovieTypes } from '../../types/movie'
 import { useFetchSimilarMoviesQuery } from '../../store/features/APIs/movies'
 import { FlatList } from 'react-native'
-import { MovieDetailsContent } from '../../components/movieDetailsContent'
+import { MovieDetailsContent } from '../../components/contentDetails/movieDetailsContent'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { movieDetailsTypes } from '../../types/movieDetail'
+import { TvShowsTypes } from '../../types/tvshows'
+import TVShowDetails from '../../components/contentDetails/tvShowDetails'
+import { TVShowDetailsTypes } from '../../types/tvShowDetails'
+import { useFetchSimilarTVShowsQuery } from '../../store/features/APIs/tvseries'
 
 type MovieDetailScreenContainerPropsType = {
   movie: movieDetailsTypes,
+  tvShow: TVShowDetailsTypes,
+  activeContent: 'Movie' | 'TV',
+  contentID: number
 
 }
 
-const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> = ({ movie }) => {
+const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
+
+  console.log(activeContent);
 
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
-  const { data, isLoading, isError } = useFetchSimilarMoviesQuery(movie.id)
 
-  const getYear: string[] = movie.release_date.split("-");
-  const year: string = getYear[0];
+  const { data: movieSimilarContent, isLoading: movieSimilarLoading, isError: movieSimilarError } = useFetchSimilarMoviesQuery(contentID, {
+    skip: activeContent != 'Movie'
+  })
+
+  const { data: tvSimilarContent, isLoading: tvSimilarLoading, isError: tvSimilarError } = useFetchSimilarTVShowsQuery(contentID, {
+    skip: activeContent != 'TV'
+  })
 
 
 
 
-  const handleMovieDetail = (movie_id: number, movie_title : string) => {
+
+  const handleMovieDetail = (movie_id: number, movie_title: string) => {
     navigation.navigate('MovieDetailsScreen', {
-      movie_id,
-      movie_title,
+      content_id: movie_id,
+      content_title: movie_title,
+      activeContent,
     })
   }
 
 
-  const renderMovies: ListRenderItem<MovieTypes> = ({ item }) => {
-   
-    
-    if (isError) return <Text>Err</Text>
-    else if (isLoading) return <Text>Loading</Text>
+  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item }) => {
+
+
+
+    if (activeContent == 'Movie') {
+      if (movieSimilarError) return <Text>Err</Text>
+      else if (movieSimilarLoading) return <ActivityIndicator />
+    } else if (activeContent == 'TV') {
+      if (tvSimilarError) return <Text>Err</Text>
+      else if (tvSimilarLoading) return <ActivityIndicator />
+    }
 
     return (
       <TouchableOpacity
@@ -48,14 +70,16 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
   }
 
 
-  /*The details is  on the header of the flat list.  */
+  /*The details is  on the header of the flat list.   */
 
   return (
     <View>
       <FlatList
-        data={isError || isLoading ? [] : data.results}
+        data={
+          activeContent == 'Movie' ? (movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results) : tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.results
+        }
         renderItem={renderMovies}
-        ListHeaderComponent={<MovieDetailsContent movie={movie} year={year} />}
+        ListHeaderComponent={activeContent == 'Movie' ? <MovieDetailsContent movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
         showsVerticalScrollIndicator={false}
         numColumns={3}
         snapToAlignment='center'

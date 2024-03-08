@@ -12,9 +12,10 @@ import { TvShowsTypes } from '../../types/tvshows'
 
 type FeaturedMoviePropsTypes = {
     content: MovieTypes | TvShowsTypes
+    activeContent : 'Movie' | 'TV'
 }
 
-const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ content }) => {
+const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ content, activeContent }) => {
 
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
@@ -23,8 +24,9 @@ const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ content }) => {
     const handleDetail = () => {
      
         navigation.navigate('MovieDetailsScreen',{
-            movie_id : content.id,
-            movie_title : content.title
+            content_id : content.id,
+            content_title : content.title,
+            activeContent,
         })
     }
 

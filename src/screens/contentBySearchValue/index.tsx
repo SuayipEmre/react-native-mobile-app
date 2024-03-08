@@ -18,7 +18,6 @@ type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'Content
 const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) => {
 
   const { value, activeSearchContent } = route.params
-  console.log('active search', activeSearchContent);
 
 
   const { data: moviesData, isLoading: moviesLoading, isError: moviesError } = useFetchMoviesBySearchQuery(value, {

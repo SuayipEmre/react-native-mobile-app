@@ -1,10 +1,8 @@
-import { commonTypes } from "./commonTypes"
+import { Network, ProductionCountry, SpokenLanguage, commonTypes } from "./commonTypes"
+import { GenreTypes } from "./genres"
 
 export interface movieDetailsTypes extends commonTypes{
-    genres : Array<{
-        id : number,
-        name : string
-    }>
+    genres : GenreTypes[]
     belongs_to_collection:null
     budget:number
     homepage:string
@@ -13,27 +11,10 @@ export interface movieDetailsTypes extends commonTypes{
     runtime:number
     status:string
     tagline:string
-    production_companies : Array<productionCompaniesItemTypes>
-    production_countries : Array<productionCountriesItemTypes>
-    spoken_languages : Array<spokenLanguagesItemTypes>
+    production_companies : Network[]
+    production_countries : ProductionCountry[]
+    spoken_languages : SpokenLanguage[]
 
 }
 
-type productionCompaniesItemTypes = {
-    id:number,
-    logo_path : null | string,
-    name:string,
-    origin_country:string
-}
 
-
-type productionCountriesItemTypes = {
-    iso_3166_1:string,
-    name : string
-}
-
-type spokenLanguagesItemTypes = {
-    english_name:string,
-    iso_639_1:string
-    name:string
-}

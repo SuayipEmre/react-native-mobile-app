@@ -31,12 +31,12 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
             <ContentLayout>
 
             <Header activeScreen='Home'  />
-            <FeaturedMovie content={trendingMovies[0]} />
+            <FeaturedMovie content={trendingMovies[0]} activeContent='Movie' />
 
-            <ContentListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-            <ContentListContainer title='Trend TV Shows' content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-            <ContentListContainer title='Popular Movies' content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-            <ContentListContainer title='Popular TV Shows' content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} />
+            <ContentListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent='Movie' />
+            <ContentListContainer title='Trend TV Shows' content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent='TV' />
+            <ContentListContainer title='Popular Movies' content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='Movie' />
+            <ContentListContainer title='Popular TV Shows' content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} activeContent='TV' />
 
         </ContentLayout>
 

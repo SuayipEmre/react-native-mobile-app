@@ -124,7 +124,7 @@ export const MainStack = ({ navigation }: any) => {
         component={MovieDetailsScreen}
         options={({ route }: { route: any }) => (
           {
-            headerTitle: route.params.movie_title ?? "",
+            headerTitle: route.params.content_title ?? "",
             headerTintColor: colors.primary,
             headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
             headerStyle: {

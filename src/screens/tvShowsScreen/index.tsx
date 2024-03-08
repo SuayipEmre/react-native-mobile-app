@@ -1,4 +1,4 @@
-import { Dimensions, ScrollView, StyleSheet, View } from 'react-native'
+import {  ScrollView, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import Header from '../../components/header'
@@ -31,11 +31,11 @@ const TvShowsScreen = () => {
                 showsVerticalScrollIndicator={false}>
                 <ContentLayout >
                     <Header activeScreen='Tv' />
-                    <FeaturedMovie content={trendingTvShows.results[0]} />
-                    <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                    <ContentListContainer title='Trending' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                    <ContentListContainer title='Popular' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-                    <ContentListContainer title='Top Rated  ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                    <FeaturedMovie content={trendingTvShows.results[0]} activeContent='TV' />
+                    <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='TV' />
+                    <ContentListContainer title='Trending' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent='TV' />
+                    <ContentListContainer title='Popular' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent='TV' />
+                    <ContentListContainer title='Top Rated  ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='TV' />
                 </ContentLayout>
 
             </ScrollView>

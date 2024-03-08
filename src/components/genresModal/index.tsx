@@ -8,6 +8,7 @@ import { MainNavigatorStackParamList } from '../../navigators/types';
 import { colors } from '../../styles/colors';
 import { setIsGenresModalVisible } from '../../store/features/modals/genres/actions';
 import { useActiveContent } from '../../store/features/activeContent/hooks';
+import { GenreTypes } from '../../types/genres';
 
 
 
@@ -19,7 +20,7 @@ const GenresModal: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
-    const [genres, setGenres] = useState<[GenresTypes] | []>([])
+    const [genres, setGenres] = useState<[GenreTypes] | []>([])
     const activeContent = useActiveContent()
 
     const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery({}, {

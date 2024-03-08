@@ -27,11 +27,11 @@ const MoviesScreen = () => {
                 showsVerticalScrollIndicator={false}>
                 <ContentLayout >
                     <Header activeScreen='Movie' />
-                    <FeaturedMovie content={trendingMovies.results[0]} />
-                    <ContentListContainer title='Trending' content={trendingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
-                    <ContentListContainer title='Popular' content={popularMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} />
-                    <ContentListContainer title='Top Rated' content={topRatedMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} />
-                    <ContentListContainer title='Upcoming ' content={upcomingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} />
+                    <FeaturedMovie content={trendingMovies.results[0]}  activeContent='Movie' />
+                    <ContentListContainer title='Trending' content={trendingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='Movie' />
+                    <ContentListContainer title='Popular' content={popularMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent='Movie' />
+                    <ContentListContainer title='Top Rated' content={topRatedMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900}  activeContent='Movie'/>
+                    <ContentListContainer title='Upcoming ' content={upcomingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100}  activeContent='Movie'/>
                 </ContentLayout>
 
             </ScrollView>
