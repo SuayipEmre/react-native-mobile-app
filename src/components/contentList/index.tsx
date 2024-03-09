@@ -4,16 +4,16 @@ import { MovieTypes } from '../../types/movie'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { TvShowsTypes } from '../../types/tvshows'
+import { ActiveContent } from '../../types/activeContent'
 
 
 type MovieListPropsType = {
     content: Array<MovieTypes | TvShowsTypes>,
-    activeContent: 'Movie' | 'TV'
+    activeContent: ActiveContent
 }
 const MovieList: React.FC<MovieListPropsType> = ({ content, activeContent }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
-    console.log(activeContent);
 
 
 

@@ -6,6 +6,7 @@ import { colors } from '../../../styles/colors'
 import { setActiveContent } from '../../../store/features/activeContent/actions'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../../navigators/types'
+import { ActiveContent } from '../../../types/activeContent'
 
 type HeaderItemPropsType = {
     text: 'TV-Series' | 'Movies' | 'Categories',
@@ -28,7 +29,7 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
     const handleContentChange = () => {
         text == 'TV-Series' ? navigation.navigate('TvShowsScreen') : text == 'Movies' && navigation.navigate('MoviesScreen')
-        setActiveContent(text == 'Movies' ? 'Movies' : 'TV-Series')
+        setActiveContent(text == 'Movies' ?  ActiveContent.Movie : ActiveContent.TVShow)
     }
 
 

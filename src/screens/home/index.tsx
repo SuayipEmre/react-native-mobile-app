@@ -1,25 +1,24 @@
 import { SafeAreaView, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { colors } from '../../styles/colors'
 import HomeScreenContainer from '../../containers/homeScreenContainer'
 import {
-  useFetchNowPlayingMoviesQuery,
-  useFetchPopularMoviesQuery
-  , useFetchTopRatedMoviesQuery,
+  useFetchPopularMoviesQuery,
   useFetchTrendingMoviesQuery,
-  useFetchUpComingMoviesQuery
 } from '../../store/features/APIs/movies'
 import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
-import { useActiveContent } from '../../store/features/activeContent/hooks'
 import { useFetchPopularTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../store/features/APIs/tvseries'
-import MovieListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
+import { setActiveContent } from '../../store/features/activeContent/actions'
 
 
 
 
 const HomeScreen: React.FC = () => {
 
+  useEffect(() => {
+    setActiveContent(null)
+  },[])
 
   const { data: trendingMovies, isLoading: isTrendingMoviesLoading, isError: isTrendingMoviesError } = useFetchTrendingMoviesQuery({})
   const { data: trendingTVShows, isLoading: isTrendingTVShowsLoading, isError: isTrendingTVShowsError } = useFetchTrendingTVShowsQuery({})

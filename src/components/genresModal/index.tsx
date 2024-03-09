@@ -9,6 +9,7 @@ import { colors } from '../../styles/colors';
 import { setIsGenresModalVisible } from '../../store/features/modals/genres/actions';
 import { useActiveContent } from '../../store/features/activeContent/hooks';
 import { GenreTypes } from '../../types/genres';
+import { ActiveContent } from '../../types/activeContent';
 
 
 
@@ -24,15 +25,15 @@ const GenresModal: React.FC = () => {
     const activeContent = useActiveContent()
 
     const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery({}, {
-        skip: activeContent == 'Movies' ? false : true
+        skip: activeContent != ActiveContent.Movie 
     })
 
     const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery({},{
-        skip: activeContent == 'TV-Series' ? false : true
+        skip: activeContent != ActiveContent.TVShow 
     })
 
     useEffect(() => {
-        if (activeContent == 'Movies') {
+        if (activeContent == ActiveContent.Movie ) {
             if (!movieGenresLoading && !movieGenresError && movieGenres) {
                 setGenres(movieGenres.genres)
             }
@@ -41,7 +42,7 @@ const GenresModal: React.FC = () => {
     }, [movieGenres, movieGenresError, movieGenresLoading])
 
     useEffect(() => {
-        if (activeContent == 'TV-Series' ){
+        if (activeContent == ActiveContent.TVShow ){
             if (!tvListLoading && !tvListError && tvListData) {
                 setGenres(tvListData.genres)
             }  

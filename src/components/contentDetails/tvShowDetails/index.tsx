@@ -1,10 +1,7 @@
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import {  Text, View } from 'react-native'
 import React from 'react'
 import { TVShowDetailsTypes } from '../../../types/tvShowDetails'
-import Entypo from 'react-native-vector-icons/Entypo'
 import styles from '../styles'
-import { colors } from '../../../styles/colors'
-import Ant from 'react-native-vector-icons/AntDesign'
 import ContentDetailsFooter from '../detailsFooter'
 import PlayButton from '../playButton'
 import ContentDetailImage from '../image'
@@ -13,7 +10,6 @@ type TVShowDetailsPropsTypes = {
     tvShow: TVShowDetailsTypes
 }
 const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow }) => {
-    console.log(tvShow);
 
     const getYear: string[] = tvShow.first_air_date.split("-")
 

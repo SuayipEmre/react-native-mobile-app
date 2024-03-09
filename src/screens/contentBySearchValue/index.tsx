@@ -10,36 +10,32 @@ import { MovieTypes } from '../../types/movie'
 import { TvShowsTypes } from '../../types/tvshows'
 import MovieCard from '../../components/movieCard'
 import { useFetchTVShowsBySearchValueQuery } from '../../store/features/APIs/tvseries'
+import { ActiveContent } from '../../types/activeContent'
 
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentBySearchScreen'>
 
 const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) => {
 
-  const { value, activeSearchContent } = route.params
+  const { value, activeContent } = route.params
 
 
   const { data: moviesData, isLoading: moviesLoading, isError: moviesError } = useFetchMoviesBySearchQuery(value, {
-    skip : activeSearchContent != 'Movie'
+    skip : activeContent != ActiveContent.Movie
   })
   const { data: tvData, isLoading: tvLoading, isError: tvError } = useFetchTVShowsBySearchValueQuery(value,{
-    skip: activeSearchContent != 'Tv'
+    skip: activeContent != ActiveContent.TVShow
   })
 
-  const getActiveContent = ()  => {
-    if (activeSearchContent == 'Movie') return 'Movie'
-    else if (activeSearchContent == 'Tv') return 'TV'
-    else return null
-  }
 
-  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} activeContent= {getActiveContent()} />
+  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} activeContent= {activeContent} />
 
 
-  if (activeSearchContent == 'Tv') {
+  if (activeContent == ActiveContent.TVShow) {
     if (tvError) return <Error />
     else if (tvLoading) return <Loading />
   } 
-  else if  (activeSearchContent == 'Movie'){
+  else if  (activeContent == ActiveContent.Movie){
     if (moviesError) return <Error />
     else if (moviesLoading) return <Loading />
   }
@@ -48,7 +44,7 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) =>
   return (
     <View style={styles.container}>
       <FlatList
-        data={activeSearchContent == 'Tv' ? tvData.results : moviesData.results}
+        data={activeContent == ActiveContent.TVShow ? tvData.results : moviesData.results}
         renderItem={renderMovies}
         numColumns={2}
         showsVerticalScrollIndicator={false}

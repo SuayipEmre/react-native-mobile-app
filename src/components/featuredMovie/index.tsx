@@ -7,12 +7,13 @@ import Animated, { FadeInRight } from 'react-native-reanimated'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { TvShowsTypes } from '../../types/tvshows'
+import { ActiveContent } from '../../types/activeContent'
 
 
 
 type FeaturedMoviePropsTypes = {
     content: MovieTypes | TvShowsTypes
-    activeContent : 'Movie' | 'TV'
+    activeContent : ActiveContent
 }
 
 const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ content, activeContent }) => {

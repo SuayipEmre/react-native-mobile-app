@@ -1,17 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { ActiveContent } from "../../../types/activeContent"
 
 type initialStateType = {
-    activeContent : 'Movies' | 'TV-Series'
+    activeContent : ActiveContent | null
 }
 const initialState  : initialStateType= {
-    activeContent: 'Movies'
+    activeContent: ActiveContent.Movie
 }
 
 const activeContent = createSlice({
     name :'active content',
     initialState,
     reducers : {
-        _setActiveContent : (state, action : PayloadAction<'Movies' | 'TV-Series'>) => {
+        _setActiveContent : (state, action : PayloadAction<ActiveContent | null>) => {
           state.activeContent = action.payload
         }
     }

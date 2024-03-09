@@ -11,27 +11,28 @@ import { TvShowsTypes } from '../../types/tvshows'
 import TVShowDetails from '../../components/contentDetails/tvShowDetails'
 import { TVShowDetailsTypes } from '../../types/tvShowDetails'
 import { useFetchSimilarTVShowsQuery } from '../../store/features/APIs/tvseries'
+import { ActiveContent } from '../../types/activeContent'
 
 type MovieDetailScreenContainerPropsType = {
   movie: movieDetailsTypes,
   tvShow: TVShowDetailsTypes,
-  activeContent: 'Movie' | 'TV',
+  activeContent: ActiveContent,
   contentID: number
 
 }
 
 const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
 
-  console.log(activeContent);
+  console.log('MovieDetailScreenContainer : ',   activeContent);
 
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
   const { data: movieSimilarContent, isLoading: movieSimilarLoading, isError: movieSimilarError } = useFetchSimilarMoviesQuery(contentID, {
-    skip: activeContent != 'Movie'
+    skip: activeContent != ActiveContent.Movie
   })
 
   const { data: tvSimilarContent, isLoading: tvSimilarLoading, isError: tvSimilarError } = useFetchSimilarTVShowsQuery(contentID, {
-    skip: activeContent != 'TV'
+    skip: activeContent != ActiveContent.TVShow
   })
 
 
@@ -51,10 +52,11 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
 
 
 
-    if (activeContent == 'Movie') {
+    if (activeContent == ActiveContent.Movie) {
       if (movieSimilarError) return <Text>Err</Text>
       else if (movieSimilarLoading) return <ActivityIndicator />
-    } else if (activeContent == 'TV') {
+
+    } else if (activeContent == ActiveContent.TVShow) {
       if (tvSimilarError) return <Text>Err</Text>
       else if (tvSimilarLoading) return <ActivityIndicator />
     }
@@ -76,10 +78,10 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
     <View>
       <FlatList
         data={
-          activeContent == 'Movie' ? (movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results) : tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.results
+          activeContent == ActiveContent.Movie ? (movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results) : tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.results
         }
         renderItem={renderMovies}
-        ListHeaderComponent={activeContent == 'Movie' ? <MovieDetailsContent movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
+        ListHeaderComponent={activeContent == ActiveContent.Movie ? <MovieDetailsContent movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
         showsVerticalScrollIndicator={false}
         numColumns={3}
         snapToAlignment='center'

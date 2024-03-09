@@ -4,6 +4,7 @@ import MovieList from '..'
 import { MovieTypes } from '../../../types/movie'
 import Animated, { FadeInLeft, FadeInRight } from 'react-native-reanimated'
 import { TvShowsTypes } from '../../../types/tvshows'
+import { ActiveContent } from '../../../types/activeContent'
 
 
 type ContentListContainerPropsType = {
@@ -11,7 +12,7 @@ type ContentListContainerPropsType = {
     content: Array<MovieTypes> | Array<TvShowsTypes>,
     fadeDirection: fadeDirection,
     delaytime: number,
-    activeContent : 'Movie' | 'TV'
+    activeContent : ActiveContent
 }
 
 export enum fadeDirection {

@@ -6,14 +6,15 @@ import { setSearchValue } from '../../store/features/search/actions'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import Animated, { FadeInRight } from 'react-native-reanimated'
 import { MainNavigatorStackParamList } from '../../navigators/types'
+import { ActiveContent } from '../../types/activeContent'
 
 
 type SearchInputPropsType = {
     placeholder:string,
-    activeSearchContent : 'Home' | 'Tv' | 'Movie'
+    activeContent : ActiveContent
 }
 
-const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeSearchContent}) => {
+const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent}) => {
 
     const searchValue: string = useSearchValue()
 
@@ -24,7 +25,7 @@ const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeSearchC
     const handleSubmit = () => {
         navigation.navigate('ContentBySearchScreen', {
             value : searchValue,
-            activeSearchContent,
+            activeContent,
         })
 
         setSearchValue('')

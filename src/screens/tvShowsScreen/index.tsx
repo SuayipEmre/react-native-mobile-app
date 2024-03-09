@@ -8,6 +8,7 @@ import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
 import FeaturedMovie from '../../components/featuredMovie'
 import ContentLayout from '../../layouts/contentLayout'
+import { ActiveContent } from '../../types/activeContent'
 
 
 
@@ -30,12 +31,12 @@ const TvShowsScreen = () => {
             <ScrollView
                 showsVerticalScrollIndicator={false}>
                 <ContentLayout >
-                    <Header activeScreen='Tv' />
-                    <FeaturedMovie content={trendingTvShows.results[0]} activeContent='TV' />
-                    <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='TV' />
-                    <ContentListContainer title='Trending' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent='TV' />
-                    <ContentListContainer title='Popular' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent='TV' />
-                    <ContentListContainer title='Top Rated  ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent='TV' />
+                    <Header activeContent={ActiveContent.TVShow} />
+                    <FeaturedMovie content={trendingTvShows.results[0]} activeContent={ActiveContent.TVShow} />
+                    <ContentListContainer title='On The Air ' content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent={ActiveContent.TVShow} />
+                    <ContentListContainer title='Trending' content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.TVShow} />
+                    <ContentListContainer title='Popular' content={popularTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent={ActiveContent.TVShow} />
+                    <ContentListContainer title='Top Rated  ' content={topRatedTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent={ActiveContent.TVShow} />
                 </ContentLayout>
 
             </ScrollView>

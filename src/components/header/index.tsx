@@ -10,13 +10,14 @@ import GenresModal from '../genresModal'
 import { colors } from '../../styles/colors'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
+import { ActiveContent } from '../../types/activeContent'
 
 
 type headerPropsType = {
-    activeScreen: 'Home' | 'Tv' | 'Movie'
+    activeContent: ActiveContent
 }
 
-const Header: React.FC<headerPropsType> = ({  activeScreen }) => {
+const Header: React.FC<headerPropsType> = ({ activeContent }) => {
 
     const [isSearch, setIsSearch] = useState<boolean>(false)
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
@@ -37,8 +38,8 @@ const Header: React.FC<headerPropsType> = ({  activeScreen }) => {
 
                 {
                     isSearch && <SearchInput
-                        placeholder={activeScreen == 'Tv' ? 'Search A TV Show' : activeScreen == 'Home' ? 'Search something' : 'Search a movie'}
-                        activeSearchContent={activeScreen}
+                        placeholder={activeContent == ActiveContent.TVShow ? 'Search A TV Show' : 'Search a movie'}
+                        activeContent={activeContent}
                     />
                 }
 
@@ -51,26 +52,26 @@ const Header: React.FC<headerPropsType> = ({  activeScreen }) => {
 
             <View style={styles.bottom_content}>
                 {
-                    activeScreen == 'Movie' ? (
+                    activeContent == ActiveContent.Movie ? (
                         <>
                             {goHomeButton()}
                             <HeaderItem text='TV-Series' isGenreModalButton={false} />
                             <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton />
                         </>
-                    ) : activeScreen == 'Tv' ? (
+                    ) : activeContent == ActiveContent.TVShow ? (
                         <>
                             {goHomeButton()}
                             <HeaderItem text='Movies' isGenreModalButton={false} />
                             <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton />
                         </>
-                    ) :
-                        activeScreen == 'Home' && (
-                            <>
-                                <HeaderItem text='Movies' isGenreModalButton={false} />
-                                <HeaderItem text='TV-Series' isGenreModalButton={false} />
-                            </>
-                        )
+                    ) : <>
+                        <HeaderItem text='Movies' isGenreModalButton={false} />
+                        <HeaderItem text='TV-Series' isGenreModalButton={false} />
+                    </>
+
                 }
+
+
             </View>
 
 
