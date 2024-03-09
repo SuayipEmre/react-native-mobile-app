@@ -8,20 +8,24 @@ import { MainNavigatorStackParamList } from '../../navigators/types'
 
 type MovieCardPropTypes = {
     movieItem: MovieTypes,
-    index : number
+    index : number,
+    activeContent : string | null
 }
 const {height : hp } = Dimensions.get("window")
 
-const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index }) => {
+const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index, activeContent }) => {
 
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const handleMovieDetails = () => {
-        
-      navigation.navigate('MovieDetailsScreen',{
-        movie_id : movieItem.id,
-        movie_title : movieItem.title
-      })
+      
+        activeContent != null  &&  navigation.navigate('MovieDetailsScreen',{
+            content_id : movieItem.id,
+            content_title : movieItem.title,
+            activeContent
+          }) 
+          
+      
     }
     return (
         <TouchableOpacity style={[{

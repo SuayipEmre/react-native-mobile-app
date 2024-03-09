@@ -3,9 +3,7 @@ import React from 'react'
 import { commonStyles } from "../../../styles/commonStyle"
 import { setIsGenresModalVisible } from '../../../store/features/modals/genres/actions'
 import { colors } from '../../../styles/colors'
-import Entypo from 'react-native-vector-icons/Entypo'
 import { setActiveContent } from '../../../store/features/activeContent/actions'
-import { useActiveContent } from '../../../store/features/activeContent/hooks'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../../navigators/types'
 
@@ -47,8 +45,6 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
                         <TouchableOpacity onPress={handleContentChange} style={styles.item_container}>
                             <Text style={styles.item}>{text}</Text>
-
-                           
 
                         </TouchableOpacity>
                     )

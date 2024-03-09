@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet,  View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { MainNavigatorStackParamList } from '../../navigators/types'
@@ -18,6 +18,8 @@ const MovieDetailsScreen: React.FC<ProfileProps> = ({ route }) => {
 
   const { content_id, activeContent } = route.params
 
+  console.log(activeContent);
+  
   const { data: movieData, isLoading: movieLoading, isError: movieError } = useFetchMovieDetailsQuery(content_id, {
     skip: activeContent != 'Movie'
   })

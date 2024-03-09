@@ -2,7 +2,6 @@ import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useFetchMoviesBySearchQuery } from '../../store/features/APIs/movies'
-import MovieScreensContainer from '../../containers/movieScreensContainer'
 import { colors } from '../../styles/colors'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import Error from '../../components/errorAnimation'
@@ -27,7 +26,13 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) =>
     skip: activeSearchContent != 'Tv'
   })
 
-  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} />
+  const getActiveContent = ()  => {
+    if (activeSearchContent == 'Movie') return 'Movie'
+    else if (activeSearchContent == 'Tv') return 'TV'
+    else return null
+  }
+
+  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} activeContent= {getActiveContent()} />
 
 
   if (activeSearchContent == 'Tv') {

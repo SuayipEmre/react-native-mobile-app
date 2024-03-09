@@ -1,4 +1,4 @@
-import { FlatList, ListRenderItem, StyleSheet, View } from 'react-native'
+import { FlatList, ListRenderItem, View } from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import MovieCard from '../../components/movieCard'
@@ -10,7 +10,7 @@ const MovieScreensContainer : React.FC<moviesScreenContainerProps> = ({movie = [
 
 
 
-    const renderMovies: ListRenderItem<MovieTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} />
+    const renderMovies: ListRenderItem<MovieTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} activeContent='Movie' />
   
     return (
     <View>
@@ -27,5 +27,3 @@ const MovieScreensContainer : React.FC<moviesScreenContainerProps> = ({movie = [
 }
 
 export default MovieScreensContainer
-
-const styles = StyleSheet.create({})
