@@ -35,6 +35,7 @@ export default StyleSheet.create({
 
     bottom_content: {
         flexDirection: 'row',
+        alignItems:'center',
         gap: 10,
         paddingLeft: 5,
     },
