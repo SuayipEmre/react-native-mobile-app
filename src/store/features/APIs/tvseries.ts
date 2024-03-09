@@ -97,6 +97,20 @@ const tvShowsApi = createApi({
                 }
             }
         }),
+        fetchTVShowsByGenre :builder.query({
+            query: (genre_id : string) => {
+                return {
+                    url: `/discover/tv`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                        with_genres : genre_id
+                    }
+                }
+            }
+        }),
+
      
      
         
@@ -115,6 +129,7 @@ export const {
     useFetchOnTheAirTVShowsQuery,
     useFetchTVShowsBySearchValueQuery,
     useFetchTVShowsDetailsQuery,
-    useFetchSimilarTVShowsQuery
+    useFetchSimilarTVShowsQuery,
+    useFetchTVShowsByGenreQuery
 } = tvShowsApi
 export default tvShowsApi

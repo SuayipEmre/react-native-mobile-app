@@ -4,9 +4,9 @@ export type MainNavigatorStackParamList = {
     HomeScreen: undefined
     TvShowsScreen: undefined,
     MoviesScreen: undefined,
-    MoviesByGenreScreen: { value: string, genreid: string } ,
+    ContentByGenreScreen: { value: string, genreid: string, activeContent : ActiveContent  } ,
     ContentBySearchScreen: { value: string,  activeContent : ActiveContent } ,
-    MovieDetailsScreen : {content_id : number, content_title : string, activeContent : ActiveContent}
+    ContentDetailsScreen : {content_id : number, content_title : string, activeContent : ActiveContent}
 }
 
 

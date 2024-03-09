@@ -2,13 +2,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import { colors } from '../styles/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import MoviesByGenreScreen from '../screens/moviesByGenre';
 import { MainNavigatorStackParamList } from './types';
-import MoviesBySearchScreen from '../screens/contentBySearchValue';
-import MovieDetailsScreen from '../screens/movieDetails';
 import TvShowsScreen from '../screens/tvShowsScreen';
 import ContentBySearchScreen from '../screens/contentBySearchValue';
 import MoviesScreen from '../screens/moviesScreen';
+import ContentDetailsScreen from '../screens/contentDetails';
+import ContentByGenreScreen from '../screens/contentByGenre';
 
 
 
@@ -79,8 +78,8 @@ export const MainStack = ({ navigation }: any) => {
 
 
       <Stack.Screen
-        name="MoviesByGenreScreen"
-        component={MoviesByGenreScreen}
+        name="ContentByGenreScreen"
+        component={ContentByGenreScreen}
         options={({ route }: { route: any }) => (
           {
             headerTitle: route.params.value ?? "",
@@ -120,8 +119,8 @@ export const MainStack = ({ navigation }: any) => {
       />
 
       <Stack.Screen
-        name="MovieDetailsScreen"
-        component={MovieDetailsScreen}
+        name="ContentDetailsScreen"
+        component={ContentDetailsScreen}
         options={({ route }: { route: any }) => (
           {
             headerTitle: route.params.content_title ?? "",

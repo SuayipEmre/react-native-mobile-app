@@ -19,7 +19,7 @@ const MovieList: React.FC<MovieListPropsType> = ({ content, activeContent }) => 
 
     const handleMovieDetail = (movie_id: number, movie_title: string) => {
 
-        navigation.navigate('MovieDetailsScreen', {
+        navigation.navigate('ContentDetailsScreen', {
             content_id : movie_id,
             content_title : movie_title,
             activeContent

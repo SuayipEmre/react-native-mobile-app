@@ -24,7 +24,7 @@ const FeaturedMovie: React.FC<FeaturedMoviePropsTypes> = ({ content, activeConte
     
     const handleDetail = () => {
      
-        navigation.navigate('MovieDetailsScreen',{
+        navigation.navigate('ContentDetailsScreen',{
             content_id : content.id,
             content_title : content.title,
             activeContent,

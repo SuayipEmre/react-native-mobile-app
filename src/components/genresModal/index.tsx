@@ -56,9 +56,10 @@ const GenresModal: React.FC = () => {
 
     const selectGenre = (genreid: string, genreName: string) => {
 
-        navigation.navigate('MoviesByGenreScreen', {
+        navigation.navigate('ContentByGenreScreen', {
             genreid,
-            value: genreName
+            value: genreName,
+            activeContent : activeContent == ActiveContent.Movie ? ActiveContent.Movie : ActiveContent.TVShow
         })
         setIsGenresModalVisible(false)
     }

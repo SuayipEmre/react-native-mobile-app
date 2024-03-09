@@ -13,7 +13,7 @@ import { TVShowDetailsTypes } from '../../types/tvShowDetails'
 import { useFetchSimilarTVShowsQuery } from '../../store/features/APIs/tvseries'
 import { ActiveContent } from '../../types/activeContent'
 
-type MovieDetailScreenContainerPropsType = {
+type ContentDetailScreenContainerPropsType = {
   movie: movieDetailsTypes,
   tvShow: TVShowDetailsTypes,
   activeContent: ActiveContent,
@@ -21,7 +21,7 @@ type MovieDetailScreenContainerPropsType = {
 
 }
 
-const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
+const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
 
   console.log('MovieDetailScreenContainer : ',   activeContent);
 
@@ -40,7 +40,7 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
 
 
   const handleMovieDetail = (movie_id: number, movie_title: string) => {
-    navigation.navigate('MovieDetailsScreen', {
+    navigation.navigate('ContentDetailsScreen', {
       content_id: movie_id,
       content_title: movie_title,
       activeContent,
@@ -92,7 +92,7 @@ const MovieDetailScreenContainer: React.FC<MovieDetailScreenContainerPropsType> 
   )
 }
 
-export default MovieDetailScreenContainer
+export default ContentDetailScreenContainer
 
 
 const { width, height } = Dimensions.get('window')

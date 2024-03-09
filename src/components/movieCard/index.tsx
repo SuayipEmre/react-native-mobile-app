@@ -20,7 +20,7 @@ const MovieCard: React.FC<MovieCardPropTypes> = ({ movieItem, index, activeConte
 
     const handleMovieDetails = () => {
 
-        navigation.navigate('MovieDetailsScreen', {
+        navigation.navigate('ContentDetailsScreen', {
             content_id: movieItem.id,
             content_title: movieItem.title,
             activeContent
