@@ -1,5 +1,5 @@
 import { ActivityIndicator, Dimensions, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useRef } from 'react'
 import { MovieTypes } from '../../types/movie'
 import { useFetchSimilarMoviesQuery } from '../../store/features/APIs/movies'
 import { FlatList } from 'react-native'
@@ -23,7 +23,11 @@ type ContentDetailScreenContainerPropsType = {
 
 const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
 
-  console.log('MovieDetailScreenContainer : ',   activeContent);
+  console.log('MovieDetailScreenContainer : ', activeContent);
+
+  const listRef = useRef<FlatList>(null)
+
+
 
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
@@ -45,8 +49,15 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
       content_title: movie_title,
       activeContent,
     })
+    scrollTopHandler()
   }
 
+
+  const scrollTopHandler = () => {
+    if (listRef.current) {
+      listRef.current.scrollToOffset({ offset: 0, animated: true })
+    }
+  }
 
   const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item }) => {
 
@@ -73,12 +84,17 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
 
 
   /*The details is  on the header of the flat list.   */
-
   return (
     <View>
       <FlatList
+        ref={listRef}
         data={
-          activeContent == ActiveContent.Movie ? (movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results) : tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.results
+          activeContent == ActiveContent.Movie ?
+            (movieSimilarLoading || movieSimilarError ? [] :
+              movieSimilarContent.results) :
+            tvSimilarLoading || tvSimilarError ?
+              [] :
+              tvSimilarContent.results
         }
         renderItem={renderMovies}
         ListHeaderComponent={activeContent == ActiveContent.Movie ? <MovieDetailsContent movie={movie} /> : <TVShowDetails tvShow={tvShow} />}

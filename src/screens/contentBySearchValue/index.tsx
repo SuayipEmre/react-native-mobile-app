@@ -15,7 +15,7 @@ import { ActiveContent } from '../../types/activeContent'
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentBySearchScreen'>
 
-const ContentBySearchScreen: React.FC<ProfileProps> = ({ route, navigation }) => {
+const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
 
   const { value, activeContent } = route.params
 
