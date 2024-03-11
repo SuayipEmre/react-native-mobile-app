@@ -8,7 +8,12 @@ import ContentBySearchScreen from '../screens/contentBySearchValue';
 import MoviesScreen from '../screens/moviesScreen';
 import ContentDetailsScreen from '../screens/contentDetails';
 import ContentByGenreScreen from '../screens/contentByGenre';
-
+import { useState } from 'react';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import SearchInput from '../components/searchInput';
+import { ActiveContent } from '../types/activeContent';
+import Ant from 'react-native-vector-icons/AntDesign'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
@@ -17,12 +22,11 @@ const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
 export const MainStack = ({ navigation }: any) => {
 
 
+  const [isSearch, setIsSearch] = useState<boolean>(false)
 
 
   return (
     <Stack.Navigator initialRouteName='HomeScreen'>
-
-
 
       <Stack.Screen
         name='HomeScreen'
@@ -37,16 +41,25 @@ export const MainStack = ({ navigation }: any) => {
         component={TvShowsScreen}
         options={
           {
-            headerTitle: 'TV Shows',
-            headerTitleStyle: {
-              fontSize: 15,
-            },
-            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
             headerTintColor: colors.primary,
             headerStyle: {
               backgroundColor: colors.third,
-
             },
+            headerTitleStyle: {
+              fontSize: 15,
+            },
+            
+            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.TVShow} placeholder='Search a TV Show' setIsSearch={setIsSearch}  /> : <Text style={styles.header_title}>TV Shows</Text>,
+            headerLeft: () => (
+              <View style={styles.header_left}>
+                <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()}  />
+              </View>
+            ),
+            headerRight: () => (
+              <View style={styles.header_right}>
+                <Ant name="search1" color={'#fff'} size={24} onPress={() => setIsSearch(!isSearch)} />
+              </View>
+            )
 
           }
 
@@ -58,22 +71,29 @@ export const MainStack = ({ navigation }: any) => {
         component={MoviesScreen}
         options={
           {
-            headerTitle: 'Movies',
+            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.Movie} placeholder='Search a movie' setIsSearch={setIsSearch} /> : <Text style={styles.header_title}>Movies</Text>,
             headerTitleStyle: {
               fontSize: 15,
             },
-            headerLeft: () => <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()} />,
             headerTintColor: colors.primary,
             headerStyle: {
               backgroundColor: colors.third,
-
             },
+            headerLeft: () => (
+              <View style={styles.header_left}>
+                <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()}  />
+              </View>
+            ),
+            headerRight: () => (
+              <View style={styles.header_right}>
+                <Ant name="search1" color={'#fff'} size={24} onPress={() => setIsSearch(!isSearch)} />
+              </View>
+            )
 
           }
 
         }
       />
-
 
 
 
@@ -135,15 +155,25 @@ export const MainStack = ({ navigation }: any) => {
         )
         }
       />
-
-
-
-
-
-
     </Stack.Navigator>
   )
 }
 
 
 
+const {width} = Dimensions.get('window')
+
+const styles = StyleSheet.create({
+  header_title : {
+    color : colors.primary,
+    fontSize :15,
+  },
+  header_right:{
+    alignItems:'center',
+    width : width * 0.1,
+  },
+  header_left:{
+    width : width * 0.1,
+    alignItems:'center',
+  },
+})

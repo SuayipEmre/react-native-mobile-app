@@ -29,6 +29,7 @@ const AuthenticationInput : React.FC<authInputPropsType> = ({isSecret, placehold
 export default AuthenticationInput
 
 const{width, height} = Dimensions.get('window')
+
 const styles = StyleSheet.create({
     input:{
         borderWidth: 1,

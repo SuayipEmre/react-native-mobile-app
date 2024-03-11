@@ -1,4 +1,4 @@
-import {  ScrollView, View } from 'react-native'
+import {  SafeAreaView, ScrollView, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import Header from '../../components/header'
@@ -26,7 +26,7 @@ const TvShowsScreen = () => {
 
 
     return (
-        <View style={{ backgroundColor: colors.third, alignItems: 'center' }}>
+        <SafeAreaView style={{ backgroundColor: colors.third, alignItems: 'center' }}>
 
             <ScrollView
                 showsVerticalScrollIndicator={false}>
@@ -40,7 +40,7 @@ const TvShowsScreen = () => {
                 </ContentLayout>
 
             </ScrollView>
-        </View >
+        </SafeAreaView >
     )
 }
 

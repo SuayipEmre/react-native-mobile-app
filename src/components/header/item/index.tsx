@@ -29,29 +29,15 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
     const handleContentChange = () => {
         text == 'TV-Series' ? navigation.navigate('TvShowsScreen') : text == 'Movies' && navigation.navigate('MoviesScreen')
-        setActiveContent(text == 'Movies' ?  ActiveContent.Movie : ActiveContent.TVShow)
+        setActiveContent(text == 'Movies' ? ActiveContent.Movie : ActiveContent.TVShow)
     }
 
 
     return (
         <View style={styles.container}>
-
-            {
-                isGenreModalButton ?
-                    <TouchableOpacity activeOpacity={.7} onPress={handleModalClick}>
-                        <Text style={[{ color: colors.primary }, styles.item]}>{text}</Text>
-                    </TouchableOpacity>
-                    :
-                    (
-
-                        <TouchableOpacity onPress={handleContentChange} style={styles.item_container}>
-                            <Text style={styles.item}>{text}</Text>
-
-                        </TouchableOpacity>
-                    )
-            }
-
-
+            <TouchableOpacity activeOpacity={.7} onPress={isGenreModalButton ? handleModalClick : handleContentChange} >
+                <Text style={styles.item}>{text}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -67,11 +53,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: colors.secondary
     },
-    item_container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 4
-    },
+
     item: {
         fontSize: 15,
         fontWeight: '500',

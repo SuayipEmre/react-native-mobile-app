@@ -11,10 +11,11 @@ import { ActiveContent } from '../../types/activeContent'
 
 type SearchInputPropsType = {
     placeholder:string,
-    activeContent : ActiveContent
+    activeContent : ActiveContent,
+    setIsSearch : (isSearch : boolean) => void
 }
 
-const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent}) => {
+const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent, setIsSearch}) => {
 
     const searchValue: string = useSearchValue()
 
@@ -29,6 +30,7 @@ const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent
         })
 
         setSearchValue('')
+        setIsSearch(false)
     }
 
     return (
@@ -54,7 +56,7 @@ const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent
 export default SearchInput
 
 
-const {  height } = Dimensions.get('window')
+const {width,  height } = Dimensions.get('window')
 const styles = StyleSheet.create({
 
     container:{
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
     input: {
         color: colors.primary,
         zIndex: 12,
+        width : width * 0.7,
         height: height *0.05,
         borderColor: colors.secondary,
         borderWidth :1,

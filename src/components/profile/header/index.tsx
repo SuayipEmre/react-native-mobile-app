@@ -20,11 +20,14 @@ const ProfileHeader: React.FC = () => {
 
       <View style={styles.header_left_side}>
         <View style={styles.image_container}>
+      
           {
             currentUser?.photoURL ?
               <Image source={{ uri: currentUser?.photoURL }} style={styles.image} />
-              : <></>
+               :
+              <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
           }
+
         </View>
 
         <View style={styles.user_info_container}>

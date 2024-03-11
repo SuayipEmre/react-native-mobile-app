@@ -28,7 +28,7 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
   })
 
 
-  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard movieItem={item} index={index} activeContent= {activeContent} />
+  const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item, index }) => <MovieCard contentItem={item} index={index} activeContent= {activeContent} />
 
 
   if (activeContent == ActiveContent.TVShow) {

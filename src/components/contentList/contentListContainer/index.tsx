@@ -9,7 +9,7 @@ import { ActiveContent } from '../../../types/activeContent'
 
 type ContentListContainerPropsType = {
     title: string,
-    content: Array<MovieTypes> | Array<TvShowsTypes>,
+    content: Array<MovieTypes | TvShowsTypes>,
     fadeDirection: fadeDirection,
     delaytime: number,
     activeContent : ActiveContent
@@ -27,9 +27,6 @@ const ContentListContainer: React.FC<ContentListContainerPropsType> = ({
     activeContent,
 }
 ) => {
-
-
-    
 
     return (
         <Animated.View

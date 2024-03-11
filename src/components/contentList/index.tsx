@@ -17,11 +17,11 @@ const MovieList: React.FC<MovieListPropsType> = ({ content, activeContent }) => 
 
 
 
-    const handleMovieDetail = (movie_id: number, movie_title: string) => {
+    const handleMovieDetail = (content_id: number, content_title: string) => {
 
         navigation.navigate('ContentDetailsScreen', {
-            content_id : movie_id,
-            content_title : movie_title,
+            content_id,
+            content_title,
             activeContent
         })
     }
