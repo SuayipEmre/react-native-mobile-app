@@ -1,4 +1,4 @@
-import { Alert, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import AuthenticationInput from '../../components/authenticationInput'
@@ -6,11 +6,13 @@ import { commonStyles } from '../../styles/commonStyle'
 import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import auth from '@react-native-firebase/auth';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-type ProfileProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'LoginScreen'>
+
+type LoginScreenProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'LoginScreen'>
 
 
-const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
+const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
 
 
 
@@ -18,46 +20,53 @@ const LoginScreen: React.FC<ProfileProps> = ({navigation}) => {
   const [password, setPassword] = useState<string>('')
 
 
-  const handleLogin = async() => {
-    
+  const handleLogin = async () => {
+
     try {
-         await auth().signInWithEmailAndPassword(email, password)
-         Alert.alert('MM', 'sucsessfuly')
-    } catch (error : any | undefined) {
-        Alert.alert('MM', error.code)
+      await auth().signInWithEmailAndPassword(email, password)
+      Alert.alert('MM', 'sucsessfuly')
+    } catch (error: any | undefined) {
+      Alert.alert('MM', error.code)
     }
 
-    
-}
+
+  }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
+      <Image source={require('../../assets/logo.png')} style={styles.logo} />
 
       <AuthenticationInput value={email} setValue={setEmail} isSecret={false} placeholder='Email' />
       <AuthenticationInput value={password} setValue={setPassword} isSecret placeholder='Password' />
 
 
-      <View style={styles.bottom_content}>
+      <View style={styles.body}>
+
         <TouchableOpacity style={styles.login_button} onPress={handleLogin}>
           <Text style={styles.login_button_text}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.signup_button}
-          onPress={() => navigation.navigate('SignupScreen')}
-        >
-
-          <Text style={styles.account_text}>
-            Don't have an account yet?
-
-            <Text style={styles.signup_text}> Signup</Text>
-
-
-          </Text>
-        </TouchableOpacity>
       </View>
 
-    </View>
+
+
+
+      <TouchableOpacity
+        style={styles.signup_button}
+        onPress={() => navigation.navigate('SignupScreen')}
+      >
+
+        <View style={styles.signup_button_content}>
+          <Text style={styles.account_text}> Don't have an account? </Text>
+
+          <Text style={styles.signup_text}>Sign up</Text>
+        </View>
+
+
+      </TouchableOpacity>
+
+    </SafeAreaView>
   )
 }
 
@@ -69,10 +78,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.third,
-    ...commonStyles.centerElements,
+    alignItems: 'center',
   },
 
-  bottom_content: {
+  logo:{
+    width : width * 0.8,
+    height : height * 0.2,
+    resizeMode :'cover'
+  },
+  body: {
     width: width * 0.8,
     alignItems: 'flex-end',
     marginTop: 15,
@@ -86,13 +100,23 @@ const styles = StyleSheet.create({
 
   },
   login_button_text: {
-    color: colors.primary
+    color: colors.primary,
   },
-  signup_button: {},
+  signup_button: {
+    position:'absolute',
+    bottom: 50,
+  },
+  signup_button_content:{
+    flexDirection:'row',
+    alignItems:'center',
+    gap:6,
+  },
   account_text: {
-    color: colors.primary
+    color: colors.primary,
+
   },
   signup_text: {
     color: '#0070BB',
+    fontWeight : '500'
   }
 })

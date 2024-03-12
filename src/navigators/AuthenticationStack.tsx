@@ -16,26 +16,17 @@ export const AuthenticationStack: React.FC = () => {
         name='LoginScreen'
         component={LoginScreen}
         options={{
-          headerTitle: 'Login to MM',
-          headerStyle: {
-            backgroundColor: colors.third,
-          },
-          headerTintColor: colors.primary
+          headerShown: false
         }}
       />
 
       <Stack.Screen
         name='SignupScreen'
-        component={SignupScreen} 
+        component={SignupScreen}
         options={{
-          headerTitle: 'Signup to MM',
-          headerStyle: {
-            backgroundColor: colors.third,
-          },
-         
-          headerTintColor: colors.primary
+          headerShown: false
         }}
-        />
+      />
 
 
     </Stack.Navigator>

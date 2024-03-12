@@ -32,8 +32,8 @@ const{width, height} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
     input:{
-        borderWidth: 1,
-        borderColor : colors.primary,
+        borderBottomWidth: 1,
+        borderBottomColor : colors.secondary,
         width : width * 0.8,
         height : height * 0.05,
         paddingHorizontal: 15,

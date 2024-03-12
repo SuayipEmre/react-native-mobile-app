@@ -1,11 +1,18 @@
-import { Alert, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import { commonStyles } from '../../styles/commonStyle'
 import AuthenticationInput from '../../components/authenticationInput'
 import auth from '@react-native-firebase/auth';
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-const SignupScreen = () => {
+
+type SignupScreenProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'SignupScreen'>
+
+const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -14,40 +21,40 @@ const SignupScreen = () => {
 
 
 
-  const handleSignUp = async() => {
+  const handleSignUp = async () => {
 
-    
-    if (email.includes('@') && email.length > 6){
-      
-      if (password == repassword){
-        
-      await auth()
-        .createUserWithEmailAndPassword(email, password) 
-        .then(() => {
-          Alert.alert('MM', 'User account created. Thank you')
-        })
-        .catch(error => {
-          if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('MM', 'That email address is already in use!')
-          }
-  
-          if (error.code === 'auth/invalid-email') {
-            Alert.alert('MM', 'That email address is invalid!')
-          }
-  
-          console.error(error);
-        })
-        
-      } else{
+
+    if (email.includes('@') && email.length > 6) {
+
+      if (password == repassword) {
+
+        await auth()
+          .createUserWithEmailAndPassword(email, password)
+          .then(() => {
+            Alert.alert('MM', 'User account created. Thank you')
+          })
+          .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              Alert.alert('MM', 'That email address is already in use!')
+            }
+
+            if (error.code === 'auth/invalid-email') {
+              Alert.alert('MM', 'That email address is invalid!')
+            }
+
+            console.error(error);
+          })
+
+      } else {
         Alert.alert('MM', 'Passwords must be equal.')
-        
+
       }
-      
+
     }
-    else{
+    else {
       Alert.alert('MM', 'The Email field is required!')
-    
-      
+
+
     }
 
 
@@ -55,22 +62,41 @@ const SignupScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
+
+      <Image source={require('../../assets/logo.png')} style={styles.logo} />
+
 
       <AuthenticationInput value={email} setValue={setEmail} isSecret={false} placeholder='Email' />
       <AuthenticationInput value={password} setValue={setPassword} isSecret placeholder='Password' />
       <AuthenticationInput value={repassword} setValue={setRepassword} isSecret placeholder='Password' />
 
 
-      <View style={styles.bottom_content}>
+      <View style={styles.body}>
 
         <TouchableOpacity style={styles.signup_button} onPress={handleSignUp}>
-          <Text style={styles.signup_button_text}>Signup</Text>
+          <Text style={styles.signup_button_text}>Sign up</Text>
         </TouchableOpacity>
 
       </View>
 
-    </View>
+
+      <TouchableOpacity
+        style={styles.login_button}
+        onPress={() => navigation.navigate('LoginScreen')}
+      >
+
+        <View style={styles.signup_button_content}>
+          <Text style={styles.account_text}> Already have an account?  </Text>
+
+          <Text style={styles.signup_text}>Sign in</Text>
+        </View>
+
+
+      </TouchableOpacity>
+
+    </SafeAreaView>
   )
 
 }
@@ -81,12 +107,18 @@ const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    ...commonStyles.centerElements,
     flex: 1,
     backgroundColor: colors.third,
+    alignItems: 'center'
   },
 
-  bottom_content: {
+  logo: {
+    width: width * 0.8,
+    height: height * 0.2,
+    resizeMode: 'cover'
+  },
+
+  body: {
     width: width * 0.8,
     alignItems: 'flex-end',
     marginTop: 15,
@@ -103,5 +135,22 @@ const styles = StyleSheet.create({
   signup_button_text: {
     color: colors.primary
   },
+  login_button: {
+    position: 'absolute',
+    bottom: 50,
+  },
+  signup_button_content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
+  account_text: {
+    color: colors.primary,
+
+  },
+  signup_text: {
+    color: '#0070BB',
+    fontWeight: '500'
+  }
 
 })
