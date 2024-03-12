@@ -22,11 +22,12 @@ const ProfileScreen = () => {
 
      
         <ProfileScreenContainer />
-
+       
         <TouchableOpacity onPress={handleSignout} style={styles.signout_button}>
           <Text style={styles.signout_button_text}>Signout</Text>
         </TouchableOpacity>
 
+      
 
     </SafeAreaView>
   )

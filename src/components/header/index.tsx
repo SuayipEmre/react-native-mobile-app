@@ -12,7 +12,7 @@ import { ActiveContent } from '../../types/activeContent'
 
 
 type headerPropsType = {
-    activeContent: ActiveContent 
+    activeContent?: ActiveContent
 }
 
 const Header: React.FC<headerPropsType> = ({ activeContent }) => {

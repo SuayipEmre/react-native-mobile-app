@@ -10,6 +10,8 @@ const ProfileScreenContainer = () => {
       <ProfileHeader />
       <ProfileBody />
       <EditProfile />
+
+
     </View>
   )
 }

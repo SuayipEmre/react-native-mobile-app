@@ -31,7 +31,7 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
 
             <ContentLayout>
 
-            <Header activeScreen='Home'  />
+            <Header  />
             <FeaturedMovie content={trendingMovies[0]} activeContent={ActiveContent.Movie} />
 
             <ContentListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.Movie} />
