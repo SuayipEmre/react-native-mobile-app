@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import { commonStyles } from '../../styles/commonStyle'
 import AuthenticationInput from '../../components/authenticationInput'
-import auth from '@react-native-firebase/auth';
-import { NavigationProp, useNavigation } from '@react-navigation/native'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import firestore from '@react-native-firebase/firestore';
 
 
 type SignupScreenProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'SignupScreen'>
@@ -19,6 +19,25 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
   const [repassword, setRepassword] = useState<string>('')
 
 
+  const saveUserToDB = async (userCredential: FirebaseAuthTypes.UserCredential) => {
+    try {
+      await firestore()
+        .collection('users')
+        .doc(userCredential.user.uid)
+        .set({
+          displayName: userCredential.user.email?.split('@')[0],
+          email: userCredential.user.email,
+          favoriteContents: [],
+          contentList: [],
+          photo: null,
+
+        })
+    } catch (e) {
+      console.log(e);
+
+    }
+
+  }
 
 
   const handleSignUp = async () => {
@@ -28,10 +47,15 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
 
       if (password == repassword) {
 
+
+
+
         await auth()
           .createUserWithEmailAndPassword(email, password)
-          .then(() => {
+          .then((userCredential: FirebaseAuthTypes.UserCredential) => {
             Alert.alert('MM', 'User account created. Thank you')
+            saveUserToDB(userCredential)
+
           })
           .catch(error => {
             if (error.code === 'auth/email-already-in-use') {
@@ -42,7 +66,7 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
               Alert.alert('MM', 'That email address is invalid!')
             }
 
-            console.error(error);
+            console.error(error)
           })
 
       } else {
