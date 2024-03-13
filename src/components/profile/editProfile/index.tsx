@@ -7,6 +7,8 @@ import { launchImageLibrary, ImageLibraryOptions, ImagePickerResponse, launchCam
 import { setIsEditProfileModalVisible } from '../../../store/features/modals/editProfileModal/actions'
 import Evil from 'react-native-vector-icons/EvilIcons'
 import styles from './styles'
+import firestore from '@react-native-firebase/firestore';
+
 
 const EditProfile: React.FC = () => {
 
@@ -14,36 +16,6 @@ const EditProfile: React.FC = () => {
     const [userName, setUserName] = useState<string>(currentUser?.displayName ? currentUser?.displayName : '')
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
     const modalVisible = useEditProfileModalVisible()
-
-    
-
-
-    const openImagePicker = (): void => {
-
-        const options: ImageLibraryOptions = {
-            mediaType: 'photo',
-            includeBase64: false,
-            maxHeight: 2000,
-            maxWidth: 2000,
-        };
-
-        try {
-            launchImageLibrary(options, (response: ImagePickerResponse) => {
-                if (response.didCancel) {
-                    console.log('User cancelled image picker');
-                    setIsEditProfileModalVisible(false)
-                } else if (response.errorCode) {
-                    console.log('Image picker error: ', response.errorCode);
-                    setIsEditProfileModalVisible(false)
-                } else {
-                    let imageUri = response.assets?.[0]?.uri;
-                    setSelectedImage(imageUri);
-                }
-            })
-        } catch {
-
-        }
-    }
 
 
 
@@ -78,8 +50,10 @@ const EditProfile: React.FC = () => {
 
         )
     )
-
-
+    const handleCloseModal = () => {
+        setIsEditProfileModalVisible(false)
+        setSelectedImage(undefined)
+    }
 
     const handleCameraLaunch = () => {
         const options: CameraOptions = {
@@ -103,6 +77,34 @@ const EditProfile: React.FC = () => {
         })
     }
 
+    const openImagePicker = (): void => {
+
+        const options: ImageLibraryOptions = {
+            mediaType: 'photo',
+            includeBase64: false,
+            maxHeight: 2000,
+            maxWidth: 2000,
+        };
+
+        try {
+            launchImageLibrary(options, (response: ImagePickerResponse) => {
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                    setIsEditProfileModalVisible(false)
+                } else if (response.errorCode) {
+                    console.log('Image picker error: ', response.errorCode);
+                    setIsEditProfileModalVisible(false)
+                } else {
+                    let imageUri = response.assets?.[0]?.uri;
+                    setSelectedImage(imageUri);
+                }
+            })
+        } catch {
+
+        }
+    }
+
+
 
     const handleUpdateProfile = async (): Promise<void> => {
         const update = {
@@ -112,6 +114,7 @@ const EditProfile: React.FC = () => {
 
         try {
             await currentUser?.updateProfile(update)
+            await updateUserInfoFromDB()
             setUserName('')
             setSelectedImage('')
             setIsEditProfileModalVisible(false)
@@ -122,11 +125,18 @@ const EditProfile: React.FC = () => {
         }
     }
 
-    const handleCloseModal = () => {
-        setIsEditProfileModalVisible(false)
-        setSelectedImage(undefined)
-    }
 
+
+
+    const updateUserInfoFromDB = async () => {
+        const updatedInformations = {
+            displayName: userName,
+            photoURL: selectedImage,
+        };
+
+        const dbRef = firestore().collection('users').doc(currentUser?.uid)
+        await dbRef.update(updatedInformations)
+    }
     return (
         <Modal
             animationType="slide"

@@ -29,7 +29,8 @@ const SignupScreen: React.FC<SignupScreenProps> = ({ navigation }) => {
           email: userCredential.user.email,
           favoriteContents: [],
           contentList: [],
-          photo: null,
+          photoURL: null,
+          id : userCredential.user.uid
 
         })
     } catch (e) {
