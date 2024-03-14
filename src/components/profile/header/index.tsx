@@ -37,11 +37,12 @@ const ProfileHeader: React.FC = () => {
             currentUser?.email &&
             <>
               {
-                currentUser?.displayName ?  <Text style={styles.user_name}>
+                currentUser?.displayName ?
+                  <Text style={styles.user_name}>
                   {
                     currentUser?.displayName.length > 17 ? currentUser?.displayName.slice(0, 17) + '...' : currentUser?.displayName
                   }
-                </Text> : <Text>{currentUser?.email.split('@')[0].length}</Text>
+                </Text> : <Text style={styles.user_name}>{currentUser?.email.split('@')[0]}</Text>
 
               }
               

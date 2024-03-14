@@ -3,6 +3,7 @@ import React from 'react'
 import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from '../../../styles/colors'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore';
 
 const ProfileBody = () => {
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
@@ -12,6 +13,7 @@ const ProfileBody = () => {
         if (currentUser){
             try {
                 await currentUser.delete()
+                await deleteUserFromDB()
             } catch (error) {
                 console.log(error);
                 
@@ -20,6 +22,19 @@ const ProfileBody = () => {
         
     }
 
+    const deleteUserFromDB = async () => {
+        try {
+          // Kullanıcının Firestore'daki belgesini sil
+          await firestore()
+            .collection('users')
+            .doc(currentUser?.uid)
+            .delete()
+      
+          console.log("Kullanıcı başarıyla silindi.");
+        } catch (error) {
+          console.error("Kullanıcıyı silerken bir hata oluştu:", error);
+        }
+      };
 
     const showAlert = () => (
         Alert.alert(

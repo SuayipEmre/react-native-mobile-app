@@ -24,7 +24,7 @@ const ProfileScreen = () => {
         <ProfileScreenContainer />
        
         <TouchableOpacity onPress={handleSignout} style={styles.signout_button}>
-          <Text style={styles.signout_button_text}>Signout</Text>
+          <Text style={styles.signout_button_text}>Sign out</Text>
         </TouchableOpacity>
 
       
@@ -47,9 +47,11 @@ const styles = StyleSheet.create({
   signout_button:{
     position:'absolute',
     bottom:10,
+    left : 10,
+     
     
   },
   signout_button_text: {
-    color: colors.primary
+    color: 'red'
   },
 })
