@@ -104,9 +104,11 @@ const EditProfile: React.FC = () => {
         }
     }
 
-
+    
 
     const handleUpdateProfile = async (): Promise<void> => {
+        console.log(userName);
+        
         const update = {
             displayName: userName,
             photoURL: selectedImage,
@@ -134,8 +136,13 @@ const EditProfile: React.FC = () => {
             photoURL: selectedImage,
         };
 
-        const dbRef = firestore().collection('users').doc(currentUser?.uid)
-        await dbRef.update(updatedInformations)
+        try{
+            const dbRef = firestore().collection('users').doc(currentUser?.uid)
+            await dbRef.update(updatedInformations)
+        }catch(e){
+            console.log('what is the error ', e);
+            
+        }
     }
     return (
         <Modal

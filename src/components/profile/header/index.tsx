@@ -20,11 +20,11 @@ const ProfileHeader: React.FC = () => {
 
       <View style={styles.header_left_side}>
         <View style={styles.image_container}>
-      
+
           {
             currentUser?.photoURL ?
               <Image source={{ uri: currentUser?.photoURL }} style={styles.image} />
-               :
+              :
               <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
           }
 
@@ -32,8 +32,22 @@ const ProfileHeader: React.FC = () => {
 
         <View style={styles.user_info_container}>
 
+
           {
-            currentUser?.email && <Text style={styles.user_name}>{currentUser?.displayName ?? currentUser?.email.split('@')[0]}</Text>
+            currentUser?.email &&
+            <>
+              {
+                currentUser?.displayName ?  <Text style={styles.user_name}>
+                  {
+                    currentUser?.displayName.length > 17 ? currentUser?.displayName.slice(0, 17) + '...' : currentUser?.displayName
+                  }
+                </Text> : <Text>{currentUser?.email.split('@')[0].length}</Text>
+
+              }
+              
+            </>
+              
+            
           }
           <Text style={styles.user_email}>{currentUser?.email ?? ''}</Text>
         </View>
