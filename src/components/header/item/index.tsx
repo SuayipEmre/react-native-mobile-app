@@ -7,7 +7,7 @@ import { setActiveContent } from '../../../store/features/activeContent/actions'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../../navigators/types'
 import { ActiveContent } from '../../../types/activeContent'
-
+import Ant from 'react-native-vector-icons/AntDesign'
 type HeaderItemPropsType = {
     text: 'TV-Series' | 'Movies' | 'Categories',
     isGenreModalButton: boolean,
@@ -35,8 +35,11 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={.7} onPress={isGenreModalButton ? handleModalClick : handleContentChange} >
+            <TouchableOpacity activeOpacity={.7} onPress={isGenreModalButton ? handleModalClick : handleContentChange} style={styles.button} >
                 <Text style={styles.item}>{text}</Text>
+                {
+                    isGenreModalButton && <Ant name='down' size={15} color={colors.primary} />
+                }
             </TouchableOpacity>
         </View>
     )
@@ -55,8 +58,13 @@ const styles = StyleSheet.create({
     },
 
     item: {
-        fontSize: 15,
+        fontSize: 13,
         fontWeight: '500',
         color: colors.primary
+    },
+    button:{
+        flexDirection:'row',
+        alignItems:'center',
+        gap:12,
     },
 })
