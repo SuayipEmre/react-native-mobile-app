@@ -1,4 +1,4 @@
-import { Network, ProductionCountry, SpokenLanguage } from "./commonTypes";
+import { Network, ProductionCountry, SpokenLanguage } from "./CommonTypes";
 import { GenreTypes } from "./genres";
 
 export interface TVShowDetailsTypes {

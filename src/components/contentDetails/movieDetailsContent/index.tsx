@@ -1,14 +1,14 @@
 import { Text, TouchableOpacity } from "react-native"
 import { Image, View } from "react-native"
 import styles from "../styles"
-import { movieDetailsTypes } from "../../../types/movieDetail"
+import { MovieDetailsTypes } from "../../../types/movieDetail"
 import ContentDetailsFooter from "../detailsFooter"
 import PlayButton from "../playButton"
 import ContentDetailImage from "../image"
 
 
 type MovieDetailsContentPropsType = {
-    movie: movieDetailsTypes,
+    movie: MovieDetailsTypes,
 }
 
 export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ movie }) => {

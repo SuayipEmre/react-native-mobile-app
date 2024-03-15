@@ -1,7 +1,7 @@
-import { Network, ProductionCountry, SpokenLanguage, commonTypes } from "./commonTypes"
+import { Network, ProductionCountry, SpokenLanguage, CommonTypes } from "./CommonTypes"
 import { GenreTypes } from "./genres"
 
-export interface movieDetailsTypes extends commonTypes{
+export interface MovieDetailsTypes extends CommonTypes{
     genres : GenreTypes[]
     belongs_to_collection:null
     budget:number

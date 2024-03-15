@@ -1,6 +1,6 @@
-import { commonTypes } from "./commonTypes"
+import { CommonTypes } from "./CommonTypes"
 
-export interface TvShowsTypes extends commonTypes {
+export interface TvShowsTypes extends CommonTypes {
     genre_ids : [number]
     original_name : String
     first_air_date : String

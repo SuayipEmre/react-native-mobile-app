@@ -1,6 +1,6 @@
-import { commonTypes } from "./commonTypes"
+import { CommonTypes } from "./CommonTypes"
 
 
-export interface MovieTypes extends commonTypes{
+export interface MovieTypes extends CommonTypes{
     genre_ids : Array<number>
 }

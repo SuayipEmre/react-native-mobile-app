@@ -6,7 +6,7 @@ import { FlatList } from 'react-native'
 import { MovieDetailsContent } from '../../components/contentDetails/movieDetailsContent'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { movieDetailsTypes } from '../../types/movieDetail'
+import { MovieDetailsTypes } from '../../types/movieDetail'
 import { TvShowsTypes } from '../../types/tvshows'
 import TVShowDetails from '../../components/contentDetails/tvShowDetails'
 import { TVShowDetailsTypes } from '../../types/tvShowDetails'
@@ -14,7 +14,7 @@ import { useFetchSimilarTVShowsQuery } from '../../store/features/APIs/tvseries'
 import { ActiveContent } from '../../types/activeContent'
 
 type ContentDetailScreenContainerPropsType = {
-  movie: movieDetailsTypes,
+  movie: MovieDetailsTypes,
   tvShow: TVShowDetailsTypes,
   activeContent: ActiveContent,
   contentID: number

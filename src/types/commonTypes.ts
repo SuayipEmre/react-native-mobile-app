@@ -1,4 +1,4 @@
-export type commonTypes = {
+export type CommonTypes = {
     id : number,
     adult : boolean,
     backdrop_path?  : string,
