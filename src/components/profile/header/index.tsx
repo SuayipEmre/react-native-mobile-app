@@ -15,6 +15,22 @@ const ProfileHeader: React.FC = () => {
   const editProfileModalVisible = useEditProfileModalVisible()
 
 
+  const getUserDisplayName = (): string => {
+    if (currentUser?.email) {
+
+      if (currentUser?.displayName) return currentUser?.displayName.length > 17 ? currentUser?.displayName.slice(0, 17) + '...' : currentUser?.displayName
+
+      return currentUser?.email.split('@')[0]
+    }
+    return ""
+
+  }
+
+
+  const getUserProfilePhoto = () => {
+    return currentUser?.photoURL ? <Image source={{ uri: currentUser?.photoURL }} style={styles.image} /> : <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
+  }
+
   return (
     <View style={styles.header}>
 
@@ -22,36 +38,18 @@ const ProfileHeader: React.FC = () => {
         <View style={styles.image_container}>
 
           {
-            currentUser?.photoURL ?
-              <Image source={{ uri: currentUser?.photoURL }} style={styles.image} />
-              :
-              <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
+            getUserProfilePhoto()
           }
 
         </View>
 
         <View style={styles.user_info_container}>
 
-
-          {
-            currentUser?.email &&
-            <>
-              {
-                currentUser?.displayName ?
-                  <Text style={styles.user_name}>
-                  {
-                    currentUser?.displayName.length > 17 ? currentUser?.displayName.slice(0, 17) + '...' : currentUser?.displayName
-                  }
-                </Text> : <Text style={styles.user_name}>{currentUser?.email.split('@')[0]}</Text>
-
-              }
-              
-            </>
-              
-            
-          }
+          <Text style={styles.user_name}>{getUserDisplayName()}</Text>
           <Text style={styles.user_email}>{currentUser?.email ?? ''}</Text>
         </View>
+
+
       </View>
 
       <View style={styles.edit_icon_container}>

@@ -24,15 +24,15 @@ const ProfileBody = () => {
 
     const deleteUserFromDB = async () => {
         try {
-          // Kullanıcının Firestore'daki belgesini sil
+          // delete user informations from database
           await firestore()
             .collection('users')
             .doc(currentUser?.uid)
             .delete()
       
-          console.log("Kullanıcı başarıyla silindi.");
+          console.log("user succesfully deleted");
         } catch (error) {
-          console.error("Kullanıcıyı silerken bir hata oluştu:", error);
+          console.error("an error occured ", error);
         }
       };
 
