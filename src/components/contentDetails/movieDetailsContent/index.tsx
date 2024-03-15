@@ -5,6 +5,7 @@ import { MovieDetailsTypes } from "../../../types/movieDetail"
 import ContentDetailsFooter from "../detailsFooter"
 import PlayButton from "../playButton"
 import ContentDetailImage from "../image"
+import { ActiveContent } from "../../../types/activeContent"
 
 
 type MovieDetailsContentPropsType = {
@@ -16,6 +17,7 @@ export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ mo
     const getYear: string[] = movie.release_date.split("-")
 
     const year: string = getYear[0];
+    
 
     const runtime = movie.runtime;
     const hours = Math.floor(runtime / 60);
@@ -41,7 +43,7 @@ export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ mo
 
                 <Text style={styles.overview}>{movie.overview}</Text>
 
-               <ContentDetailsFooter />
+               <ContentDetailsFooter contentID={movie.id} contentType={ActiveContent.Movie} />
 
             </View>
             <View style={styles.border} />

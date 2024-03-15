@@ -5,6 +5,7 @@ import styles from '../styles'
 import ContentDetailsFooter from '../detailsFooter'
 import PlayButton from '../playButton'
 import ContentDetailImage from '../image'
+import { ActiveContent } from '../../../types/activeContent'
 
 type TVShowDetailsPropsTypes = {
     tvShow: TVShowDetailsTypes
@@ -33,7 +34,7 @@ const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow }) => {
 
                 <Text style={styles.overview}>{tvShow.overview}</Text>
 
-                <ContentDetailsFooter />
+                <ContentDetailsFooter contentID={tvShow.id} contentType={ActiveContent.TVShow} />
             </View>
 
 

@@ -1,10 +1,10 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
 import React from 'react'
 import styles from "../styles"
 
 
 type ContentDetailImagePropsType = {
-    backdrop_path  :string | undefined
+    backdrop_path :string | undefined
 }
 const ContentDetailImage  : React.FC<ContentDetailImagePropsType> = ({backdrop_path}) => {
     return (

@@ -29,8 +29,6 @@ const ProfileBody = () => {
             .collection('users')
             .doc(currentUser?.uid)
             .delete()
-      
-          console.log("user succesfully deleted");
         } catch (error) {
           console.error("an error occured ", error);
         }

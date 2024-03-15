@@ -65,7 +65,7 @@ const EditProfile: React.FC = () => {
 
         launchCamera(options, (response: ImagePickerResponse) => {
             if (response.didCancel) {
-                console.log('User cancelled camera');
+                console.log('User cancelled camera')
                 setIsEditProfileModalVisible(false)
             } else if (response.errorCode) {
                 console.log('Camera Error: ', response.errorCode)
@@ -140,8 +140,7 @@ const EditProfile: React.FC = () => {
             const dbRef = firestore().collection('users').doc(currentUser?.uid)
             await dbRef.update(updatedInformations)
         }catch(e){
-            console.log('what is the error ', e);
-            
+            console.log('an error occured ', e);  
         }
     }
     return (

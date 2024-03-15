@@ -65,7 +65,7 @@ const GenresModal: React.FC = () => {
     }
 
     return (
-        <Modal animationType="slide" transparent={true}>
+        <Modal animationType="slide" transparent={true} >
             <ScrollView contentContainerStyle={styles.modalView}>
 
                 {
