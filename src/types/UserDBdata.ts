@@ -4,7 +4,7 @@ interface UserDBData {
     displayName: string;
     email: string;
     favoriteContents: any[];
-    contentList: any[];
+    contentList: [ContentListItemType];
     photoURL: string | null;
     id: string;
 }
