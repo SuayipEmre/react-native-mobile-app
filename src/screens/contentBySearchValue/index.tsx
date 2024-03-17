@@ -1,7 +1,8 @@
 import { FlatList, ListRenderItem, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useFetchMoviesBySearchQuery } from '../../store/features/APIs/movies'
+import { useFetchMoviesBySearchQuery } from '../../Services/MoviesService'
+import { useFetchTVShowsBySearchValueQuery } from '../../Services/TvSeriesService'
 import { colors } from '../../styles/colors'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import Error from '../../components/errorAnimation'
@@ -9,7 +10,6 @@ import Loading from '../../components/loading'
 import { MovieTypes } from '../../types/movie'
 import { TvShowsTypes } from '../../types/tvshows'
 import MovieCard from '../../components/movieCard'
-import { useFetchTVShowsBySearchValueQuery } from '../../store/features/APIs/tvseries'
 import { ActiveContent } from '../../types/activeContent'
 
 

@@ -3,12 +3,12 @@ import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { colors } from '../../styles/colors'
-import { useFetchMovieDetailsQuery } from '../../store/features/APIs/movies'
+import { useFetchMovieDetailsQuery } from '../../Services/MoviesService'
 import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
-import { useFetchTVShowsDetailsQuery } from '../../store/features/APIs/tvseries'
 import { ActiveContent } from '../../types/activeContent'
 import ContentDetailScreenContainer from '../../containers/contentDetailScreenContainer'
+import { useFetchTVShowsDetailsQuery } from '../../Services/TvSeriesService'
 
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentDetailsScreen'>

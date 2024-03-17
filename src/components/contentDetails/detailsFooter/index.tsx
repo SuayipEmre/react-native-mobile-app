@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {  Text, TouchableOpacity, View } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ant from 'react-native-vector-icons/AntDesign';
 import styles from "../styles";
@@ -16,6 +16,7 @@ type ContentDetailsFooterPropsTypes = {
 
 const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ contentType, contentID }) => {
   const [isAlreadyInList, setIsAlreadyInList] = useState<boolean>(false)
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
       try {
         const dbRef = await getUserDocument();
         if (dbRef.exists) {
-          const userData = dbRef.data()
+          const userData: FirebaseFirestoreTypes.DocumentData | undefined = dbRef.data()
           const currentContentList = userData?.contentList ?? []
           setIsAlreadyInList(currentContentList.some((item: ContentListItemType) => item.contentID === contentID))
         }
@@ -38,14 +39,18 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
 
   const getUserDocument = async () => {
     const dbRef = await firestore().collection('users').doc(currentUser?.uid).get()
-    return dbRef;
+    return dbRef
   }
 
   const modifyListContent = async () => {
+    setIsButtonDisabled(true)
+    setTimeout(() => {
+      setIsButtonDisabled(false)
+    }, 1000)
 
     try {
       const dbRef = await getUserDocument()
-      
+
       if (dbRef.exists) {
         const userData = dbRef.data()
         const currentContentList = userData?.contentList ?? []
@@ -57,9 +62,9 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
           await dbRef.ref.update({ contentList: updatedContentList })
           setIsAlreadyInList(false)
         } else {
-            const updatedContentList = [...currentContentList, { contentType, contentID }]
-            await dbRef.ref.update({ contentList: updatedContentList })
-            setIsAlreadyInList(true)
+          const updatedContentList = [...currentContentList, { contentType, contentID }]
+          await dbRef.ref.update({ contentList: updatedContentList })
+          setIsAlreadyInList(true)
         }
 
       }
@@ -69,17 +74,24 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
 
     } catch {
       console.log("err")
-      
+
     }
 
 
   }
 
+
+
+
+
   return (
     <View style={styles.bottom_content}>
-      <TouchableOpacity style={styles.bottom_content_button} onPress={modifyListContent}>
+      <TouchableOpacity
+        style={styles.bottom_content_button}
+        onPress={modifyListContent}
+        disabled={isButtonDisabled}>
         {
-          isAlreadyInList ? <Ant name="check" size={24} color='green' /> : <Entypo name="plus" size={24} color={colors.primary} />
+          isAlreadyInList ? <Ant name="check" size={24} color={colors.primary} /> : <Entypo name="plus" size={24} color={colors.primary} />
         }
 
         <Text style={styles.bottom_content_text}>My List</Text>
@@ -94,6 +106,8 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
         <Entypo name="share" size={24} color={colors.primary} />
         <Text style={styles.bottom_content_text}>Share</Text>
       </TouchableOpacity>
+
+     
     </View>
   )
 }

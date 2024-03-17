@@ -1,6 +1,6 @@
 import { ScrollView, Text, View } from 'react-native'
 import React from 'react'
-import { useFetchPopularMoviesQuery, useFetchTopRatedMoviesQuery, useFetchTrendingMoviesQuery, useFetchUpComingMoviesQuery } from '../../store/features/APIs/movies'
+import { useFetchPopularMoviesQuery, useFetchTopRatedMoviesQuery, useFetchTrendingMoviesQuery, useFetchUpComingMoviesQuery } from '../../Services/MoviesService'
 import Loading from '../../components/loading'
 import Error from '../../components/errorAnimation'
 import { colors } from '../../styles/colors'

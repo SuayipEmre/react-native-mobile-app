@@ -4,8 +4,8 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 const baseEndPoint = process.env.BASE_ENDPOINT
 const apiKey = process.env.API_KEY
 
-const moviesAPi = createApi({
-    reducerPath: 'moviesAPi',
+const MoviesService = createApi({
+    reducerPath: 'movies service',
 
     baseQuery: fetchBaseQuery({
         baseUrl: baseEndPoint,
@@ -144,5 +144,5 @@ export const {
     useFetchMoviesBySearchQuery,
     useFetchMovieDetailsQuery,
     useFetchSimilarMoviesQuery
-} = moviesAPi
-export default moviesAPi
+} = MoviesService
+export default MoviesService

@@ -5,11 +5,11 @@ import HomeScreenContainer from '../../containers/homeScreenContainer'
 import {
   useFetchPopularMoviesQuery,
   useFetchTrendingMoviesQuery,
-} from '../../store/features/APIs/movies'
+} from '../../Services/MoviesService'
 import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
-import { useFetchPopularTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../store/features/APIs/tvseries'
 import { setActiveContent } from '../../store/features/activeContent/actions'
+import { useFetchPopularTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../Services/TvSeriesService'
 
 
 

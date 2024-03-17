@@ -2,13 +2,13 @@ import {  SafeAreaView, ScrollView, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import Header from '../../components/header'
-import { useFetchOnTheAirTVShowsQuery, useFetchPopularTVShowsQuery, useFetchTopRatedTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../store/features/APIs/tvseries'
 import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
 import FeaturedMovie from '../../components/featuredMovie'
 import ContentLayout from '../../layouts/contentLayout'
 import { ActiveContent } from '../../types/activeContent'
+import { useFetchOnTheAirTVShowsQuery, useFetchPopularTVShowsQuery, useFetchTopRatedTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../Services/TvSeriesService'
 
 
 

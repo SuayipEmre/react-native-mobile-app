@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity } from "react-native"
-import { Image, View } from "react-native"
+import { Text } from "react-native"
+import { View } from "react-native"
 import styles from "../styles"
 import { MovieDetailsTypes } from "../../../types/movieDetail"
 import ContentDetailsFooter from "../detailsFooter"
@@ -12,7 +12,7 @@ type MovieDetailsContentPropsType = {
     movie: MovieDetailsTypes,
 }
 
-export const MovieDetailsContent: React.FC<MovieDetailsContentPropsType> = ({ movie }) => {
+export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie }) => {
 
     const getYear: string[] = movie.release_date.split("-")
 

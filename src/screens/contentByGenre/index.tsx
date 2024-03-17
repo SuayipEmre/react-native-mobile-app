@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors';
-import { useFetchMoviesBygenreQuery } from '../../store/features/APIs/movies';
+import { useFetchMoviesBygenreQuery } from '../../Services/MoviesService';
 import MovieScreensContainer from '../../containers/contentByGenreScreenContainer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MainNavigatorStackParamList } from '../../navigators/types';
 import Error from '../../components/errorAnimation';
 import Loading from '../../components/loading';
-import { useFetchTVShowsByGenreQuery } from '../../store/features/APIs/tvseries';
 import { ActiveContent } from '../../types/activeContent';
 import ContentByGenreScreenContainer from '../../containers/contentByGenreScreenContainer';
+import { useFetchTVShowsByGenreQuery } from '../../Services/TvSeriesService';
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentByGenreScreen'>
 

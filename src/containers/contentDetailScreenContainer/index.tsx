@@ -1,17 +1,17 @@
 import { ActivityIndicator, Dimensions, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useRef } from 'react'
 import { MovieTypes } from '../../types/movie'
-import { useFetchSimilarMoviesQuery } from '../../store/features/APIs/movies'
+import { useFetchSimilarMoviesQuery } from '../../Services/MoviesService'
 import { FlatList } from 'react-native'
-import { MovieDetailsContent } from '../../components/contentDetails/movieDetailsContent'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MovieDetailsTypes } from '../../types/movieDetail'
 import { TvShowsTypes } from '../../types/tvshows'
 import TVShowDetails from '../../components/contentDetails/tvShowDetails'
 import { TVShowDetailsTypes } from '../../types/tvShowDetails'
-import { useFetchSimilarTVShowsQuery } from '../../store/features/APIs/tvseries'
 import { ActiveContent } from '../../types/activeContent'
+import { MovieDetails } from '../../components/contentDetails/movieDetails'
+import { useFetchSimilarTVShowsQuery } from '../../Services/TvSeriesService'
 
 type ContentDetailScreenContainerPropsType = {
   movie: MovieDetailsTypes,
@@ -97,7 +97,7 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
               tvSimilarContent.results
         }
         renderItem={renderMovies}
-        ListHeaderComponent={activeContent == ActiveContent.Movie ? <MovieDetailsContent movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
+        ListHeaderComponent={activeContent == ActiveContent.Movie ? <MovieDetails movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
         showsVerticalScrollIndicator={false}
         numColumns={3}
         snapToAlignment='center'

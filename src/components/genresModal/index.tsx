@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
 import { commonStyles } from '../../styles/commonStyle'
-import { useFetchGenresOfMoviesQuery, useFetchGenresOfTvListQuery } from '../../store/features/APIs/genres';
+import { useFetchGenresOfMoviesQuery, useFetchGenresOfTvListQuery } from '../../Services/GenresService';
 import Ant from 'react-native-vector-icons/AntDesign';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { MainNavigatorStackParamList } from '../../navigators/types';

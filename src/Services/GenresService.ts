@@ -4,8 +4,8 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 const baseEndPoint = process.env.BASE_ENDPOINT
 const apiKey = process.env.API_KEY
 
-const genresApi = createApi({
-    reducerPath: 'genresApi',
+const GenresService = createApi({
+    reducerPath: 'genres service',
 
     baseQuery: fetchBaseQuery({
         baseUrl: baseEndPoint,
@@ -42,5 +42,5 @@ const genresApi = createApi({
 export const {
     useFetchGenresOfMoviesQuery,  
     useFetchGenresOfTvListQuery
-} = genresApi
-export default genresApi
+} = GenresService
+export default GenresService

@@ -4,8 +4,8 @@ import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 const baseEndPoint = process.env.BASE_ENDPOINT
 const apiKey = process.env.API_KEY
 
-const tvShowsApi = createApi({
-    reducerPath: 'tv shows api',
+const TvSeriesService = createApi({
+    reducerPath: 'tv series service',
 
     baseQuery: fetchBaseQuery({
         baseUrl: baseEndPoint,
@@ -117,8 +117,6 @@ const tvShowsApi = createApi({
        
     }),
     
-  //search/tv?query=barbie
-    
 })
 
 
@@ -131,5 +129,6 @@ export const {
     useFetchTVShowsDetailsQuery,
     useFetchSimilarTVShowsQuery,
     useFetchTVShowsByGenreQuery
-} = tvShowsApi
-export default tvShowsApi
+} = TvSeriesService
+export default TvSeriesService
+
