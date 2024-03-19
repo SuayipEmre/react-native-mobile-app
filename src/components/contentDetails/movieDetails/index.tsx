@@ -45,7 +45,7 @@ export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie, se
 
                 <Text style={styles.overview}>{movie.overview}</Text>
 
-                <ContentDetailsFooter contentID={movie.id} contentType={ActiveContent.Movie} />
+                <ContentDetailsFooter contentID={movie.id} contentType={ActiveContent.Movie}  contentImageUrl={movie.poster_path} contentName={movie.title}/>
 
             </View>
             <View style={styles.border} />

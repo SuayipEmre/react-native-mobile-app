@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {  Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ant from 'react-native-vector-icons/AntDesign';
 import styles from "../styles";
@@ -11,10 +11,12 @@ import { ContentListItemType } from '../../../types/UserDBdata';
 
 type ContentDetailsFooterPropsTypes = {
   contentType: ActiveContent
-  contentID: number
+  contentID: number,
+  contentImageUrl: string,
+  contentName: string
 }
 
-const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ contentType, contentID }) => {
+const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ contentType, contentID, contentImageUrl, contentName }) => {
   const [isAlreadyInList, setIsAlreadyInList] = useState<boolean>(false)
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
@@ -62,7 +64,12 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
           await dbRef.ref.update({ contentList: updatedContentList })
           setIsAlreadyInList(false)
         } else {
-          const updatedContentList = [...currentContentList, { contentType, contentID }]
+          const updatedContentList = [...currentContentList, {
+            contentType,
+            contentID,
+            imageUrl: `${process.env.IMAGE_PATH}/${contentImageUrl}`,
+            contentName
+          }]
           await dbRef.ref.update({ contentList: updatedContentList })
           setIsAlreadyInList(true)
         }
@@ -107,7 +114,7 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
         <Text style={styles.bottom_content_text}>Share</Text>
       </TouchableOpacity>
 
-     
+
     </View>
   )
 }

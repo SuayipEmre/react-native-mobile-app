@@ -4,10 +4,12 @@ import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from '../../../styles/colors'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import {  ProfilNavigatorStackParamList } from '../../../navigators/types'
 
 const ProfileBody = () => {
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
-
+    const navigation = useNavigation<NavigationProp<ProfilNavigatorStackParamList>>()
     const deleteAccount  = async () => {
      
         if (currentUser){
@@ -62,10 +64,10 @@ const ProfileBody = () => {
     return (
         <View style={styles.body}>
 
-            <View style={styles.body_item_container}>
+            <TouchableOpacity style={styles.body_item_container} onPress={() => navigation.navigate('MyListScreen')}>
                 <Ant name='plus' color={colors.primary} size={24} />
                 <Text style={styles.body_item_text}>My List</Text>
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.body_item_container}>
                 <Ant name='heart' color={'#FF0800'} size={23} />

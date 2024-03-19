@@ -1,6 +1,6 @@
 import { ActiveContent } from "./activeContent";
 
-interface UserDBData {
+export interface UserDBData {
     displayName: string;
     email: string;
     favoriteContents: any[];
@@ -12,4 +12,6 @@ interface UserDBData {
 export type ContentListItemType = {
     contentID: number,
     contentType: ActiveContent
+    imageUrl : string,
+    contentName : string
 }

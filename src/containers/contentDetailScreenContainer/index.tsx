@@ -13,7 +13,6 @@ import { ActiveContent } from '../../types/activeContent'
 import { MovieDetails } from '../../components/contentDetails/movieDetails'
 import { useFetchSimilarTVShowsQuery, useFetchTVShowVideosQuery } from '../../Services/TvSeriesService'
 import ContentVideos from '../../components/contentDetails/videos'
-import { retry } from '@reduxjs/toolkit/query'
 
 type ContentDetailScreenContainerPropsType = {
   movie: MovieDetailsTypes,
@@ -72,9 +71,6 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
   }
 
   const renderMovies: ListRenderItem<MovieTypes | TvShowsTypes> = ({ item }) => {
-
-
-
     return (
       <TouchableOpacity
         style={styles.button} onPress={() => handleMovieDetail(item.id, item.title)}  >
@@ -89,7 +85,7 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
 
   const determineSimilarContent = () => {
     if (activeContent == ActiveContent.Movie) return movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results
-    return tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.result
+    return tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.results
   }
 
   const determineContentVideos =  () => {
@@ -103,12 +99,13 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
     return <TVShowDetails tvShow={tvShow} preferredContent={preferredContent} setPreferredContent={setPreferredContent} />
   }
 
-  /*The details is  on the header of the flat list.   */
+ 
 
   return (
     <>
 
       {
+         /*The details is  on the header of the flat list.   */
         preferredContent == 'similar' ? 
           <FlatList
             ref={listRef}

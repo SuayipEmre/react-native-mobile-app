@@ -6,10 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../styles/colors';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from './AuthenticationStack';
-import { AuthenticationNavigatorStackParamList, MainNavigatorStackParamList, ProfileStackParamList } from './types';
+import { AuthenticationNavigatorStackParamList, MainNavigatorStackParamList, ProfilNavigatorStackParamList } from './types';
 import { useEffect, useState } from 'react';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { MainStack } from './MainStack';
+import { ProfileStack } from './ProfileNavigator';
 
 
 
@@ -17,7 +18,7 @@ import { MainStack } from './MainStack';
 
 type BottomNavigatorRootStackParamList = {
   MainNavigator : NavigatorScreenParams<MainNavigatorStackParamList>
-  ProfileScreen : NavigatorScreenParams<ProfileStackParamList>
+  ProfileNavigator : NavigatorScreenParams<ProfilNavigatorStackParamList>
 }
 
 
@@ -75,8 +76,8 @@ const RootNavigator: React.FC = () => {
           />
   
           <Tab.Screen
-           name='ProfileScreen'
-            component={ProfileScreen}
+           name='ProfileNavigator'
+            component={ProfileStack}
             options={{
               tabBarIcon : ({color}) =>(
                 <UserIcon color={color} />

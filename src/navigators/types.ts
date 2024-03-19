@@ -9,10 +9,11 @@ export type MainNavigatorStackParamList = {
     ContentDetailsScreen : {content_id : number, content_title : string, activeContent : ActiveContent}
 }
 
-
-export type ProfileStackParamList = {
-    ProfileScreen: undefined
+export type ProfilNavigatorStackParamList = {
+    ProfileScreen : undefined,
+    MyListScreen : undefined
 }
+
 
 
 export type AuthenticationNavigatorStackParamList = {

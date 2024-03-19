@@ -5,7 +5,7 @@ export type CommonTypes = {
     original_language : string
     overview:string,
     popularity:string,
-    poster_path?:string,
+    poster_path:string,
     vote_average:number,
     vote_count:number
     original_title : string

@@ -17,9 +17,9 @@ const ContentVideos: React.FC<ContentVideosPropsType> = ({ videos }) => {
     <View>
       {
         videos.map((item: ContentVideoItem) => (
-          <View key={item.id}>
+          <View key={item.id} style={styles.video_container}>
             <View style={styles.info_container}>
-              <Text style={styles.video_name} numberOfLines={2} ellipsizeMode="tail">{item.name}</Text>
+              <Text style={styles.video_name} numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
               <Text style={styles.video_type}>{item.type}</Text>
             </View>
             <YoutubePlayer
@@ -36,6 +36,9 @@ const ContentVideos: React.FC<ContentVideosPropsType> = ({ videos }) => {
 export default ContentVideos
 
 const styles = StyleSheet.create({
+  video_container:{
+    marginBottom:5,
+  },
   info_container: {
     width :'100%',
     flexDirection: 'row',
@@ -48,10 +51,11 @@ const styles = StyleSheet.create({
     fontSize:16,
     fontWeight :'600',
     width :'80%',
-
+    alignItems:'center',
   },
   video_type: {
     color: colors.secondary,
     width :'20%',
+    alignItems:'center',
   }
 })

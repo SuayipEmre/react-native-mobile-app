@@ -36,7 +36,7 @@ const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow, setPreferred
 
                 <Text style={styles.overview}>{tvShow.overview}</Text>
 
-                <ContentDetailsFooter contentID={tvShow.id} contentType={ActiveContent.TVShow} />
+                <ContentDetailsFooter contentID={tvShow.id} contentType={ActiveContent.TVShow} contentImageUrl={tvShow.poster_path} contentName={tvShow.name} />
             </View>
 
 
