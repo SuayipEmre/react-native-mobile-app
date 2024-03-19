@@ -1,7 +1,7 @@
-import { ActivityIndicator, Dimensions, Image, ListRenderItem, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useRef } from 'react'
+import { ActivityIndicator, Dimensions, Image, ListRenderItem, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { MovieTypes } from '../../types/movie'
-import { useFetchSimilarMoviesQuery } from '../../Services/MoviesService'
+import { useFetchMovieVideosQuery, useFetchSimilarMoviesQuery } from '../../Services/MoviesService'
 import { FlatList } from 'react-native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
@@ -11,7 +11,9 @@ import TVShowDetails from '../../components/contentDetails/tvShowDetails'
 import { TVShowDetailsTypes } from '../../types/tvShowDetails'
 import { ActiveContent } from '../../types/activeContent'
 import { MovieDetails } from '../../components/contentDetails/movieDetails'
-import { useFetchSimilarTVShowsQuery } from '../../Services/TvSeriesService'
+import { useFetchSimilarTVShowsQuery, useFetchTVShowVideosQuery } from '../../Services/TvSeriesService'
+import ContentVideos from '../../components/contentDetails/videos'
+import { retry } from '@reduxjs/toolkit/query'
 
 type ContentDetailScreenContainerPropsType = {
   movie: MovieDetailsTypes,
@@ -22,11 +24,9 @@ type ContentDetailScreenContainerPropsType = {
 }
 
 const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsType> = ({ movie, activeContent, tvShow, contentID }) => {
-
-  console.log('MovieDetailScreenContainer : ', activeContent);
+  const [preferredContent, setPreferredContent] = useState<'similar' | 'trailers'>('similar')
 
   const listRef = useRef<FlatList>(null)
-
 
 
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
@@ -35,9 +35,21 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
     skip: activeContent != ActiveContent.Movie
   })
 
+  const { data: movieVideos, isLoading: movieVideosLoading, isError: movieVideosError } = useFetchMovieVideosQuery(
+    activeContent == ActiveContent.Movie ? movie.id : null, {
+    skip: activeContent != ActiveContent.Movie
+  })
+
+
   const { data: tvSimilarContent, isLoading: tvSimilarLoading, isError: tvSimilarError } = useFetchSimilarTVShowsQuery(contentID, {
     skip: activeContent != ActiveContent.TVShow
   })
+
+  const { data: tvVideos, isLoading: tvVideosLoading, isError: tvVideosError } = useFetchTVShowVideosQuery(
+    activeContent == ActiveContent.TVShow ? tvShow.id : null, {
+    skip: activeContent != ActiveContent.TVShow
+  })
+
 
 
 
@@ -63,15 +75,6 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
 
 
 
-    if (activeContent == ActiveContent.Movie) {
-      if (movieSimilarError) return <Text>Err</Text>
-      else if (movieSimilarLoading) return <ActivityIndicator />
-
-    } else if (activeContent == ActiveContent.TVShow) {
-      if (tvSimilarError) return <Text>Err</Text>
-      else if (tvSimilarLoading) return <ActivityIndicator />
-    }
-
     return (
       <TouchableOpacity
         style={styles.button} onPress={() => handleMovieDetail(item.id, item.title)}  >
@@ -82,29 +85,50 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
     )
   }
 
+  
+
+  const determineSimilarContent = () => {
+    if (activeContent == ActiveContent.Movie) return movieSimilarLoading || movieSimilarError ? [] : movieSimilarContent.results
+    return tvSimilarLoading || tvSimilarError ? [] : tvSimilarContent.result
+  }
+
+  const determineContentVideos =  () => {
+    if (activeContent == ActiveContent.Movie) return movieVideosLoading || movieVideosError ? [] : movieVideos.results
+    return tvVideosLoading || tvVideosError ? [] : tvVideos.results
+  }
+
+  const determineContentDetail = () => {
+
+    if (activeContent == ActiveContent.Movie) return <MovieDetails movie={movie} preferredContent={preferredContent} setPreferredContent={setPreferredContent} />
+    return <TVShowDetails tvShow={tvShow} preferredContent={preferredContent} setPreferredContent={setPreferredContent} />
+  }
 
   /*The details is  on the header of the flat list.   */
+
   return (
-    <View>
-      <FlatList
-        ref={listRef}
-        data={
-          activeContent == ActiveContent.Movie ?
-            (movieSimilarLoading || movieSimilarError ? [] :
-              movieSimilarContent.results) :
-            tvSimilarLoading || tvSimilarError ?
-              [] :
-              tvSimilarContent.results
-        }
-        renderItem={renderMovies}
-        ListHeaderComponent={activeContent == ActiveContent.Movie ? <MovieDetails movie={movie} /> : <TVShowDetails tvShow={tvShow} />}
-        showsVerticalScrollIndicator={false}
-        numColumns={3}
-        snapToAlignment='center'
-        decelerationRate={'normal'}
-        contentContainerStyle={{ alignItems: 'center' }}
-      />
-    </View>
+    <>
+
+      {
+        preferredContent == 'similar' ? 
+          <FlatList
+            ref={listRef}
+            data={determineSimilarContent()}
+            renderItem={renderMovies}
+            ListHeaderComponent={determineContentDetail()}
+            showsVerticalScrollIndicator={false}
+            numColumns={3}
+            snapToAlignment='center'
+            decelerationRate={'normal'}
+            contentContainerStyle={{ alignItems: 'center' }}
+          />
+        : 
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {determineContentDetail()}
+            <ContentVideos videos={determineContentVideos()} />
+          </ScrollView>
+        
+      }
+    </>
   )
 }
 

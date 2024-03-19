@@ -1,4 +1,4 @@
-import { Text } from "react-native"
+import { Text, TouchableOpacity } from "react-native"
 import { View } from "react-native"
 import styles from "../styles"
 import { MovieDetailsTypes } from "../../../types/movieDetail"
@@ -10,14 +10,16 @@ import { ActiveContent } from "../../../types/activeContent"
 
 type MovieDetailsContentPropsType = {
     movie: MovieDetailsTypes,
+    preferredContent: 'similar' | 'trailers',
+    setPreferredContent: (preferredContent: 'similar' | 'trailers') => void
 }
 
-export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie }) => {
+export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie, setPreferredContent, preferredContent }) => {
 
     const getYear: string[] = movie.release_date.split("-")
 
     const year: string = getYear[0];
-    
+
 
     const runtime = movie.runtime;
     const hours = Math.floor(runtime / 60);
@@ -25,7 +27,7 @@ export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie }) 
 
     return (
         <>
-           <ContentDetailImage backdrop_path={movie.backdrop_path} />
+            <ContentDetailImage backdrop_path={movie.backdrop_path} />
 
             <View style={styles.body}>
 
@@ -43,12 +45,20 @@ export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie }) 
 
                 <Text style={styles.overview}>{movie.overview}</Text>
 
-               <ContentDetailsFooter contentID={movie.id} contentType={ActiveContent.Movie} />
+                <ContentDetailsFooter contentID={movie.id} contentType={ActiveContent.Movie} />
 
             </View>
             <View style={styles.border} />
 
-            <Text style={styles.similar_text}>Similar</Text>
+            <View style={{flexDirection :'row', alignItems:'center', gap:4}}>
+                <TouchableOpacity onPress={() => setPreferredContent('similar')}>
+                    <Text style={styles.similar_text}>Similar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setPreferredContent('trailers')}>
+                    <Text style={styles.similar_text}>Trailers</Text>
+                </TouchableOpacity>
+            </View>
 
         </>
     )

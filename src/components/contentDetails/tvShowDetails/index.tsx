@@ -1,4 +1,4 @@
-import {  Text, View } from 'react-native'
+import {  Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { TVShowDetailsTypes } from '../../../types/tvShowDetails'
 import styles from '../styles'
@@ -9,8 +9,10 @@ import { ActiveContent } from '../../../types/activeContent'
 
 type TVShowDetailsPropsTypes = {
     tvShow: TVShowDetailsTypes
+    preferredContent: 'similar' | 'trailers',
+    setPreferredContent: (preferredContent: 'similar' | 'trailers') => void
 }
-const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow }) => {
+const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow, setPreferredContent }) => {
 
     const getYear: string[] = tvShow.first_air_date.split("-")
 
@@ -40,7 +42,16 @@ const TVShowDetails: React.FC<TVShowDetailsPropsTypes> = ({ tvShow }) => {
 
             <View style={styles.border} />
 
-            <Text style={styles.similar_text}>Similar</Text>
+
+             <View style={{flexDirection :'row', alignItems:'center', gap:4}}>
+                <TouchableOpacity onPress={() => setPreferredContent('similar')}>
+                    <Text style={styles.similar_text}>Similar</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setPreferredContent('trailers')}>
+                    <Text style={styles.similar_text}>Trailers</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

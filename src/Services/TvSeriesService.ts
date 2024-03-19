@@ -111,6 +111,19 @@ const TvSeriesService = createApi({
             }
         }),
 
+        fetchTVShowVideos :builder.query({
+            query: (id : number | null) => {
+                return {
+                    url: `/tv/${id}/videos`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                    }
+                }
+            }
+        }),
+
      
      
         
@@ -119,7 +132,7 @@ const TvSeriesService = createApi({
     
 })
 
-
+//https://api.themoviedb.org/3/tv/{series_id}/videos
 export const {
     useFetchPopularTVShowsQuery,
     useFetchTrendingTVShowsQuery,
@@ -128,7 +141,8 @@ export const {
     useFetchTVShowsBySearchValueQuery,
     useFetchTVShowsDetailsQuery,
     useFetchSimilarTVShowsQuery,
-    useFetchTVShowsByGenreQuery
+    useFetchTVShowsByGenreQuery,
+    useFetchTVShowVideosQuery
 } = TvSeriesService
 export default TvSeriesService
 

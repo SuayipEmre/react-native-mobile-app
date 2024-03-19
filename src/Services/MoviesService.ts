@@ -125,14 +125,33 @@ const MoviesService = createApi({
                 }
             }
         }),
+        fetchMovieVideos :builder.query({
+            query: (id: number | null) => {
+                return {
+                    url: `/movie/${id}/videos`,
+                    method: 'GET',
+                    params: {
+                        lanaguage: 'en',
+                        api_key: apiKey,
+                    }
+                }
+            }
+        }),
        
 
     })
+
+  
+   
+
+})
+
     
     
   
     
-})
+
+
 
 export const {
     useFetchPopularMoviesQuery,
@@ -143,6 +162,7 @@ export const {
     useFetchMoviesBygenreQuery,
     useFetchMoviesBySearchQuery,
     useFetchMovieDetailsQuery,
-    useFetchSimilarMoviesQuery
+    useFetchSimilarMoviesQuery,
+    useFetchMovieVideosQuery
 } = MoviesService
 export default MoviesService
