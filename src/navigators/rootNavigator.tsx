@@ -1,29 +1,31 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
-import ProfileScreen from '../screens/profile';
 import { UserIcon } from '../icons';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles/colors';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthenticationStack } from './AuthenticationStack';
-import { AuthenticationNavigatorStackParamList, MainNavigatorStackParamList, ProfilNavigatorStackParamList } from './types';
+import { AuthenticationNavigatorStackParamList, ChatRoomsNavigatorStackParamList, MainNavigatorStackParamList, ProfileNavigatorStackParamList } from './types';
 import { useEffect, useState } from 'react';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { MainStack } from './MainStack';
 import { ProfileStack } from './ProfileNavigator';
+import { ChatRoomsStack } from './ChatRoomsStack';
 
 
 
 
 
 type BottomNavigatorRootStackParamList = {
-  MainNavigator : NavigatorScreenParams<MainNavigatorStackParamList>
-  ProfileNavigator : NavigatorScreenParams<ProfilNavigatorStackParamList>
+  MainNavigator: NavigatorScreenParams<MainNavigatorStackParamList>
+  ProfileNavigator: NavigatorScreenParams<ProfileNavigatorStackParamList>
+  ChatRoomsNavigator: NavigatorScreenParams<ChatRoomsNavigatorStackParamList>
 }
 
 
 type NativeStackNavigatorParamList = {
-  AuthenticationNavigator : NavigatorScreenParams<AuthenticationNavigatorStackParamList>
+  AuthenticationNavigator: NavigatorScreenParams<AuthenticationNavigatorStackParamList>
 }
 
 
@@ -43,49 +45,61 @@ const RootNavigator: React.FC = () => {
   }, [])
 
 
-  if (user){
-    
+  if (user) {
+
     return (
-      <NavigationContainer>
+      <NavigationContainer >
         <Tab.Navigator
+          initialRouteName='MainNavigator'
           screenOptions={{
             tabBarHideOnKeyboard: true,
             tabBarShowLabel: false,
             tabBarActiveTintColor: colors.primary,
             tabBarInactiveTintColor: colors.secondary,
-            tabBarActiveBackgroundColor:colors.third,
+            tabBarActiveBackgroundColor: colors.third,
             tabBarInactiveBackgroundColor: colors.third,
             headerShown: false,
-            tabBarStyle : {
-              backgroundColor:colors.third,
+            tabBarStyle: {
+              backgroundColor: colors.third,
             }
-            
+
           }}
         >
-  
+
           <Tab.Screen
             name='MainNavigator'
             component={MainStack}
             options={{
-              tabBarIcon : ({color}) =>(
-                <Icon name="home" color={color} size={24}  />
+              tabBarIcon: ({ color }) => (
+                <Icon name="home" color={color} size={24} />
               ),
-             
-            
+
+
             }}
           />
-  
           <Tab.Screen
-           name='ProfileNavigator'
+            name='ChatRoomsNavigator'
+            component={ChatRoomsStack}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Entypo name="chat" color={color} size={24} />
+              ),
+
+
+            }}
+          />
+
+          <Tab.Screen
+            name='ProfileNavigator'
             component={ProfileStack}
             options={{
-              tabBarIcon : ({color}) =>(
+              tabBarIcon: ({ color }) => (
                 <UserIcon color={color} />
               )
             }}
-            />
-  
-  
+          />
+
+
         </Tab.Navigator>
       </NavigationContainer>
     )
@@ -94,7 +108,7 @@ const RootNavigator: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
-        headerShown : false,
+        headerShown: false,
       }}>
         <Stack.Screen name='AuthenticationNavigator' component={AuthenticationStack} />
       </Stack.Navigator>
@@ -102,7 +116,7 @@ const RootNavigator: React.FC = () => {
   )
 
 
-  
+
 }
 
 export default RootNavigator

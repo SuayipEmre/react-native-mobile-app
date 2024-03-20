@@ -1,29 +1,27 @@
-import {  TextInput, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import styles from './styles'
 
 type authInputPropsType = {
-    isSecret : boolean,
-    placeholder:string,
-    value:string,
-    setValue : (newValue : string) => void
+  isSecret: boolean,
+  placeholder: string,
+  value: string,
+  setValue: (newValue: string) => void
 }
-const AuthenticationInput : React.FC<authInputPropsType> = ({isSecret, placeholder, value, setValue}) => {
- 
+const AuthenticationInput: React.FC<authInputPropsType> = ({ isSecret, placeholder, value, setValue }) => {
+
   return (
-    <View>
-      <TextInput 
-      value={value}
-      autoCapitalize='none'
-      autoCorrect={false}
-      secureTextEntry={isSecret}
-      placeholderTextColor='#eee8'
-      placeholder={placeholder}
-      selectionColor={colors.primary}
-      onChangeText={setValue}
-      style={styles.input} />
-    </View>
+      <TextInput
+        value={value}
+        autoCapitalize='none'
+        autoCorrect={false}
+        secureTextEntry={isSecret}
+        placeholderTextColor='#eee8'
+        placeholder={placeholder}
+        selectionColor={colors.primary}
+        onChangeText={setValue}
+        style={styles.input} />
   )
 }
 

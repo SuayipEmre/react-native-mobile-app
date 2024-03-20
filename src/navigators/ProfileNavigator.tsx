@@ -1,16 +1,18 @@
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
 import { colors } from '../styles/colors';
-import { ProfilNavigatorStackParamList } from './types';
+import { ProfileNavigatorStackParamList } from './types';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import ProfileScreen from '../screens/profile';
 import MyListScreen from '../screens/myListScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
-const Stack = createNativeStackNavigator<ProfilNavigatorStackParamList>()
+const Stack = createNativeStackNavigator<ProfileNavigatorStackParamList>()
 
-type ProfileStackProps = NativeStackScreenProps<ProfilNavigatorStackParamList>
-export const ProfileStack: React.FC<ProfileStackProps> = ({ navigation }) => {
 
+export const ProfileStack: React.FC = () => {
+
+    const navigation = useNavigation<NavigationProp<ProfileNavigatorStackParamList>>()
 
 
 
@@ -57,15 +59,15 @@ const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
     header_left: {
         width: width * 0.2,
-        gap:9,
-        flexDirection:'row',
+        gap: 9,
+        flexDirection: 'row',
         alignItems: 'center',
     },
     header_title: {
         color: colors.primary,
         fontSize: 15,
-        fontWeight :'500'
+        fontWeight: '500'
     },
-  
- 
+
+
 })
