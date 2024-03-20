@@ -8,6 +8,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../../navigators/types'
 import { ActiveContent } from '../../../types/activeContent'
 import Ant from 'react-native-vector-icons/AntDesign'
+import styles from './styles'
+
 type HeaderItemPropsType = {
     text: 'TV-Series' | 'Movies' | 'Categories',
     isGenreModalButton: boolean,
@@ -46,25 +48,3 @@ const HeaderItem: React.FC<HeaderItemPropsType> = ({ text, isGenreModalButton, m
 }
 
 export default HeaderItem
-
-const styles = StyleSheet.create({
-    container: {
-        borderWidth: 1,
-        paddingVertical: 4,
-        paddingHorizontal: 6,
-        ...commonStyles.centerElements,
-        borderRadius: 10,
-        borderColor: colors.secondary
-    },
-
-    item: {
-        fontSize: 13,
-        fontWeight: '500',
-        color: colors.primary
-    },
-    button:{
-        flexDirection:'row',
-        alignItems:'center',
-        gap:12,
-    },
-})

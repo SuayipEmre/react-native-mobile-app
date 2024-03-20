@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, StyleSheet, Text, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
-import { commonStyles } from '../../styles/commonStyle'
+import { Modal, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useFetchGenresOfMoviesQuery, useFetchGenresOfTvListQuery } from '../../Services/GenresService';
 import Ant from 'react-native-vector-icons/AntDesign';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -10,7 +9,7 @@ import { setIsGenresModalVisible } from '../../store/features/modals/genres/acti
 import { useActiveContent } from '../../store/features/activeContent/hooks';
 import { GenreTypes } from '../../types/genres';
 import { ActiveContent } from '../../types/activeContent';
-
+import styles from './styles'
 
 
 
@@ -88,21 +87,3 @@ const GenresModal: React.FC = () => {
 
 export default GenresModal
 
-const { width, height } = Dimensions.get('window')
-const styles = StyleSheet.create({
-    modalView: {
-        backgroundColor: colors.third,
-        shadowColor: colors.primary,
-        width: width,
-        height: height,
-        ...commonStyles.centerElements
-    },
-    genre_button: {
-        marginBottom: 12,
-    },
-    genre_text: {
-        fontSize: 20,
-        color: '#fff',
-    },
-
-});

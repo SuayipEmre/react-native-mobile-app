@@ -1,8 +1,7 @@
-import { Dimensions, StyleSheet, View } from 'react-native'
+import {View } from 'react-native'
 import React from 'react'
 import AnimatedLottieView from 'lottie-react-native'
-import { colors } from '../../styles/colors'
-
+import styles from './styles'
 const Loading : React.FC = () => {
   return (
     <View style={styles.container}>
@@ -21,12 +20,3 @@ const Loading : React.FC = () => {
 
 export default Loading
 
-const{height} = Dimensions.get('window')
-const styles = StyleSheet.create({
-    container:{
-     backgroundColor: colors.third,
-      height : height,
-      alignItems :'center',
-      justifyContent :'center'
-    },
-  })

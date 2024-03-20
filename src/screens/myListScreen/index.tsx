@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native'
+import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../../styles/colors'
 import firestore from '@react-native-firebase/firestore';
@@ -13,10 +13,7 @@ const MyListScreen: React.FC = () => {
 
 
     useEffect(() => {
-        const getData = async () => {
-            await getUserListFromDB()
-        }
-        getData()
+        getUserListFromDB()
     }, [])
 
     const getUserListFromDB = async () => {
@@ -35,7 +32,9 @@ const MyListScreen: React.FC = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-               <MyListScreenContainer list={list} />
+                {
+                    list.length > 0 ? <MyListScreenContainer list={list} /> : <Text style={styles.empty_list_text}>Your List is empty 🥱</Text>
+                }
             </ScrollView>
         </SafeAreaView>
     )
@@ -47,5 +46,13 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: colors.third,
         flex: 1,
+    },
+    empty_list_text: {
+        color: colors.primary,
+        alignSelf: 'center',
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 16,
+        letterSpacing: 1,
     },
 })

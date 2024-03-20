@@ -8,6 +8,7 @@ import { ActiveContent } from '../../../types/activeContent';
 import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { ContentListItemType } from '../../../types/UserDBdata';
+import { addContentToDB, deleteContentFromDB } from '../DatabaseOperations';
 
 type ContentDetailsFooterPropsTypes = {
   contentType: ActiveContent
@@ -18,7 +19,7 @@ type ContentDetailsFooterPropsTypes = {
 
 const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ contentType, contentID, contentImageUrl, contentName }) => {
   const [isAlreadyInList, setIsAlreadyInList] = useState<boolean>(false)
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
 
   useEffect(() => {
@@ -44,50 +45,46 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
     return dbRef
   }
 
+
+
+
   const modifyListContent = async () => {
     setIsButtonDisabled(true)
+
     setTimeout(() => {
       setIsButtonDisabled(false)
     }, 1000)
 
-    try {
-      const dbRef = await getUserDocument()
+    const dbRef = await getUserDocument()
 
-      if (dbRef.exists) {
-        const userData = dbRef.data()
-        const currentContentList = userData?.contentList ?? []
+    if (dbRef.exists) {
+      const userData = dbRef.data()
+      const currentContentList = userData?.contentList ?? []
 
+      isAlreadyInList ? deleteContentFromDB(
+        currentContentList,
+        dbRef,
+        contentID,
+        setIsAlreadyInList
+      ) :
+        addContentToDB(
+          currentContentList,
+          dbRef,
+          contentType,
+          contentID,
 
-        //if content is already in contentList in database, remove content from db
-        if (isAlreadyInList) {
-          const updatedContentList = currentContentList.filter((item: ContentListItemType) => item.contentID != contentID)
-          await dbRef.ref.update({ contentList: updatedContentList })
-          setIsAlreadyInList(false)
-        } else {
-          const updatedContentList = [...currentContentList, {
-            contentType,
-            contentID,
-            imageUrl: `${process.env.IMAGE_PATH}/${contentImageUrl}`,
-            contentName
-          }]
-          await dbRef.ref.update({ contentList: updatedContentList })
-          setIsAlreadyInList(true)
-        }
+          contentName,
+          contentImageUrl,
+          setIsAlreadyInList
+        )
 
-      }
-      else {
-        console.log("Could not find user's document")
-      }
-
-    } catch {
-      console.log("err")
-
+    }
+    else {
+      console.log("Could not find user's document")
     }
 
 
   }
-
-
 
 
 
@@ -120,3 +117,4 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
 }
 
 export default ContentDetailsFooter
+

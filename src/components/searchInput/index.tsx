@@ -7,7 +7,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import Animated, { FadeInRight } from 'react-native-reanimated'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { ActiveContent } from '../../types/activeContent'
-
+import styles from './styles'
 
 type SearchInputPropsType = {
     placeholder:string,
@@ -56,21 +56,3 @@ const SearchInput: React.FC<SearchInputPropsType> = ({placeholder, activeContent
 export default SearchInput
 
 
-const {width,  height } = Dimensions.get('window')
-const styles = StyleSheet.create({
-
-    container:{
-       flex:1,
-
-    },
-    input: {
-        color: colors.primary,
-        zIndex: 12,
-        width : width * 0.7,
-        height: height *0.04,
-        borderColor: colors.secondary,
-        borderWidth :1,
-        borderRadius : 12,
-        paddingHorizontal: 12,
-    }
-})

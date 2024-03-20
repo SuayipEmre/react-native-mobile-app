@@ -13,6 +13,7 @@ import { ActiveContent } from '../../types/activeContent'
 import { MovieDetails } from '../../components/contentDetails/movieDetails'
 import { useFetchSimilarTVShowsQuery, useFetchTVShowVideosQuery } from '../../Services/TvSeriesService'
 import ContentVideos from '../../components/contentDetails/videos'
+import styles from './styles'
 
 type ContentDetailScreenContainerPropsType = {
   movie: MovieDetailsTypes,
@@ -94,7 +95,6 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
   }
 
   const determineContentDetail = () => {
-
     if (activeContent == ActiveContent.Movie) return <MovieDetails movie={movie} preferredContent={preferredContent} setPreferredContent={setPreferredContent} />
     return <TVShowDetails tvShow={tvShow} preferredContent={preferredContent} setPreferredContent={setPreferredContent} />
   }
@@ -131,21 +131,3 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
 
 export default ContentDetailScreenContainer
 
-
-const { width, height } = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  button: {
-    width: width * 0.3,
-    height: height * 0.2,
-    margin: 5,
-    borderRadius: 20,
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 20,
-    resizeMode: 'stretch'
-  },
-
-})

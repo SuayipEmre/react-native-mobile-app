@@ -11,6 +11,7 @@ import { MovieTypes } from '../../types/movie'
 import { TvShowsTypes } from '../../types/tvshows'
 import MovieCard from '../../components/movieCard'
 import { ActiveContent } from '../../types/activeContent'
+import NoMatchesText from '../../components/noMatchesText'
 
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentBySearchScreen'>
@@ -47,13 +48,16 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={{
+      backgroundColor: colors.third,
+      flex: 1,
+    }}>
       {
         activeContent == ActiveContent.Movie ?
           moviesData.results.length == 0 &&
-          <Text style={styles.no_matches_text}>No results for {value}</Text> :
+         <NoMatchesText searchValue={value} /> :
           tvData.results.length == 0 &&
-          <Text style={styles.no_matches_text}>No results for {value}</Text>
+          <NoMatchesText searchValue={value} />
       }
       <FlatList
         data={activeContent == ActiveContent.TVShow ? tvData.results : moviesData.results}
@@ -69,14 +73,3 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
 
 export default ContentBySearchScreen
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.third,
-    flex: 1,
-  },
-  no_matches_text: {
-    color: colors.secondary,
-    alignSelf: 'center',
-    marginVertical: 15,
-  },
-})

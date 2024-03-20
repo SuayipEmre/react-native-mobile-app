@@ -5,108 +5,97 @@ import { colors } from '../../../styles/colors'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import {  ProfilNavigatorStackParamList } from '../../../navigators/types'
+import { ProfilNavigatorStackParamList } from '../../../navigators/types'
+import { deleteAccount } from '../deleteAccount'
 
 const ProfileBody = () => {
-    const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
-    const navigation = useNavigation<NavigationProp<ProfilNavigatorStackParamList>>()
-    const deleteAccount  = async () => {
-     
-        if (currentUser){
-            try {
-                await currentUser.delete()
-                await deleteUserFromDB()
-            } catch (error) {
-                console.log(error);
-                
-            }
-        }
-        
-    }
+  const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
+  const navigation = useNavigation<NavigationProp<ProfilNavigatorStackParamList>>()
+ 
+  const showAlert = () => (
+    Alert.alert(
+      'MM',
+      'You will lose all your data by deleting your account. This action cannot be undone. ',
+      [
+        {
+          text: 'No! I have changed my mind',
+          style: 'default',
+          isPreferred: true
+        },
 
-    const deleteUserFromDB = async () => {
-        try {
-          // delete user informations from database
-          await firestore()
-            .collection('users')
-            .doc(currentUser?.uid)
-            .delete()
-        } catch (error) {
-          console.error("an error occured ", error);
-        }
-      };
+        {
+          text: 'Delete my account',
+          onPress: () => deleteAccount(currentUser),
+          style: 'destructive',
+        },
 
-    const showAlert = () => (
-        Alert.alert(
-            'MM',
-            'You will lose all your data by deleting your account. This action cannot be undone. ',
-            [
-                {
-                    text: 'No! I have changed my mind',
-                    style: 'default',
-                    isPreferred : true
-                },
-              
-                {
-                    text: 'Delete my account',
-                    onPress: () => deleteAccount(),
-                    style: 'destructive',
-                },
-
-            ],
+      ],
 
 
-        )
     )
+  )
 
 
 
-    return (
-        <View style={styles.body}>
+  return (
+    <View style={styles.body}>
 
-            <TouchableOpacity style={styles.body_item_container} onPress={() => navigation.navigate('MyListScreen')}>
-                <Ant name='plus' color={colors.primary} size={24} />
-                <Text style={styles.body_item_text}>My List</Text>
-            </TouchableOpacity>
-
-            <View style={styles.body_item_container}>
-                <Ant name='heart' color={'#FF0800'} size={23} />
-                <Text style={styles.body_item_text}>My Favorites</Text>
-            </View>
-
-                  
-      <TouchableOpacity onPress={showAlert} style={styles.delete_button}>
-          <Ant name='close' color='red' size={27} />
-          <Text style={styles.delete_text}>Delete Account</Text>
-        </TouchableOpacity>
-
-
+      <TouchableOpacity style={styles.item_container} onPress={() => navigation.navigate('MyListScreen')}>
+        <View style={styles.item_left_side}>
+          <Ant name='plus' color={colors.primary} size={20} />
+          <Text style={styles.item_text}>My List</Text>
         </View>
-    )
+        <Ant name='right' color={colors.primary} size={16} />
+
+      </TouchableOpacity>
+
+      <View style={styles.item_container}>
+        <View style={styles.item_left_side}>
+
+          <Ant name='heart' color={'#FF0800'} size={20} />
+          <Text style={styles.item_text}>My Favorites</Text>
+        </View>
+        <Ant name='right' color={colors.primary} size={16} />
+      </View>
+
+
+      <TouchableOpacity onPress={showAlert} style={styles.item_container}>
+        <View style={styles.item_left_side}>
+          <Ant name='close' color='red'size={20} />
+          <Text style={styles.delete_text}>Delete Account</Text>
+        </View>
+        <Ant name='right' color={colors.primary} size={16} />
+      </TouchableOpacity>
+
+
+    </View>
+  )
 }
 
 export default ProfileBody
 
 const styles = StyleSheet.create({
-    body_item_container: {
-        flexDirection: 'row',
-        gap: 6,
-        alignItems: 'center',
-      },
-      body_item_text: {
-        color: colors.primary,
-        fontSize: 16,
-      },
-      body: {
-        gap: 12,
-      },
-      delete_button:{
-        flexDirection:'row',
-        alignItems:'center',
-        gap:3,
-      },
-      delete_text:{
-        fontWeight : 'bold',
-        color: colors.primary,
-      },
+  item_container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  item_left_side: {
+    flexDirection: 'row',
+    alignItems:'center',
+    gap:5,
+  },
+  item_text: {
+    color: colors.primary,
+    fontSize: 16,
+  },
+  body: {
+    gap: 12,
+  },
+ 
+  delete_text: {
+    fontWeight: 'bold',
+    color: colors.primary,
+  },
+
 })

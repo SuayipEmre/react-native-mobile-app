@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import {  View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { MainNavigatorStackParamList } from '../../navigators/types'
@@ -44,7 +44,10 @@ const ContentDetailsScreen: React.FC<ProfileProps> = ({ route }) => {
 
 
   return (
-    <View style={styles.container}>
+    <View style={{
+      backgroundColor: colors.third,
+      flex: 1,
+    }}>
       <ContentDetailScreenContainer
         movie={movieData}
         tvShow={tvData}
@@ -57,9 +60,3 @@ const ContentDetailsScreen: React.FC<ProfileProps> = ({ route }) => {
 
 export default ContentDetailsScreen
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.third,
-    flex: 1,
-  }
-})

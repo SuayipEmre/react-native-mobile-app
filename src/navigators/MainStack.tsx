@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import { colors } from '../styles/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -13,13 +13,13 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import SearchInput from '../components/searchInput';
 import { ActiveContent } from '../types/activeContent';
 import Ant from 'react-native-vector-icons/AntDesign'
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
+type MainStackProps = NativeStackScreenProps<MainNavigatorStackParamList>
 
 
-export const MainStack = ({ navigation }: any) => {
+export const MainStack : React.FC <MainStackProps> = ({ navigation }) => {
 
 
   const [isSearch, setIsSearch] = useState<boolean>(false)

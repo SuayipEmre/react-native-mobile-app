@@ -3,7 +3,7 @@ import React from 'react'
 import { colors } from '../../styles/colors'
 import auth from '@react-native-firebase/auth';
 import ProfileScreenContainer from '../../containers/profileScreenContainer';
-
+import Ant from 'react-native-vector-icons/AntDesign'
 const ProfileScreen = () => {
 
 
@@ -24,7 +24,8 @@ const ProfileScreen = () => {
         <ProfileScreenContainer />
        
         <TouchableOpacity onPress={handleSignout} style={styles.signout_button}>
-          <Text style={styles.signout_button_text}>Sign out</Text>
+          <Ant name='logout' size={18} color='red' />
+          <Text style={styles.signout_button_text}>Log out</Text>
         </TouchableOpacity>
 
       
@@ -46,12 +47,15 @@ const styles = StyleSheet.create({
 
   signout_button:{
     position:'absolute',
+    flexDirection :'row',
+    alignItems:'center',
+    gap:10,
     bottom:10,
     left : 10,
      
     
   },
   signout_button_text: {
-    color: 'red'
+    color: 'red',
   },
 })

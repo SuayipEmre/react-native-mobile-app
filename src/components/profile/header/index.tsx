@@ -26,11 +26,14 @@ const ProfileHeader: React.FC = () => {
 
   }
 
+  console.log(currentUser?.photoURL)
+  
 
   const getUserProfilePhoto = () => {
-    return currentUser?.photoURL ? <Image source={{ uri: currentUser?.photoURL }} style={styles.image} /> : <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
+    return currentUser?.photoURL ? <Image source={{ uri: currentUser.photoURL }} style={styles.image} /> : <Image source={require('../../../assets/anonymousUser.png')} style={styles.image} />
   }
 
+  
   return (
     <View style={styles.header}>
 
@@ -40,6 +43,7 @@ const ProfileHeader: React.FC = () => {
           {
             getUserProfilePhoto()
           }
+
 
         </View>
 
