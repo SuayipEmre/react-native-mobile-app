@@ -13,15 +13,16 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import SearchInput from '../components/searchInput';
 import { ActiveContent } from '../types/activeContent';
 import Ant from 'react-native-vector-icons/AntDesign'
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 
 const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
-type MainStackProps = NativeStackScreenProps<MainNavigatorStackParamList>
 
 
-export const MainStack : React.FC <MainStackProps> = ({ navigation }) => {
+export const MainStack : React.FC = ( ) => {
 
 
+  const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
   const [isSearch, setIsSearch] = useState<boolean>(false)
 
 

@@ -1,17 +1,14 @@
 import { Alert, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
-import { AuthenticationNavigatorStackParamList } from '../../navigators/types'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import auth from '@react-native-firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import LoginScreenContainer from '../../containers/loginScreenContainer'
 
 
-type LoginScreenProps = NativeStackScreenProps<AuthenticationNavigatorStackParamList, 'LoginScreen'>
 
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+const LoginScreen: React.FC = () => {
 
 
 

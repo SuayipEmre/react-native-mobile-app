@@ -3,14 +3,13 @@ import React from 'react'
 import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from '../../../styles/colors'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore';
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { ProfilNavigatorStackParamList } from '../../../navigators/types'
 import { deleteAccount } from '../deleteAccount'
+import { ProfileNavigatorStackParamList } from '../../../navigators/types'
 
 const ProfileBody = () => {
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
-  const navigation = useNavigation<NavigationProp<ProfilNavigatorStackParamList>>()
+  const navigation = useNavigation<NavigationProp<ProfileNavigatorStackParamList>>()
  
   const showAlert = () => (
     Alert.alert(
