@@ -1,13 +1,16 @@
-import { Text, TouchableOpacity, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, Text, TouchableOpacity, TouchableWithoutFeedback, View, Keyboard, Button, FlatList, ListRenderItem, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
-import { RoomsTypes } from '../../types/RoomsDB';
+import { MessagesItemType, RoomsTypes } from '../../types/RoomsDB';
 import { TextInput } from 'react-native';
 import { UserDBData } from '../../types/UserDBdata';
 import { getUserFromDB } from '../../utils/getUserFromDB';
 import { getRoomsDBRef, sendMessage } from '../../utils/sendMessage';
 import styles from './styles'
+import { ScrollView } from 'react-native';
+import { UUID } from '../../helpers/generateUUID';
+import { colors } from '../../styles/colors';
 
 type ChatRoomScreenPropsTypes = NativeStackScreenProps<ChatRoomsNavigatorStackParamList, 'ChatRoomScreen'>
 
@@ -47,18 +50,52 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
     }, [roomID])
 
 
+    const renderMovies: ListRenderItem<MessagesItemType> = ({ item }) => {
 
 
+        return (
+            <View style={{
+                flexDirection: 'row',
+                gap: 8,
+                marginVertical: 10,
+            }}>
+                <Image source={require('../../assets/anonymousUser.png')} style={styles.profile_photo} />
+                <View>
+                    <Text style={{ color: colors.secondary }}>{item.owner.name}</Text>
+                    <Text style={{ color: '#fff' }}>{item.message}</Text>
+                </View>
+            </View>
+        )
+    }
 
     return (
+
         <View style={styles.container}>
+           
 
-            <TextInput value={message} onChangeText={setMessage} />
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={room?.messages}
+                    keyExtractor={() => UUID()}
+                    renderItem={renderMovies}
+                />
 
-            <TouchableOpacity onPress={() => sendMessage(room, user, message, roomID)}>
-                <Text>Save</Text>
-            </TouchableOpacity>
+                <View style={styles.inner}>
+                    <TextInput
+                     placeholderTextColor='#eee8'
+                        value={message}
+                        onChangeText={setMessage}
+                        onSubmitEditing={() => sendMessage(room, user, message, roomID, setMessage)}
+                        placeholder="Username"
+                        style={styles.textInput}
+                    />
+                </View>
+
+
+
+
         </View>
+
     )
 }
 

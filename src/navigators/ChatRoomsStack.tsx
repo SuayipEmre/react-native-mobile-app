@@ -2,7 +2,7 @@ import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navig
 import { colors } from '../styles/colors';
 import { ChatRoomsNavigatorStackParamList } from './types';
 import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
-import RoomsScreen from '../screens/roomsScreen';
+import RoomsScreen from '../screens/chatRoomsScreen';
 import OpenCreateChatRoomModal from '../components/openCreateChatRoomModalButton';
 import { Button } from 'react-native';
 import ChatRoomScreen from '../screens/chatRoomScreen';
@@ -11,9 +11,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator<ChatRoomsNavigatorStackParamList>()
 
-type ChatRoomsStackkProps = NativeStackScreenProps<ChatRoomsNavigatorStackParamList>
 
-export const ChatRoomsStack: React.FC<ChatRoomsStackkProps> = () => {
+export const ChatRoomsStack: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
 
@@ -40,9 +39,14 @@ export const ChatRoomsStack: React.FC<ChatRoomsStackkProps> = () => {
                 component={ChatRoomScreen}
                 options={({ route }) => (
                     {
+                        headerLeft: () => (
+                            <View style={styles.header_left}>
+                                <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.navigate('RoomsScreen')} />
+                            </View>
+                        ),
                         headerTitle: () => (
                             <View>
-                                <Text style={{color : colors.primary}}>{route.params.room_name ?? ""}</Text>
+                                <Text style={{ color: colors.primary }}>{route.params.room_name ?? ""}</Text>
                             </View>
                         ),
                         headerTitleStyle: {
@@ -50,14 +54,7 @@ export const ChatRoomsStack: React.FC<ChatRoomsStackkProps> = () => {
                         },
                         headerStyle: {
                             backgroundColor: colors.third,
-
                         },
-                        headerLeft: () => (
-                            <View style={styles.header_left}>
-                              <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()}  />
-                            </View>
-                          ),
-                      
 
                     }
                 )
@@ -91,32 +88,3 @@ const styles = StyleSheet.create({
 
 })
 
-/*
-
-
-
-  <Stack.Screen
-                name='RoomsScreen'
-                component={RoomsScreen}
-                options={
-                    {
-                       header : () => (
-                        <View style={{
-                            height : 120,
-                            backgroundColor:'red',
-                            alignItems:'center',
-                            justifyContent:'center'
-                        }}>
-                            <Text>Rooms</Text>
-                            <OpenCreateChatRoomModal />
-                        </View>
-                       )
-
-                    }
-
-                }
-            />
-
-
-
-*/

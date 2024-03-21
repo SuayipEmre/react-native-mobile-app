@@ -61,29 +61,41 @@ const RoomsScreen = () => {
 
 
   const handleJoinToRoomReguest = async (roomid: string, roomName: string) => {
-    Alert.alert(
-      'MM',
-      'You will join the room. Please adhere to the community guidelines."',
-      [
-        {
-          text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
+ 
+    const room = rooms.find(item => item.id === roomid)
+    const members = room?.members
+    const isAlreadyInMembers = members?.some(item => item.id === user?.id)
 
-        {
-          text: 'Agree',
-          onPress: async () => {
-            await joinToRoom(roomid, roomName, rooms, user, navigation);
+    if (isAlreadyInMembers) {
+      navigation.navigate('ChatRoomScreen', {
+        room_id: roomid,
+        room_name: roomName,
+      })
+    } else {
+      Alert.alert(
+        'MM',
+        'You will join the room. Please adhere to the community guidelines."',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
           },
-          style: 'default',
-          isPreferred: true
-        },
 
-      ],
+          {
+            text: 'Agree',
+            onPress: async () => {
+              await joinToRoom(roomid, roomName, rooms, user, navigation);
+            },
+            style: 'default',
+            isPreferred: true
+          },
+
+        ],
 
 
-    )
+      )
+    }
 
   }
 

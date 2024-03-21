@@ -44,7 +44,7 @@ export default  StyleSheet.create({
         ...commonStyles.centerElements,
         backgroundColor: colors.primary,
         flexDirection: 'row',
-        width: width,
+        width: width * 0.9,
         height: height * 0.05
 
     },

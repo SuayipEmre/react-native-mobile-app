@@ -15,8 +15,10 @@ export const sendMessage = async (
     room: RoomsTypes | undefined,
     user: UserDBData | undefined,
     message: string,
-    room_id: string
+    room_id: string,
+    setMessage : (msg : string) => void
 ) => {
+
 
     const messageID = room?.messages?.length && room?.messages?.length + 1
 
@@ -45,6 +47,7 @@ export const sendMessage = async (
         }
 
         await dbRef.update({ messages: updatedMessages })
+        setMessage('')
     } catch (error) {
         console.error("Error adding content to database:", error)
         throw error
