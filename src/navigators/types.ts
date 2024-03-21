@@ -16,6 +16,7 @@ export type ProfileNavigatorStackParamList = {
 
 export type ChatRoomsNavigatorStackParamList = {
     RoomsScreen : undefined,
+    ChatRoomScreen : {room_id : string, room_name : string}
 }
 
 
