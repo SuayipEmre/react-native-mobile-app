@@ -77,7 +77,7 @@ const EditProfile: React.FC = () => {
         })
     }
 
-    const openImagePicker = (): void => {
+    const openImagePicker = async(): Promise<void> => {
 
         const options: ImageLibraryOptions = {
             mediaType: 'photo',
@@ -95,8 +95,9 @@ const EditProfile: React.FC = () => {
                     console.log('Image picker error: ', response.errorCode);
                     setIsEditProfileModalVisible(false)
                 } else {
-                    let imageUri = response.assets?.[0]?.uri;
-                    setSelectedImage(imageUri);
+                    let imageUri = response.assets?.[0]?.uri
+                    setSelectedImage(imageUri)
+
                 }
             })
         } catch {
@@ -105,6 +106,7 @@ const EditProfile: React.FC = () => {
     }
 
     
+   
 
     const handleUpdateProfile = async (): Promise<void> => {
         console.log(userName);

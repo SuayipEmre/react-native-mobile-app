@@ -26,7 +26,6 @@ const ProfileHeader: React.FC = () => {
 
   }
 
-  console.log(currentUser?.photoURL)
   
 
   const getUserProfilePhoto = () => {
