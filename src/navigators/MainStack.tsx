@@ -101,7 +101,7 @@ export const MainStack : React.FC = ( ) => {
       <Stack.Screen
         name="ContentByGenreScreen"
         component={ContentByGenreScreen}
-        options={({ route }: { route: any }) => (
+        options={({ route } ) => (
           {
             headerTitle: route.params.value ?? "",
             headerTitleStyle: {
@@ -121,7 +121,7 @@ export const MainStack : React.FC = ( ) => {
       <Stack.Screen
         name="ContentBySearchScreen"
         component={ContentBySearchScreen}
-        options={({ route }: { route: any }) => (
+        options={({ route }) => (
           {
             headerTitle: route?.params?.value || '',
             headerTitleStyle: {

@@ -8,21 +8,26 @@ import { UUID } from '../../helpers/generateUUID'
 import firestore from '@react-native-firebase/firestore';
 import { useCreateChatRoomModalVisible } from '../../store/features/modals/createChatRoomModal/hooks'
 import { setIsCreateChatRoomModalVisible } from '../../store/features/modals/createChatRoomModal/actions'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
 
-const CreateRoomModal: React.FC = ( ) => {
+const CreateRoomModal: React.FC = () => {
     const [roomName, setRoomName] = useState('')
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
 
     const isModalVisible = useCreateChatRoomModalVisible()
 
-    console.log('is visible ? :' , isModalVisible);
-    
+    const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
+
+
     const handleCreateRoom = async () => {
         try {
+            const room_id = UUID()
             await firestore()
                 .collection('rooms')
-                .doc(UUID())
+                .doc(room_id)
                 .set({
+                    id : room_id,
                     members: [
                         {
                             id: currentUser?.uid,
@@ -35,6 +40,13 @@ const CreateRoomModal: React.FC = ( ) => {
                     roomName,
 
                 })
+
+                navigation.navigate('ChatRoomScreen', {
+                    room_id,
+                    room_name:roomName,
+                })
+
+                setRoomName('')
         } catch (e) {
             console.log(e);
 
@@ -43,7 +55,7 @@ const CreateRoomModal: React.FC = ( ) => {
 
 
     return (
-        <Modal animationType="slide" transparent={true}  visible={isModalVisible}>
+        <Modal animationType="slide" transparent={true} visible={isModalVisible}>
             <SafeAreaView style={styles.modalView}>
                 <Text style={styles.title}> Create Your Own Room!</Text>
 
@@ -78,12 +90,12 @@ const styles = StyleSheet.create({
     title: {
         color: colors.primary,
         marginTop: 6,
-        marginBottom:60,
+        marginBottom: 60,
     },
-    roomname_label:{
-        color:  colors.secondary,
-        fontSize : 14,
-        fontWeight : '500'
+    roomname_label: {
+        color: colors.secondary,
+        fontSize: 14,
+        fontWeight: '500'
     },
     close_modal_button: {
         position: 'absolute',
