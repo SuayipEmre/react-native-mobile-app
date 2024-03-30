@@ -1,6 +1,7 @@
 import { MessagesItemType, RoomsTypes } from "../types/RoomsDB"
 import firestore from '@react-native-firebase/firestore';
 import { UserDBData } from "../types/UserDBdata";
+import { UUID } from "../helpers/generateUUID";
 
 export const getRoomsDBRef = (room_id: string) => {
     const dbRef = firestore()
@@ -16,11 +17,10 @@ export const sendMessage = async (
     user: UserDBData | undefined,
     message: string,
     room_id: string,
-    setMessage : (msg : string) => void
 ) => {
 
 
-    const messageID = room?.messages?.length && room?.messages?.length + 1
+    const messageID = UUID()
 
     try {
 
@@ -47,7 +47,6 @@ export const sendMessage = async (
         }
 
         await dbRef.update({ messages: updatedMessages })
-        setMessage('')
     } catch (error) {
         console.error("Error adding content to database:", error)
         throw error

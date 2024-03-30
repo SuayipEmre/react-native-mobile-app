@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, Text, TouchableOpacity, TouchableWithoutFeedback, View, Keyboard, Button, FlatList, ListRenderItem, Image } from 'react-native'
+import { Text, View, FlatList, ListRenderItem, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
@@ -8,7 +8,6 @@ import { UserDBData } from '../../types/UserDBdata';
 import { getUserFromDB } from '../../utils/getUserFromDB';
 import { getRoomsDBRef, sendMessage } from '../../utils/sendMessage';
 import styles from './styles'
-import { ScrollView } from 'react-native';
 import { UUID } from '../../helpers/generateUUID';
 import { colors } from '../../styles/colors';
 
@@ -52,6 +51,8 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
 
     const renderMovies: ListRenderItem<MessagesItemType> = ({ item }) => {
 
+        console.log('message' , item);
+
 
         return (
             <View style={{
@@ -59,7 +60,9 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
                 gap: 8,
                 marginVertical: 10,
             }}>
-                <Image source={require('../../assets/anonymousUser.png')} style={styles.profile_photo} />
+               {
+                 item.owner.photo ? <Image source={{ uri: item.owner.photo }} style={styles.profile_photo} /> : <ActivityIndicator />
+               }
                 <View>
                     <Text style={{ color: colors.secondary }}>{item.owner.name}</Text>
                     <Text style={{ color: '#fff' }}>{item.message}</Text>
@@ -68,28 +71,38 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
         )
     }
 
+    const keyExtractor = (item: MessagesItemType) => {
+        console.log('on key' ,item.messageId);
+        
+        return item.messageId;
+      };
+
+
     return (
 
         <View style={styles.container}>
-           
 
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={room?.messages}
-                    keyExtractor={() => UUID()}
-                    renderItem={renderMovies}
+
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                data={room?.messages}
+                keyExtractor={keyExtractor}
+                renderItem={renderMovies}
+            />
+
+            <View style={styles.inner}>
+                <TextInput
+                    placeholderTextColor='#eee8'
+                    value={message}
+                    onChangeText={setMessage}
+                    onSubmitEditing={() =>{
+                        sendMessage(room, user, message, roomID)
+                        setMessage('')
+                    }}
+                    placeholder="Username"
+                    style={styles.textInput}
                 />
-
-                <View style={styles.inner}>
-                    <TextInput
-                     placeholderTextColor='#eee8'
-                        value={message}
-                        onChangeText={setMessage}
-                        onSubmitEditing={() => sendMessage(room, user, message, roomID, setMessage)}
-                        placeholder="Username"
-                        style={styles.textInput}
-                    />
-                </View>
+            </View>
 
 
 
@@ -101,3 +114,17 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
 
 export default ChatRoomScreen
 
+
+
+/*
+
+{"date": "2024-03-30T22:00:00.085Z",
+ "message": "Lan",
+  "messageId": 6,
+   "owner": {"id": "wRiAXm0hVlUiiJDKaODL2CPLWG92", 
+   "name": "rider dev",
+    "photo": "https://firebasestorage.googleapis.com/v0/b/worldofthemovies-ce6c5.appspot.com/o/photos%2Fsuayipemre@gmail.com%2Fprofilephoto.png?alt=media&token=e5c9d42c-3147-4f92-8b35-6c0f8b378b59"}
+}
+
+
+*/

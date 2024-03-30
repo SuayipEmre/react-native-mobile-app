@@ -1,4 +1,4 @@
-import { Alert, Image, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Alert, Image, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../../styles/colors'
 import { useEditProfileModalVisible } from '../../../store/features/modals/editProfileModal/hooks'
@@ -9,6 +9,9 @@ import Evil from 'react-native-vector-icons/EvilIcons'
 import styles from './styles'
 import firestore from '@react-native-firebase/firestore';
 
+import { utils } from '@react-native-firebase/app';
+import storage from '@react-native-firebase/storage';
+import { UUID } from '../../../helpers/generateUUID';
 
 const EditProfile: React.FC = () => {
 
@@ -16,8 +19,7 @@ const EditProfile: React.FC = () => {
     const [userName, setUserName] = useState<string>(currentUser?.displayName ? currentUser?.displayName : '')
     const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined)
     const modalVisible = useEditProfileModalVisible()
-
-
+    const [isUpdatingProfile, setIsUpdatingProfile] = useState(false)
 
     const showAlert = () => (
         Alert.alert(
@@ -77,7 +79,7 @@ const EditProfile: React.FC = () => {
         })
     }
 
-    const openImagePicker = async(): Promise<void> => {
+    const openImagePicker = async (): Promise<void> => {
 
         const options: ImageLibraryOptions = {
             mediaType: 'photo',
@@ -105,44 +107,57 @@ const EditProfile: React.FC = () => {
         }
     }
 
-    
-   
 
     const handleUpdateProfile = async (): Promise<void> => {
-        console.log(userName);
-        
-        const update = {
-            displayName: userName,
-            photoURL: selectedImage,
-        };
+        const reference = storage().ref(`photos/${currentUser?.email}/profilephoto.png`)
+        let downloadURL: string
+        setIsUpdatingProfile(true)
 
-        try {
-            await currentUser?.updateProfile(update)
-            await updateUserInfoFromDB()
-            setUserName('')
-            setSelectedImage('')
-            setIsEditProfileModalVisible(false)
+        if (selectedImage) {
+            await reference.putFile(selectedImage)
+            downloadURL = await reference.getDownloadURL()
+            
 
-        } catch (e) {
-            console.log(e)
+            const update = {
+                displayName: userName,
+                photoURL: downloadURL,
+            };
 
+            try {
+                await currentUser?.updateProfile(update)
+                await updateUserInfoFromDB(downloadURL)
+                setUserName('')
+                setSelectedImage('')
+                setIsEditProfileModalVisible(false)
+                setIsUpdatingProfile(false)
+
+
+            } catch (e) {
+                console.log(e)
+                setIsUpdatingProfile(false)
+
+
+            }
         }
+
+
+
+
     }
 
 
-
-
-    const updateUserInfoFromDB = async () => {
+    const updateUserInfoFromDB = async (profilPhotoURL : string ) => {
+        
         const updatedInformations = {
             displayName: userName,
-            photoURL: selectedImage,
+            photoURL: profilPhotoURL,
         };
 
-        try{
+        try {
             const dbRef = firestore().collection('users').doc(currentUser?.uid)
             await dbRef.update(updatedInformations)
-        }catch(e){
-            console.log('an error occured ', e);  
+        } catch (e) {
+            console.log('an error occured ', e);
         }
     }
     return (
@@ -180,6 +195,9 @@ const EditProfile: React.FC = () => {
                         style={styles.input} />
 
                     <View style={styles.button_container} >
+                        {
+                            isUpdatingProfile && <ActivityIndicator />
+                        }
                         <TouchableOpacity style={styles.save_button} disabled={userName.length < 6} onPress={handleUpdateProfile}>
                             <Text style={styles.save_button_text}>Save</Text>
                         </TouchableOpacity>

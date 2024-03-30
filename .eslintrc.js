@@ -1,4 +1,7 @@
 module.exports = {
-  root: true,
-  extends: '@react-native',
+  eslintConfig: {
+    extends: "eslint:recommended",
+  },
 };
+
+
