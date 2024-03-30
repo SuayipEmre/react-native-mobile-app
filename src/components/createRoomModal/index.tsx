@@ -27,7 +27,7 @@ const CreateRoomModal: React.FC = () => {
                 .collection('rooms')
                 .doc(room_id)
                 .set({
-                    id : room_id,
+                    id: room_id,
                     members: [
                         {
                             id: currentUser?.uid,
@@ -41,12 +41,12 @@ const CreateRoomModal: React.FC = () => {
 
                 })
 
-                navigation.navigate('ChatRoomScreen', {
-                    room_id,
-                    room_name:roomName,
-                })
+            navigation.navigate('ChatRoomScreen', {
+                room_id,
+                room_name: roomName,
+            })
 
-                setRoomName('')
+            setRoomName('')
         } catch (e) {
             console.log(e);
 
@@ -56,23 +56,27 @@ const CreateRoomModal: React.FC = () => {
 
     return (
         <Modal animationType="slide" transparent={true} visible={isModalVisible}>
-            <SafeAreaView style={styles.modalView}>
+
+            <View style={styles.modalView}>
                 <Text style={styles.title}> Create Your Own Room!</Text>
+
+                <TouchableOpacity onPress={() => setIsCreateChatRoomModalVisible(false)} style={styles.close_modal_button}>
+                    <Ant name="close" color={colors.primary} size={24} />
+                </TouchableOpacity>
 
                 <View>
                     <Text style={styles.roomname_label}>Room Name</Text>
                     <AuthenticationInput isSecret={false} placeholder='' setValue={setRoomName} value={roomName} />
                 </View>
 
-                <TouchableOpacity onPress={() => setIsCreateChatRoomModalVisible(false)} style={styles.close_modal_button}>
-                    <Ant name="close" color={colors.primary} size={24} />
-                </TouchableOpacity>
+                <View style={styles.create_room_button_container}>
+                    <TouchableOpacity style={styles.create_room_button} onPress={handleCreateRoom}>
+                        <Text>Create</Text>
+                    </TouchableOpacity>
+                </View>
 
 
-                <TouchableOpacity style={styles.create_room_button} onPress={handleCreateRoom}>
-                    <Text>Create</Text>
-                </TouchableOpacity>
-            </SafeAreaView>
+            </View>
         </Modal>
     )
 }
@@ -82,10 +86,14 @@ export default CreateRoomModal
 const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
     modalView: {
-        flex: 1,
+        height: height * 0.5,
         backgroundColor: colors.third,
         alignItems: 'center',
-        justifyContent: 'center',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+
     },
     title: {
         color: colors.primary,
@@ -99,13 +107,18 @@ const styles = StyleSheet.create({
     },
     close_modal_button: {
         position: 'absolute',
-        top: height * 0.1,
+        top: 5,
         right: 10,
+    },
+    create_room_button_container:{
+        width : '100%',
+        alignItems:'flex-end',
+        paddingEnd : 20
     },
     create_room_button: {
         width: width * 0.3,
         height: height * 0.04,
-        backgroundColor: colors.secondary,
+        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center'
     },

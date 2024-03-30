@@ -64,6 +64,7 @@ const RoomsScreen = () => {
  
     const room = rooms.find(item => item.id === roomid)
     const members = room?.members
+    
     const isAlreadyInMembers = members?.some(item => item.id === user?.id)
 
     if (isAlreadyInMembers) {

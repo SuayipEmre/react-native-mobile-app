@@ -7,6 +7,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { ActiveContent } from '../../types/activeContent'
 import { TvShowsTypes } from '../../types/tvshows'
+import Animated, { FadeInUp } from 'react-native-reanimated'
 
 type MovieCardPropTypes = {
     contentItem: MovieTypes | TvShowsTypes,
@@ -30,15 +31,16 @@ const MovieCard: React.FC<MovieCardPropTypes> = ({ contentItem, index, activeCon
 
     }
     return (
-        <TouchableOpacity style={[{
-            height: index % 3 == 0 ? hp / 4 : hp * 0.30,
-        }, styles.container]} onPress={handleMovieDetails} >
-            <Image source={{ uri: `${process.env.IMAGE_PATH}/${contentItem.poster_path}` }}
+        <Animated.View 
+        entering={FadeInUp.delay(100 * index).duration(100).springify().damping(12)}
+        >
+            <TouchableOpacity style={[{
+                height: index % 3 == 0 ? hp / 4 : hp * 0.30,
+            }, styles.container]} onPress={handleMovieDetails} >
+                <Image source={{ uri: `${process.env.IMAGE_PATH}/${contentItem.poster_path}` }} style={styles.image} />
 
-                style={[{
-
-                }, styles.image]} />
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </Animated.View>
     )
 }
 
