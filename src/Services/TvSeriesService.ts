@@ -13,60 +13,60 @@ const TvSeriesService = createApi({
     endpoints: (builder) => ({
 
         fetchPopularTVShows: builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: '/tv/popular',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language ,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchTrendingTVShows :builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: `/trending/tv/day`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
         fetchTopRatedTVShows :builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: `/tv/top_rated`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
         fetchOnTheAirTVShows :builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: `/discover/tv`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
         fetchTVShowsBySearchValue :builder.query({
-            query: (searchValue : string) => {
+            query: ({searchValue, language} : {searchValue : string, language : string}) => {
                 return {
                     url: `/search/tv`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                         query : searchValue
                     }
@@ -74,36 +74,36 @@ const TvSeriesService = createApi({
             }
         }),
         fetchTVShowsDetails :builder.query({
-            query: (series_id : number) => {
+            query: ({series_id, language} : {series_id : number, language : string}) => {
                 return {
                     url: `/tv/${series_id}`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
         fetchSimilarTVShows :builder.query({
-            query: (show_id : number) => {
+            query: ({show_id, language} : {show_id : number, language : string}) => {
                 return {
                     url: `/tv/${show_id}/similar`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
         fetchTVShowsByGenre :builder.query({
-            query: (genre_id : string) => {
+            query: ({genre_id, language} : {genre_id : string, language : string} ) => {
                 return {
                     url: `/discover/tv`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                         with_genres : genre_id
                     }
@@ -112,12 +112,12 @@ const TvSeriesService = createApi({
         }),
 
         fetchTVShowVideos :builder.query({
-            query: (id : number | null) => {
+            query: ({id, language} :{id : number | null, language :string}) => {
                 return {
                     url: `/tv/${id}/videos`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }

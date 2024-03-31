@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet,  View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors';
 import { useFetchMoviesBygenreQuery } from '../../Services/MoviesService';
-import MovieScreensContainer from '../../containers/contentByGenreScreenContainer';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { MainNavigatorStackParamList } from '../../navigators/types';
 import Error from '../../components/errorAnimation';
@@ -10,14 +9,20 @@ import Loading from '../../components/loading';
 import { ActiveContent } from '../../types/activeContent';
 import ContentByGenreScreenContainer from '../../containers/contentByGenreScreenContainer';
 import { useFetchTVShowsByGenreQuery } from '../../Services/TvSeriesService';
+import { useLanguage } from '../../store/features/language/hooks';
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentByGenreScreen'>
 
 const ContentByGenreScreen: React.FC<ProfileProps> = ({ route }) => {
 
+    const language = useLanguage()
     const { genreid, activeContent } = route.params
-    const { data : movieData, isLoading : movieLoading, isError: movieError } = useFetchMoviesBygenreQuery(genreid)
-    const { data: tvData, isLoading: tvLoading, isError: tvError } = useFetchTVShowsByGenreQuery(genreid)
+    const { data : movieData, isLoading : movieLoading, isError: movieError } = useFetchMoviesBygenreQuery({genreid, language},  {
+        skip: activeContent != ActiveContent.Movie
+      })
+    const { data: tvData, isLoading: tvLoading, isError: tvError } = useFetchTVShowsByGenreQuery({genre_id :genreid, language}, {
+        skip: activeContent != ActiveContent.TVShow
+      })
 
 
 

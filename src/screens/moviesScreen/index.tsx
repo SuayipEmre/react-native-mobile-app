@@ -9,12 +9,14 @@ import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 import { ActiveContent } from '../../types/activeContent'
+import { useLanguage } from '../../store/features/language/hooks'
 
 const MoviesScreen = () => {
-    const { data: trendingMovies, isError: isTrendingMoviesError, isLoading: isTrendingMoviesLoading } = useFetchTrendingMoviesQuery({})
-    const { data: popularMovies, isError: popularMoviesError, isLoading: popularMoviesLoading } = useFetchPopularMoviesQuery({})
-    const { data: topRatedMovies, isError: topRatedMoviesError, isLoading: topRatedMoviesLoading } = useFetchTopRatedMoviesQuery({})
-    const { data: upcomingMovies, isError: upComingMoviesError, isLoading: upComingMoviesLoading } = useFetchUpComingMoviesQuery({})
+    const language = useLanguage()
+    const { data: trendingMovies, isError: isTrendingMoviesError, isLoading: isTrendingMoviesLoading } = useFetchTrendingMoviesQuery(language)
+    const { data: popularMovies, isError: popularMoviesError, isLoading: popularMoviesLoading } = useFetchPopularMoviesQuery(language)
+    const { data: topRatedMovies, isError: topRatedMoviesError, isLoading: topRatedMoviesLoading } = useFetchTopRatedMoviesQuery(language)
+    const { data: upcomingMovies, isError: upComingMoviesError, isLoading: upComingMoviesLoading } = useFetchUpComingMoviesQuery(language)
 
 
 

@@ -1,9 +1,8 @@
 
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
 import { ContentVideoItem, ContentVideosTypes, } from '../../../types/ContentVideos'
 import YoutubePlayer from "react-native-youtube-iframe"
-import { colors } from '../../../styles/colors'
 import Animated, { FadeInLeft } from 'react-native-reanimated'
 import styles from './styles'
 

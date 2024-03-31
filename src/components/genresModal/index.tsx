@@ -10,6 +10,7 @@ import { useActiveContent } from '../../store/features/activeContent/hooks';
 import { GenreTypes } from '../../types/genres';
 import { ActiveContent } from '../../types/activeContent';
 import styles from './styles'
+import { useLanguage } from '../../store/features/language/hooks';
 
 
 
@@ -18,16 +19,22 @@ import styles from './styles'
 const GenresModal: React.FC = () => {
 
 
+    const language = useLanguage()
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const [genres, setGenres] = useState<[GenreTypes] | []>([])
     const activeContent = useActiveContent()
+    console.log('IHASBDHIABDAS : ', language);
+    
+    console.log(activeContent);
+    
 
-    const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery({}, {
+
+    const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery(language, {
         skip: activeContent != ActiveContent.Movie 
     })
 
-    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery({},{
+    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery(language,{
         skip: activeContent != ActiveContent.TVShow 
     })
 
