@@ -8,7 +8,6 @@ import { UserDBData } from '../../types/UserDBdata';
 import { getUserFromDB } from '../../utils/getUserFromDB';
 import { getRoomsDBRef, sendMessage } from '../../utils/sendMessage';
 import styles from './styles'
-import { UUID } from '../../helpers/generateUUID';
 import { colors } from '../../styles/colors';
 
 type ChatRoomScreenPropsTypes = NativeStackScreenProps<ChatRoomsNavigatorStackParamList, 'ChatRoomScreen'>

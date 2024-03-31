@@ -9,6 +9,7 @@ import { colors } from '../../styles/colors'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { ActiveContent } from '../../types/activeContent'
+import { useTranslation } from 'react-i18next'
 
 
 type headerPropsType = {
@@ -20,6 +21,8 @@ const Header: React.FC<headerPropsType> = ({ activeContent }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
     const isModalVisible = useGenresModalVisible()
+
+    const{t} = useTranslation()
 
 
     const goHomeButton = () => <Ant name='closecircleo' size={24} color={colors.primary} onPress={() => navigation.navigate('HomeScreen')} />
@@ -33,18 +36,18 @@ const Header: React.FC<headerPropsType> = ({ activeContent }) => {
                     activeContent == ActiveContent.Movie ? (
                         <>
                             {goHomeButton()}
-                            <HeaderItem text='TV-Series' isGenreModalButton={false} />
-                            <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton />
+                            <HeaderItem text={t('tvseries')} isGenreModalButton={false} />
+                            <HeaderItem text={t('categories')} modalVisible={isModalVisible} isGenreModalButton />
                         </>
                     ) : activeContent == ActiveContent.TVShow ? (
                         <>
                             {goHomeButton()}
-                            <HeaderItem text='Movies' isGenreModalButton={false} />
-                            <HeaderItem text='Categories' modalVisible={isModalVisible} isGenreModalButton />
+                            <HeaderItem text={t('movies')} isGenreModalButton={false} />
+                            <HeaderItem text={t('categories')} modalVisible={isModalVisible} isGenreModalButton />
                         </>
                     ) : <>
-                        <HeaderItem text='Movies' isGenreModalButton={false} />
-                        <HeaderItem text='TV-Series' isGenreModalButton={false} />
+                        <HeaderItem text={t('movies')} isGenreModalButton={false} />
+                        <HeaderItem text={t('tvseries')} isGenreModalButton={false} />
                     </>
 
                 }

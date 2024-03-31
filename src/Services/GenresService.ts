@@ -13,24 +13,24 @@ const GenresService = createApi({
     endpoints: (builder) => ({
 
         fetchGenresOfMovies: builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: '/genre/movie/list',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchGenresOfTvList: builder.query({
-            query: () => {
+            query: (language : string) => {
                 return {
                     url: '/genre/tv/list',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }

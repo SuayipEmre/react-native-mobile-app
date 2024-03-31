@@ -12,6 +12,7 @@ import { TvShowsTypes } from '../../types/tvshows'
 import MovieCard from '../../components/movieCard'
 import { ActiveContent } from '../../types/activeContent'
 import NoMatchesText from '../../components/noMatchesText'
+import { useLanguage } from '../../store/features/language/hooks'
 
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentBySearchScreen'>
@@ -19,12 +20,12 @@ type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'Content
 const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
 
   const { value, activeContent } = route.params
+  const language = useLanguage()
 
-
-  const { data: moviesData, isLoading: moviesLoading, isError: moviesError } = useFetchMoviesBySearchQuery(value, {
+  const { data: moviesData, isLoading: moviesLoading, isError: moviesError } = useFetchMoviesBySearchQuery({searchValue : value, language}, {
     skip: activeContent != ActiveContent.Movie
   })
-  const { data: tvData, isLoading: tvLoading, isError: tvError } = useFetchTVShowsBySearchValueQuery(value, {
+  const { data: tvData, isLoading: tvLoading, isError: tvError } = useFetchTVShowsBySearchValueQuery({searchValue:value, language}, {
     skip: activeContent != ActiveContent.TVShow
   })
 

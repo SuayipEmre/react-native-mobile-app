@@ -6,7 +6,9 @@ import activeContent from '../features/activeContent'
 import TvSeriesService from '../../Services/TvSeriesService'
 import GenresService from '../../Services/GenresService'
 import MoviesService from '../../Services/MoviesService'
+import languageSlice from '../features/language'
 import createChatRoomModal from '../features/modals/createChatRoomModal'
+
 
 const store = configureStore({
 
@@ -16,6 +18,7 @@ const store = configureStore({
         editProfileModal : editProfileModal,
         activeContent : activeContent,
         createChatRoomModal : createChatRoomModal,
+        language : languageSlice,
         [MoviesService.reducerPath] : MoviesService.reducer,
         [GenresService.reducerPath] : GenresService.reducer,
         [TvSeriesService.reducerPath] : TvSeriesService.reducer,

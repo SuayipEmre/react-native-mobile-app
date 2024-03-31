@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { Language } from '../types/language'
 
 const baseEndPoint = process.env.BASE_ENDPOINT
 const apiKey = process.env.API_KEY
@@ -13,48 +14,48 @@ const MoviesService = createApi({
     endpoints: (builder) => ({
 
         fetchPopularMovies: builder.query({
-            query: () => {
+            query: (language : Language) => {
                 return {
                     url: '/movie/popular',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchTrendingMovies: builder.query({
-            query: () => {
+            query: (language : Language) => {
                 return {
                     url: '/trending/movie/day',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchTopRatedMovies: builder.query({
-            query: () => {
+            query: (language : Language) => {
                 return {
                     url: '/movie/top_rated',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchNowPlayingMovies: builder.query({
-            query: () => {
+            query: (language : Language) => {
                 return {
                     url: '/movie/now_playing',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
@@ -62,24 +63,24 @@ const MoviesService = createApi({
         }),
 
         fetchUpComingMovies: builder.query({
-            query: () => {
+            query: (language : Language) => {
                 return {
                     url: '/movie/upcoming',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
             }
         }),
         fetchMoviesBygenre: builder.query({
-            query: (genreid: string) => {
+            query: ({genreid, language} : {genreid : string, language : Language}) => {
                 return {
                     url: `/genre/${genreid}/movies`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey
                     }
                 }
@@ -87,12 +88,12 @@ const MoviesService = createApi({
         }),
 
         fetchMoviesBySearch: builder.query({
-            query: (searchValue: string) => {
+            query: ({searchValue, language} : {searchValue : string, language : Language}) => {
                 return {
                     url: '/search/movie',
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey,
                         query: searchValue
                     }
@@ -101,55 +102,57 @@ const MoviesService = createApi({
         }),
 
         fetchMovieDetails: builder.query({
-            query: (movie_id: number) => {
+            query: (
+                { movie_id, language }: { movie_id: number, language: Language }
+            ) => {
                 return {
                     url: `/movie/${movie_id}`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
 
-        fetchSimilarMovies :builder.query({
-            query: (id: number) => {
+        fetchSimilarMovies: builder.query({
+            query: ({id, language } : { id: number, language: Language }) => {
                 return {
                     url: `/movie/${id}/similar`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
-        fetchMovieVideos :builder.query({
-            query: (id: number | null) => {
+        fetchMovieVideos: builder.query({
+            query: ({id, language} :{ id: number | null , language: Language }) => {
                 return {
                     url: `/movie/${id}/videos`,
                     method: 'GET',
                     params: {
-                        lanaguage: 'en',
+                        language: language,
                         api_key: apiKey,
                     }
                 }
             }
         }),
-       
+
 
     })
 
-  
-   
+
+
 
 })
 
-    
-    
-  
-    
+
+
+
+
 
 
 

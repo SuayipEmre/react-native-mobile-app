@@ -9,21 +9,23 @@ import Loading from '../../components/loading'
 import { ActiveContent } from '../../types/activeContent'
 import ContentDetailScreenContainer from '../../containers/contentDetailScreenContainer'
 import { useFetchTVShowsDetailsQuery } from '../../Services/TvSeriesService'
-
+import { useLanguage } from '../../store/features/language/hooks'
 
 type ProfileProps = NativeStackScreenProps<MainNavigatorStackParamList, 'ContentDetailsScreen'>
 
 
 const ContentDetailsScreen: React.FC<ProfileProps> = ({ route }) => {
 
+  
+  const language = useLanguage()
 
   const { content_id, activeContent } = route.params
 
 
-  const { data: movieData, isLoading: movieLoading, isError: movieError } = useFetchMovieDetailsQuery(content_id, {
+  const { data: movieData, isLoading: movieLoading, isError: movieError } = useFetchMovieDetailsQuery({movie_id : content_id, language}, {
     skip: activeContent != ActiveContent.Movie
   })
-  const { data: tvData, isLoading: tvLoading, isError: tvError, error } = useFetchTVShowsDetailsQuery(content_id, {
+  const { data: tvData, isLoading: tvLoading, isError: tvError, error } = useFetchTVShowsDetailsQuery({series_id : content_id, language}, {
     skip: activeContent != ActiveContent.TVShow
   })
 

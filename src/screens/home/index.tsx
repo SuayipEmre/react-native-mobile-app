@@ -10,6 +10,7 @@ import Error from '../../components/errorAnimation'
 import Loading from '../../components/loading'
 import { setActiveContent } from '../../store/features/activeContent/actions'
 import { useFetchPopularTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../Services/TvSeriesService'
+import { useLanguage } from '../../store/features/language/hooks'
 
 
 
@@ -19,11 +20,14 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     setActiveContent(null)
   },[])
+  const language = useLanguage()
 
-  const { data: trendingMovies, isLoading: isTrendingMoviesLoading, isError: isTrendingMoviesError } = useFetchTrendingMoviesQuery({})
-  const { data: trendingTVShows, isLoading: isTrendingTVShowsLoading, isError: isTrendingTVShowsError } = useFetchTrendingTVShowsQuery({})
-  const { data: popularMovies, isLoading: isPopularMoviesLoading, isError: isPopularMoviesError } = useFetchPopularMoviesQuery({})
-  const { data: popularTVShows, isLoading: isTVShowsLoading, isError: isTVShowsError } = useFetchPopularTVShowsQuery({})
+  
+
+  const { data: trendingMovies, isLoading: isTrendingMoviesLoading, isError: isTrendingMoviesError } = useFetchTrendingMoviesQuery(language)
+  const { data: trendingTVShows, isLoading: isTrendingTVShowsLoading, isError: isTrendingTVShowsError } = useFetchTrendingTVShowsQuery(language)
+  const { data: popularMovies, isLoading: isPopularMoviesLoading, isError: isPopularMoviesError } = useFetchPopularMoviesQuery(language)
+  const { data: popularTVShows, isLoading: isTVShowsLoading, isError: isTVShowsError } = useFetchPopularTVShowsQuery(language)
 
 
 

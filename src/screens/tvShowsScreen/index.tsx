@@ -9,15 +9,17 @@ import FeaturedMovie from '../../components/featuredMovie'
 import ContentLayout from '../../layouts/contentLayout'
 import { ActiveContent } from '../../types/activeContent'
 import { useFetchOnTheAirTVShowsQuery, useFetchPopularTVShowsQuery, useFetchTopRatedTVShowsQuery, useFetchTrendingTVShowsQuery } from '../../Services/TvSeriesService'
+import { useLanguage } from '../../store/features/language/hooks'
 
 
 
 const TvShowsScreen = () => {
 
-    const { data: trendingTvShows, isError: trendingTvShowsError, isLoading: trendingTvShowsLoading } = useFetchTrendingTVShowsQuery({})
-    const { data: popularTvShows, isError: popularTvShowsError, isLoading: popularTvShowsLoading } = useFetchPopularTVShowsQuery({})
-    const { data: topRatedTvShows, isError: topRatedTvShowsError, isLoading: topRatedTvShowsLoading } = useFetchTopRatedTVShowsQuery({})
-    const { data: onAirTvShows, isError: onAirTvShowsError, isLoading: onAirTvShowsLoading } = useFetchOnTheAirTVShowsQuery({})
+    const language = useLanguage()
+    const { data: trendingTvShows, isError: trendingTvShowsError, isLoading: trendingTvShowsLoading } = useFetchTrendingTVShowsQuery(language)
+    const { data: popularTvShows, isError: popularTvShowsError, isLoading: popularTvShowsLoading } = useFetchPopularTVShowsQuery(language)
+    const { data: topRatedTvShows, isError: topRatedTvShowsError, isLoading: topRatedTvShowsLoading } = useFetchTopRatedTVShowsQuery(language)
+    const { data: onAirTvShows, isError: onAirTvShowsError, isLoading: onAirTvShowsLoading } = useFetchOnTheAirTVShowsQuery(language)
 
 
     if (trendingTvShowsError || popularTvShowsError || topRatedTvShowsError || onAirTvShowsError) return <Error />

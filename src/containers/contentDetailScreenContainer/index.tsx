@@ -14,6 +14,7 @@ import { MovieDetails } from '../../components/contentDetails/movieDetails'
 import { useFetchSimilarTVShowsQuery, useFetchTVShowVideosQuery } from '../../Services/TvSeriesService'
 import ContentVideos from '../../components/contentDetails/videos'
 import styles from './styles'
+import { useLanguage } from '../../store/features/language/hooks'
 
 type ContentDetailScreenContainerPropsType = {
   movie: MovieDetailsTypes,
@@ -28,15 +29,15 @@ const ContentDetailScreenContainer: React.FC<ContentDetailScreenContainerPropsTy
 
   const listRef = useRef<FlatList>(null)
 
-
+  const language = useLanguage()
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
 
-  const { data: movieSimilarContent, isLoading: movieSimilarLoading, isError: movieSimilarError } = useFetchSimilarMoviesQuery(contentID, {
+  const { data: movieSimilarContent, isLoading: movieSimilarLoading, isError: movieSimilarError } = useFetchSimilarMoviesQuery({id : contentID, language}, {
     skip: activeContent != ActiveContent.Movie
   })
 
   const { data: movieVideos, isLoading: movieVideosLoading, isError: movieVideosError } = useFetchMovieVideosQuery(
-    activeContent == ActiveContent.Movie ? movie.id : null, {
+   {id :  activeContent == ActiveContent.Movie ? movie.id : null, language}, {
     skip: activeContent != ActiveContent.Movie
   })
 
