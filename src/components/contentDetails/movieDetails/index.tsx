@@ -6,6 +6,7 @@ import ContentDetailsFooter from "../detailsFooter"
 import PlayButton from "../playButton"
 import ContentDetailImage from "../image"
 import { ActiveContent } from "../../../types/activeContent"
+import { useTranslation } from "react-i18next"
 
 
 type MovieDetailsContentPropsType = {
@@ -15,7 +16,7 @@ type MovieDetailsContentPropsType = {
 }
 
 export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie, setPreferredContent, preferredContent }) => {
-
+    const{t} = useTranslation()
     const getYear: string[] = movie.release_date.split("-")
 
     const year: string = getYear[0];
@@ -52,11 +53,11 @@ export const MovieDetails: React.FC<MovieDetailsContentPropsType> = ({ movie, se
 
             <View style={{flexDirection :'row', alignItems:'center', gap:4}}>
                 <TouchableOpacity onPress={() => setPreferredContent('similar')}>
-                    <Text style={styles.similar_text}>Similar</Text>
+                    <Text style={styles.similar_text}>{t('similar')}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setPreferredContent('trailers')}>
-                    <Text style={styles.similar_text}>Trailers</Text>
+                    <Text style={styles.similar_text}>{t('videos')}</Text>
                 </TouchableOpacity>
             </View>
 

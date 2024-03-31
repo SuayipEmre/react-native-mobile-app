@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {  Image, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors'
 import { ContentListItemType } from '../../types/UserDBdata'

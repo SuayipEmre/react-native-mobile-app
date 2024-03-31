@@ -1,4 +1,4 @@
-import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
+import {  createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/home';
 import { colors } from '../styles/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -13,14 +13,15 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import SearchInput from '../components/searchInput';
 import { ActiveContent } from '../types/activeContent';
 import Ant from 'react-native-vector-icons/AntDesign'
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 
 const Stack = createNativeStackNavigator<MainNavigatorStackParamList>()
 
 
 export const MainStack : React.FC = ( ) => {
-
+  const{t} = useTranslation()
 
   const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
   const [isSearch, setIsSearch] = useState<boolean>(false)
@@ -50,7 +51,7 @@ export const MainStack : React.FC = ( ) => {
               fontSize: 15,
             },
             
-            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.TVShow} placeholder='Search a TV Show' setIsSearch={setIsSearch}  /> : <Text style={styles.header_title}>TV Shows</Text>,
+            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.TVShow} placeholder={t('searchTV')} setIsSearch={setIsSearch}  /> : <Text style={styles.header_title}>{t('tvseries')}</Text>,
             headerLeft: () => (
               <View style={styles.header_left}>
                 <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.goBack()}  />
@@ -72,7 +73,7 @@ export const MainStack : React.FC = ( ) => {
         component={MoviesScreen}
         options={
           {
-            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.Movie} placeholder='Search a movie' setIsSearch={setIsSearch} /> : <Text style={styles.header_title}>Movies</Text>,
+            headerTitle: () => isSearch ? <SearchInput activeContent={ActiveContent.Movie} placeholder={t('searchMovie')} setIsSearch={setIsSearch} /> : <Text style={styles.header_title}>{t('movies')}</Text>,
             headerTitleStyle: {
               fontSize: 15,
             },

@@ -58,7 +58,7 @@ const ProfileScreen = () => {
 
       <TouchableOpacity onPress={handleSignout} style={styles.signout_button}>
         <Ant name='logout' size={18} color='red' />
-        <Text style={styles.signout_button_text}>Log out</Text>
+        <Text style={styles.signout_button_text}>{t('logout')}</Text>
       </TouchableOpacity>
 
 

@@ -8,12 +8,11 @@ import { setIsEditProfileModalVisible } from '../../../store/features/modals/edi
 import Evil from 'react-native-vector-icons/EvilIcons'
 import styles from './styles'
 import firestore from '@react-native-firebase/firestore';
-
-import { utils } from '@react-native-firebase/app';
 import storage from '@react-native-firebase/storage';
-import { UUID } from '../../../helpers/generateUUID';
+import { useTranslation } from 'react-i18next';
 
 const EditProfile: React.FC = () => {
+    const{t} = useTranslation()
 
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
     const [userName, setUserName] = useState<string>(currentUser?.displayName ? currentUser?.displayName : '')
@@ -24,19 +23,19 @@ const EditProfile: React.FC = () => {
     const showAlert = () => (
         Alert.alert(
             'MM',
-            'Which one do you want to use to edit your profile ? ',
+            t('whichOne'),
             [
                 {
-                    text: 'Cancel',
+                    text: t('cancel'),
                     style: 'cancel',
                 },
                 {
-                    text: 'Camera',
+                    text: t('camera'),
                     onPress: () => handleCameraLaunch(),
                     style: 'default',
                 },
                 {
-                    text: 'Gallery',
+                    text: t('gallery'),
                     onPress: () => openImagePicker(),
                     style: 'default',
                 },
@@ -199,7 +198,7 @@ const EditProfile: React.FC = () => {
                             isUpdatingProfile && <ActivityIndicator />
                         }
                         <TouchableOpacity style={styles.save_button} disabled={userName.length < 6} onPress={handleUpdateProfile}>
-                            <Text style={styles.save_button_text}>Save</Text>
+                            <Text style={styles.save_button_text}>{t('save')}</Text>
                         </TouchableOpacity>
                     </View>
 

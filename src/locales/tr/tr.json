@@ -1,5 +1,36 @@
 {
     "movies" : "Filmler",
     "tvseries" : "Diziler",
-    "categories" : "Kategoriler"
+    "categories" : "Kategoriler",
+    "trendMovies" : "Trend Filmler",
+    "trendTv" : "Trend Diziler",
+    "popularMovies" : "Popüler Filmler",
+    "popularTv" : "Popüler Diziler",
+    "trending" : "Trendlerde",
+    "popular" : "Popüler",
+    "topRated" : "En çok Oylananlar",
+    "upcoming" : "Yakında",
+    "onTheAir" : "Yayında",
+    "play" : "Oynat",
+    "myList" : "Listem",
+    "myFavorites" : "Favorilerim",
+    "deleteAccount" : "Hesabı Sil",
+    "logout" : "Çıkış Yap",
+    "rate" : "Oyla",
+    "share" : "Paylaş",
+    "similar" : "Benzer",
+    "videos" : "Videolar",
+    "willLoseData" : "Hesabınızı silerek tüm verilerinizi kaybedeceksiniz. Bu işlem geri alınamaz",
+    "changedMind" : "Hayır! Fikrimi Değiştirdim",
+    "createRoom" : "Kendi Odanı Oluştur!",
+    "whichOne" : "Profilini değiştirmek için hangisini tercih edersin",
+    "save" : "Kaydet",
+    "gallery" : "Galeri",
+    "camera" : "Kamera",
+    "cancel" : "İptal",
+    "emptyList" : "Listen boş 🥱" ,
+    "searchMovie" : "Film ara",
+    "searchTV" : "Dizi ara"
+
+    
 }

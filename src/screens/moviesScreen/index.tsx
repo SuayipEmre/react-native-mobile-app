@@ -10,6 +10,7 @@ import FeaturedMovie from '../../components/featuredMovie'
 import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 import { ActiveContent } from '../../types/activeContent'
 import { useLanguage } from '../../store/features/language/hooks'
+import { useTranslation } from 'react-i18next'
 
 const MoviesScreen = () => {
     const language = useLanguage()
@@ -17,7 +18,7 @@ const MoviesScreen = () => {
     const { data: popularMovies, isError: popularMoviesError, isLoading: popularMoviesLoading } = useFetchPopularMoviesQuery(language)
     const { data: topRatedMovies, isError: topRatedMoviesError, isLoading: topRatedMoviesLoading } = useFetchTopRatedMoviesQuery(language)
     const { data: upcomingMovies, isError: upComingMoviesError, isLoading: upComingMoviesLoading } = useFetchUpComingMoviesQuery(language)
-
+    const {t} = useTranslation()
 
 
     if (isTrendingMoviesError || popularMoviesError || topRatedMoviesError || upComingMoviesError) return <Error />
@@ -31,10 +32,10 @@ const MoviesScreen = () => {
                 <ContentLayout >
                     <Header  activeContent={ActiveContent.Movie} />
                     <FeaturedMovie content={trendingMovies.results[0]}  activeContent={ActiveContent.Movie} />
-                    <ContentListContainer title='Trending' content={trendingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent={ActiveContent.Movie} />
-                    <ContentListContainer title='Popular' content={popularMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.Movie} />
-                    <ContentListContainer title='Top Rated' content={topRatedMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900}  activeContent={ActiveContent.Movie}/>
-                    <ContentListContainer title='Upcoming ' content={upcomingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100}  activeContent={ActiveContent.Movie}/>
+                    <ContentListContainer title={t('trending')} content={trendingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent={ActiveContent.Movie} />
+                    <ContentListContainer title={t('popular')}content={popularMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.Movie} />
+                    <ContentListContainer title={t('topRated')}content={topRatedMovies.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900}  activeContent={ActiveContent.Movie}/>
+                    <ContentListContainer title={t('upcoming')} content={upcomingMovies.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100}  activeContent={ActiveContent.Movie}/>
                 </ContentLayout>
 
             </ScrollView>
