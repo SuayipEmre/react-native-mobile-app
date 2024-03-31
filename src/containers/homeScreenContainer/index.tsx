@@ -8,6 +8,7 @@ import { TvShowsTypes } from '../../types/tvshows'
 import ContentListContainer, { fadeDirection } from '../../components/contentList/contentListContainer'
 import ContentLayout from '../../layouts/contentLayout'
 import { ActiveContent } from '../../types/activeContent'
+import { useTranslation } from 'react-i18next'
 
 
 type HomeScreenContainerPropsType = {
@@ -23,6 +24,7 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
     trendingTVShows,
 }) => {
 
+    const{t} = useTranslation()
 
     return (
         <ScrollView
@@ -34,10 +36,10 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
             <Header  />
             <FeaturedMovie content={trendingMovies[0]} activeContent={ActiveContent.Movie} />
 
-            <ContentListContainer title='Trend Movies' content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.Movie} />
-            <ContentListContainer title='Trend TV Shows' content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent={ActiveContent.TVShow} />
-            <ContentListContainer title='Popular Movies' content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100}activeContent={ActiveContent.Movie} />
-            <ContentListContainer title='Popular TV Shows' content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} activeContent={ActiveContent.TVShow} />
+            <ContentListContainer title={t('trendMovies')} content={trendingMovies} fadeDirection={fadeDirection.FadeInRight} delaytime={400} activeContent={ActiveContent.Movie} />
+            <ContentListContainer title={t('trendTv')} content={trendingTVShows} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent={ActiveContent.TVShow} />
+            <ContentListContainer title={t('popularMovies')} content={popularMovies} fadeDirection={fadeDirection.FadeInLeft} delaytime={100}activeContent={ActiveContent.Movie} />
+            <ContentListContainer title={t('popularTv')}  content={popularTVShows} fadeDirection={fadeDirection.FadeInLeft} delaytime={600} activeContent={ActiveContent.TVShow} />
 
         </ContentLayout>
 

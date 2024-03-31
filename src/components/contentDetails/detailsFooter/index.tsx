@@ -9,6 +9,7 @@ import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firest
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { ContentListItemType } from '../../../types/UserDBdata';
 import { addContentToDB, deleteContentFromDB } from '../DatabaseOperations';
+import { useTranslation } from 'react-i18next';
 
 type ContentDetailsFooterPropsTypes = {
   contentType: ActiveContent
@@ -22,6 +23,7 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
 
+  const{t} = useTranslation()
   useEffect(() => {
 
     const checkContentAlreadyInList = async () => {
@@ -98,17 +100,17 @@ const ContentDetailsFooter: React.FC<ContentDetailsFooterPropsTypes> = ({ conten
           isAlreadyInList ? <Ant name="check" size={24} color={colors.primary} /> : <Entypo name="plus" size={24} color={colors.primary} />
         }
 
-        <Text style={styles.bottom_content_text}>My List</Text>
+        <Text style={styles.bottom_content_text}>{t('myList')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.bottom_content_button}>
         <Ant name="like2" size={24} color={colors.primary} />
-        <Text style={styles.bottom_content_text}>Rate</Text>
+        <Text style={styles.bottom_content_text}>{t('rate')}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.bottom_content_button}>
         <Entypo name="share" size={24} color={colors.primary} />
-        <Text style={styles.bottom_content_text}>Share</Text>
+        <Text style={styles.bottom_content_text}>{t('share')}</Text>
       </TouchableOpacity>
 
 

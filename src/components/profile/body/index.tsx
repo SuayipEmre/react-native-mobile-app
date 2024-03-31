@@ -6,24 +6,25 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { deleteAccount } from '../deleteAccount'
 import { ProfileNavigatorStackParamList } from '../../../navigators/types'
+import { useTranslation } from 'react-i18next'
 
 const ProfileBody = () => {
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
   const navigation = useNavigation<NavigationProp<ProfileNavigatorStackParamList>>()
- 
+ const{t}  = useTranslation()
   const showAlert = () => (
     Alert.alert(
       'MM',
-      'You will lose all your data by deleting your account. This action cannot be undone. ',
+       t('willLoseData'),
       [
         {
-          text: 'No! I have changed my mind',
+          text: t('changedMind'),
           style: 'default',
           isPreferred: true
         },
 
         {
-          text: 'Delete my account',
+          text: t('deleteAccount'),
           onPress: () => deleteAccount(currentUser),
           style: 'destructive',
         },
@@ -42,7 +43,7 @@ const ProfileBody = () => {
       <TouchableOpacity style={styles.item_container} onPress={() => navigation.navigate('MyListScreen')}>
         <View style={styles.item_left_side}>
           <Ant name='plus' color={colors.primary} size={20} />
-          <Text style={styles.item_text}>My List</Text>
+          <Text style={styles.item_text}>{t('myList')}</Text>
         </View>
         <Ant name='right' color={colors.primary} size={16} />
 
@@ -52,7 +53,7 @@ const ProfileBody = () => {
         <View style={styles.item_left_side}>
 
           <Ant name='heart' color={'#FF0800'} size={20} />
-          <Text style={styles.item_text}>My Favorites</Text>
+          <Text style={styles.item_text}>{t('myFavorites')}</Text>
         </View>
         <Ant name='right' color={colors.primary} size={16} />
       </View>
@@ -61,7 +62,7 @@ const ProfileBody = () => {
       <TouchableOpacity onPress={showAlert} style={styles.item_container}>
         <View style={styles.item_left_side}>
           <Ant name='close' color='red'size={20} />
-          <Text style={styles.delete_text}>Delete Account</Text>
+          <Text style={styles.delete_text}>{t('deleteAccount')}</Text>
         </View>
         <Ant name='right' color={colors.primary} size={16} />
       </TouchableOpacity>

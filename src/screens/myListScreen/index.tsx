@@ -5,12 +5,13 @@ import firestore from '@react-native-firebase/firestore';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { ContentListItemType } from '../../types/UserDBdata';
 import MyListScreenContainer from '../../containers/myListScreenContainer';
+import { useTranslation } from 'react-i18next';
 
 
 const MyListScreen: React.FC = () => {
     const [list, setList] = useState<[ContentListItemType] | []>([])
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
-
+    const{t} = useTranslation()
 
     useEffect(() => {
         getUserListFromDB()
@@ -33,7 +34,7 @@ const MyListScreen: React.FC = () => {
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 {
-                    list.length > 0 ? <MyListScreenContainer list={list} /> : <Text style={styles.empty_list_text}>Your List is empty 🥱</Text>
+                    list.length > 0 ? <MyListScreenContainer list={list} /> : <Text style={styles.empty_list_text}>{t('emptyList')}</Text>
                 }
             </ScrollView>
         </SafeAreaView>
