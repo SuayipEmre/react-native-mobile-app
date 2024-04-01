@@ -1,7 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from '../../../../styles/colors'
+import styles from './styles'
 
 type ContentDetailFooterButtonItemsPropsType = {
     text : 'My List' | 'Rate' | 'Share',
@@ -20,12 +21,3 @@ const ContentDetailFooterButtonItems : React.FC <ContentDetailFooterButtonItemsP
 
 export default ContentDetailFooterButtonItems
 
-const styles = StyleSheet.create({
-    button: {
-        alignItems: 'center'
-    },
-    text: {
-        color: '#eee',
-        fontSize: 14
-    },
-})

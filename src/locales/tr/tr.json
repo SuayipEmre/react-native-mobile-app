@@ -33,5 +33,10 @@
     "searchTV" : "Dizi ara",
     "adhereGuidelines" : "Odaya katılacaksınız. Lütfen topluluk kurallarına uyun.",
     "agree" : "Kabul Ediyorum",
-    "succesfullyDeleted":  "Sohbet odası başarıyla silindi"
+    "succesfullyDeleted":  "Sohbet odası başarıyla silindi",
+    "changeLanguage" : "Dili Değiştir",
+    "app" : "Uygulama",
+    "yourAccount" : "Hesabın",
+    "doYouApprove" : "Sohbet odası silinecektir, onaylıyor musunuz?",
+    "yes" : "Evet"
 }

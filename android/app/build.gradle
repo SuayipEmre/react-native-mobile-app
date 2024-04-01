@@ -6,7 +6,7 @@ apply plugin: 'com.google.gms.google-services' // <- Add this line
 
 
  project.ext.vectoricons = [
-    iconFontNames: [ 'Entypo.ttf', 'EvilIcons.ttf','FontAwesome.ttf','AntDesign.ttf','Ionicons.ttf'] // Specify font files
+    iconFontNames: [ 'Entypo.ttf', 'EvilIcons.ttf','FontAwesome.ttf','AntDesign.ttf','Ionicons.ttf', 'MaterialIcons.ttf'] // Specify font files
 ]
 react {
     /* Folders */

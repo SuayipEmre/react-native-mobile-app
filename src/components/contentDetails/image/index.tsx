@@ -9,7 +9,7 @@ type ContentDetailImagePropsType = {
 const ContentDetailImage  : React.FC<ContentDetailImagePropsType> = ({backdrop_path}) => {
     return (
         <View style={styles.image_container}>
-            <Image source={{ uri: `${process.env.IMAGE_PATH}/${backdrop_path}` }} style={styles.image} />
+            <Image source={{ uri: `${process.env.IMAGE_PATH}/${backdrop_path}`}} style={styles.image} />
         </View>
     )
 }

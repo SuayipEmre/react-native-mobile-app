@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert,  StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Ant from 'react-native-vector-icons/AntDesign'
 import { colors } from '../../../styles/colors'
@@ -7,15 +7,49 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { deleteAccount } from '../deleteAccount'
 import { ProfileNavigatorStackParamList } from '../../../navigators/types'
 import { useTranslation } from 'react-i18next'
+import Material from 'react-native-vector-icons/MaterialIcons'
+import i18n from '../../../i18n'
+import { setLanguage } from '../../../store/features/language/actions'
+import { saveUserLanguagePreference } from '../../../utils/saveLanguagePreferenceToStorage'
+import { useLanguage } from '../../../store/features/language/hooks'
+import { Language } from '../../../types/language'
+import ProfileSectionItem from './sectionItem'
 
-const ProfileBody = () => {
+
+const ProfileBody : React.FC = () => {
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
   const navigation = useNavigation<NavigationProp<ProfileNavigatorStackParamList>>()
- const{t}  = useTranslation()
+  const { t } = useTranslation()
+  const language = useLanguage()
+
+  const handleSignout = async () => {
+
+    try {
+      await auth().signOut()
+    } catch {
+      Alert.alert('MM', 'An Error occured')
+    }
+  }
+
+  const handleSetLanguage = async () => {
+
+    //active language is english => new language will be turkish
+    //active language is turkish => new language will be english
+    const changeLanguageValue = language == Language.en ? Language.tr : Language.en
+    setLanguage(changeLanguageValue)
+
+    await i18n.changeLanguage(changeLanguageValue)
+
+    //save user language preference to async storage
+    await saveUserLanguagePreference(changeLanguageValue)
+  }
+
+
+
   const showAlert = () => (
     Alert.alert(
       'MM',
-       t('willLoseData'),
+      t('willLoseData'),
       [
         {
           text: t('changedMind'),
@@ -38,34 +72,45 @@ const ProfileBody = () => {
 
 
   return (
-    <View style={styles.body}>
+    <View style={{gap: 12,}}>
 
-      <TouchableOpacity style={styles.item_container} onPress={() => navigation.navigate('MyListScreen')}>
-        <View style={styles.item_left_side}>
-          <Ant name='plus' color={colors.primary} size={20} />
-          <Text style={styles.item_text}>{t('myList')}</Text>
-        </View>
-        <Ant name='right' color={colors.primary} size={16} />
-
-      </TouchableOpacity>
-
-      <View style={styles.item_container}>
-        <View style={styles.item_left_side}>
-
-          <Ant name='heart' color={'#FF0800'} size={20} />
-          <Text style={styles.item_text}>{t('myFavorites')}</Text>
-        </View>
-        <Ant name='right' color={colors.primary} size={16} />
-      </View>
+      <Text style={styles.subtitle}>{t('yourAccount')}</Text>
 
 
-      <TouchableOpacity onPress={showAlert} style={styles.item_container}>
-        <View style={styles.item_left_side}>
-          <Ant name='close' color='red'size={20} />
-          <Text style={styles.delete_text}>{t('deleteAccount')}</Text>
-        </View>
-        <Ant name='right' color={colors.primary} size={16} />
-      </TouchableOpacity>
+      <ProfileSectionItem
+        icon={<Ant name='plus' color={colors.primary} size={20} />}
+        text={t('myList')}
+        onPress={() => navigation.navigate('MyListScreen')} />
+
+      <ProfileSectionItem
+        icon={<Ant name='heart' color={colors.primary} size={20} />}
+        text={t('myFavorites')}
+      />
+
+
+
+
+      <Text style={styles.subtitle}>{t('app')}</Text>
+
+      <ProfileSectionItem
+        icon={<Ant name='close' color='red' size={20} />}
+        text={t('deleteAccount')}
+        onPress={showAlert}
+      />
+
+      <ProfileSectionItem
+        icon={<Ant name='logout' size={18} color={colors.primary} />}
+        text={t('logout')}
+        onPress={handleSignout}
+      />
+
+
+      <ProfileSectionItem
+        icon={<Material name='language' color={colors.primary} size={20} />}
+        text={t('changeLanguage')}
+        onPress={handleSetLanguage}
+        isChangeLanguageSection
+      />
 
 
     </View>
@@ -75,27 +120,12 @@ const ProfileBody = () => {
 export default ProfileBody
 
 const styles = StyleSheet.create({
-  item_container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  item_left_side: {
-    flexDirection: 'row',
-    alignItems:'center',
-    gap:5,
-  },
-  item_text: {
+
+  subtitle: {
     color: colors.primary,
-    fontSize: 16,
-  },
-  body: {
-    gap: 12,
-  },
- 
-  delete_text: {
-    fontWeight: 'bold',
-    color: colors.primary,
+    fontSize: 12,
+    fontWeight: '300',
+    marginTop: 12,
   },
 
 })

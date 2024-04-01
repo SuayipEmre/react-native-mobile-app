@@ -169,7 +169,9 @@ const EditProfile: React.FC = () => {
             <View style={styles.modal_container}>
                 <View style={styles.modal_View}>
 
-                    <Evil name='close' color={colors.primary} size={24} style={styles.close_icon} onPress={handleCloseModal} />
+                    <Evil name='close'
+                    disabled={isUpdatingProfile}
+                    color={colors.primary} size={24} style={styles.close_icon} onPress={handleCloseModal} />
 
                     <TouchableOpacity onPress={showAlert} style={styles.image_container}>
                         {

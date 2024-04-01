@@ -19,6 +19,29 @@ export const ChatRoomsStack: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
     const { t } = useTranslation()
+
+    const showAlert = (roomid:  string) => (
+        Alert.alert(
+            'MM',
+            t('doYouApprove'),
+            [
+                {
+                    text: t('cancel'),
+                    style: 'cancel',
+                },
+                {
+                    text: t('yes'),
+                    onPress: () => handleDeleteRoom(roomid),
+                    style: 'default',
+                },
+                
+
+            ],
+          
+
+        )
+    )
+
     const handleDeleteRoom = async (roomid: string) => {
         await deleteChatRoom(roomid)
         navigation.navigate('RoomsScreen')
@@ -54,7 +77,7 @@ export const ChatRoomsStack: React.FC = () => {
                         ),
                         headerRight: () => (
                             <>
-                                <Evil name='trash' size={24} color={colors.primary} onPress={() => handleDeleteRoom(route.params.room_id)} />
+                                <Evil name='trash' size={24} color={colors.primary} onPress={() => showAlert(route.params.room_id)} />
                             </>
                         ),
                         headerTitle: () => (

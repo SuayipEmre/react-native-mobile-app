@@ -33,5 +33,10 @@
     "searchTV" : "Search a TV Series",
     "adhereGuidelines" : "You will join the room. Please adhere to the community guidelines.",
     "agree" : "Agree",
-    "succesfullyDeleted":  "Succesfully deleted chat room"
+    "succesfullyDeleted":  "Succesfully deleted chat room",
+    "changeLanguage" : "Change Language",
+    "app" : "App",
+    "yourAccount" : "Your Account",
+    "doYouApprove" : "The chat room will be deleted, do you approve?",
+    "yes" : "Yes"
 }

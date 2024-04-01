@@ -11,6 +11,8 @@ import { GenreTypes } from '../../types/genres';
 import { ActiveContent } from '../../types/activeContent';
 import styles from './styles'
 import { useLanguage } from '../../store/features/language/hooks';
+import Error from '../errorAnimation';
+import Loading from '../loading';
 
 
 
@@ -24,37 +26,27 @@ const GenresModal: React.FC = () => {
 
     const [genres, setGenres] = useState<[GenreTypes] | []>([])
     const activeContent = useActiveContent()
-    console.log('IHASBDHIABDAS : ', language);
-    
-    console.log(activeContent);
-    
+
 
 
     const { data: movieGenres, isLoading: movieGenresLoading, isError: movieGenresError } = useFetchGenresOfMoviesQuery(language, {
-        skip: activeContent != ActiveContent.Movie 
+        skip: activeContent != ActiveContent.Movie
     })
 
-    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery(language,{
-        skip: activeContent != ActiveContent.TVShow 
+    const { data: tvListData, isLoading: tvListLoading, isError: tvListError } = useFetchGenresOfTvListQuery(language, {
+        skip: activeContent != ActiveContent.TVShow
     })
 
     useEffect(() => {
-        if (activeContent == ActiveContent.Movie ) {
-            if (!movieGenresLoading && !movieGenresError && movieGenres) {
-                setGenres(movieGenres.genres)
-            }
-        } 
-
-    }, [movieGenres, movieGenresError, movieGenresLoading])
-
-    useEffect(() => {
-        if (activeContent == ActiveContent.TVShow ){
-            if (!tvListLoading && !tvListError && tvListData) {
-                setGenres(tvListData.genres)
-            }  
+        if (activeContent == ActiveContent.Movie) {
+            if (movieGenresError || movieGenresLoading) return;
+            setGenres(movieGenres.genres)
+        } else {
+            if (tvListError || tvListLoading) return;
+            setGenres(tvListData.genres)
         }
-    }, [tvListData, tvListLoading, tvListError])
-
+          
+    }, [movieGenres, movieGenresError, movieGenresLoading, tvListLoading, tvListData, tvListError, activeContent])
 
 
     const handleCloseModal = () => setIsGenresModalVisible(false)
@@ -65,10 +57,24 @@ const GenresModal: React.FC = () => {
         navigation.navigate('ContentByGenreScreen', {
             genreid,
             value: genreName,
-            activeContent : activeContent == ActiveContent.Movie ? ActiveContent.Movie : ActiveContent.TVShow
+            activeContent: activeContent == ActiveContent.Movie ? ActiveContent.Movie : ActiveContent.TVShow
         })
         setIsGenresModalVisible(false)
     }
+
+
+
+    if (activeContent == ActiveContent.Movie) {
+        if (movieGenresError) return <Error />
+        else if (movieGenresLoading) return <Loading />
+    }
+
+    else {
+        if (tvListError) return <Error />
+        else if (tvListLoading) return <Loading />
+    }
+
+ 
 
     return (
         <Modal animationType="slide" transparent={true} >

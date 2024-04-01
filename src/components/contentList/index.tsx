@@ -1,10 +1,11 @@
-import { Dimensions, FlatList, Image, ListRenderItem, StyleSheet, TouchableOpacity } from 'react-native'
+import {  FlatList, Image, ListRenderItem,  TouchableOpacity } from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { MainNavigatorStackParamList } from '../../navigators/types'
 import { TvShowsTypes } from '../../types/tvshows'
 import { ActiveContent } from '../../types/activeContent'
+import styles from './styles'
 
 
 type MovieListPropsType = {
@@ -13,8 +14,6 @@ type MovieListPropsType = {
 }
 const MovieList: React.FC<MovieListPropsType> = ({ content, activeContent }) => {
     const navigation = useNavigation<NavigationProp<MainNavigatorStackParamList>>()
-
-
 
 
     const handleMovieDetail = (content_id: number, content_title: string) => {
@@ -50,16 +49,3 @@ const MovieList: React.FC<MovieListPropsType> = ({ content, activeContent }) => 
 
 export default MovieList
 
-const { width, height } = Dimensions.get('window')
-const styles = StyleSheet.create({
-    container: {
-        margin: 5,
-        borderRadius: 16,
-    },
-    title: {},
-    image: {
-        width: width * 0.3,
-        height: height * 0.2,
-        borderRadius: 16,
-    },
-})

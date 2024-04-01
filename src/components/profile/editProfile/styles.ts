@@ -48,7 +48,10 @@ export default StyleSheet.create({
     button_container: {
         width: '80%',
         height: '10%',
-        alignItems: 'flex-end'
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        gap:12,
     },
     save_button: {
         width: '50%',
