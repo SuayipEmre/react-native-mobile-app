@@ -8,6 +8,8 @@ import { Button } from 'react-native';
 import ChatRoomScreen from '../screens/chatRoomScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import Evil from 'react-native-vector-icons/EvilIcons'
+import { deleteChatRoom } from '../utils/deleteChatRoom';
 
 const Stack = createNativeStackNavigator<ChatRoomsNavigatorStackParamList>()
 
@@ -16,6 +18,11 @@ export const ChatRoomsStack: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
 
+    const handleDeleteRoom = async (roomid: string) => {
+        deleteChatRoom(roomid)
+        navigation.navigate('RoomsScreen')
+        Alert.alert('MM', 'Succesfully deleted')
+    }
 
     return (
         <Stack.Navigator initialRouteName='RoomsScreen'>
@@ -44,17 +51,24 @@ export const ChatRoomsStack: React.FC = () => {
                                 <Ionicons name='arrow-back' size={24} color={colors.primary} onPress={() => navigation.navigate('RoomsScreen')} />
                             </View>
                         ),
+                        headerRight: () => (
+                            <>
+                                <Evil name='trash' size={24} color={colors.primary} onPress={() => handleDeleteRoom(route.params.room_id)} />
+                            </>
+                        ),
                         headerTitle: () => (
                             <View>
                                 <Text style={{ color: colors.primary }}>{route.params.room_name ?? ""}</Text>
                             </View>
                         ),
+
                         headerTitleStyle: {
                             fontSize: 18,
                         },
                         headerStyle: {
                             backgroundColor: colors.third,
                         },
+
 
                     }
                 )

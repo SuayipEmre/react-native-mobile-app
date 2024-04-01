@@ -1,4 +1,4 @@
-import { Text, View, FlatList, ListRenderItem, Image, ActivityIndicator } from 'react-native'
+import { Text, View, FlatList, ListRenderItem, Image, ActivityIndicator, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
@@ -9,11 +9,14 @@ import { getUserFromDB } from '../../utils/getUserFromDB';
 import { getRoomsDBRef, sendMessage } from '../../utils/sendMessage';
 import styles from './styles'
 import { colors } from '../../styles/colors';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 type ChatRoomScreenPropsTypes = NativeStackScreenProps<ChatRoomsNavigatorStackParamList, 'ChatRoomScreen'>
 
 const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
-
+    const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
     const [room, setRoom] = useState<RoomsTypes>()
     const [user, setUser] = useState<UserDBData>()
     const [message, setMessage] = useState('')
@@ -50,31 +53,31 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
 
     const renderMovies: ListRenderItem<MessagesItemType> = ({ item }) => {
 
-        console.log('message' , item);
-
 
         return (
             <View style={{
                 flexDirection: 'row',
                 gap: 8,
                 marginVertical: 10,
+                paddingHorizontal: 12,
             }}>
-               {
-                 item.owner.photo ? <Image source={{ uri: item.owner.photo }} style={styles.profile_photo} /> : <ActivityIndicator />
-               }
-                <View>
-                    <Text style={{ color: colors.secondary }}>{item.owner.name}</Text>
-                    <Text style={{ color: '#fff' }}>{item.message}</Text>
+                {
+                    item.owner.photo ? <Image source={{ uri: item.owner.photo }} style={styles.profile_photo} /> : <ActivityIndicator />
+                }
+                <View style={{ width: '100%' }}>
+                    <Text style={{ color: colors.secondary }}>
+                        {
+                            currentUser?.displayName == item.owner.name ? 'You' : item.owner.name
+                        }
+                    </Text>
+                    <Text style={{ color: '#fff', width: '80%' }}>{item.message}</Text>
                 </View>
             </View>
         )
     }
 
-    const keyExtractor = (item: MessagesItemType) => {
-        console.log('on key' ,item.messageId);
-        
-        return item.messageId;
-      };
+    const keyExtractor = (item: MessagesItemType) => item.messageId
+
 
 
     return (
@@ -87,25 +90,25 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
                 data={room?.messages}
                 keyExtractor={keyExtractor}
                 renderItem={renderMovies}
+                contentContainerStyle={{ paddingBottom: 50 }}
             />
 
-            <View style={styles.inner}>
+            <KeyboardAvoidingView
+                style={{ position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 0, backgroundColor: colors.third }}
+                behavior="position"
+            >
                 <TextInput
                     placeholderTextColor='#eee8'
                     value={message}
                     onChangeText={setMessage}
-                    onSubmitEditing={() =>{
+                    onSubmitEditing={() => {
                         sendMessage(room, user, message, roomID)
                         setMessage('')
                     }}
-                    placeholder="Username"
+                    placeholder="Message"
                     style={styles.textInput}
                 />
-            </View>
-
-
-
-
+            </KeyboardAvoidingView>
         </View>
 
     )
@@ -115,15 +118,3 @@ export default ChatRoomScreen
 
 
 
-/*
-
-{"date": "2024-03-30T22:00:00.085Z",
- "message": "Lan",
-  "messageId": 6,
-   "owner": {"id": "wRiAXm0hVlUiiJDKaODL2CPLWG92", 
-   "name": "rider dev",
-    "photo": "https://firebasestorage.googleapis.com/v0/b/worldofthemovies-ce6c5.appspot.com/o/photos%2Fsuayipemre@gmail.com%2Fprofilephoto.png?alt=media&token=e5c9d42c-3147-4f92-8b35-6c0f8b378b59"}
-}
-
-
-*/

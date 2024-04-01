@@ -7,24 +7,15 @@ export default StyleSheet.create({
     backgroundColor: colors.third,
 
   },
-  inner: {
-    flex: 1,
-    justifyContent: 'center',
-    position:'absolute',
-    bottom:0,
-    right:0,
-    left:0,
-    backgroundColor:'#303030'
-
-    
-  },
+ 
 
   textInput: {
     height: 40,
     borderColor: '#000000',
-    borderBottomWidth: 1,
-    marginBottom: 36,
+    borderWidth: 1,
     color:colors.primary,
+    paddingHorizontal :20,
+
   },
   profile_photo:{
     width : 50,

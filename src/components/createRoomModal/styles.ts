@@ -11,6 +11,12 @@ export default StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
+        paddingVertical : 12,
+        borderTopWidth :0.3,
+        borderLeftWidth : 0.3,
+        borderRightWidth : 0.3,
+        borderColor : '#fff',
+        borderRadius :12,
 
     },
     title: {
@@ -18,26 +24,36 @@ export default StyleSheet.create({
         marginTop: 6,
         marginBottom: 60,
     },
-    roomname_label: {
-        color: colors.secondary,
-        fontSize: 14,
-        fontWeight: '500'
-    },
+
     close_modal_button: {
         position: 'absolute',
         top: 5,
         right: 10,
     },
+    input:{
+        borderWidth :1,
+        borderColor :'#fff',
+        borderRadius : 8,
+        width : width * 0.9,
+        height : height * 0.05,
+        paddingHorizontal : 5,
+        color : colors.primary,
+    },
     create_room_button_container:{
-        width : '100%',
+        width : width * 0.9,
         alignItems:'flex-end',
-        paddingEnd : 20
+        marginTop:10,
     },
     create_room_button: {
         width: width * 0.3,
         height: height * 0.04,
-        backgroundColor: 'red',
+        borderWidth :1,
+        borderRadius : 8,
+        borderColor : '#fff',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    button_text:{
+        color : colors.primary,
     },
 })

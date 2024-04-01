@@ -1,8 +1,7 @@
-import { Dimensions, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {  KeyboardAvoidingView, Modal,  Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { colors } from '../../styles/colors'
 import Ant from 'react-native-vector-icons/AntDesign'
-import AuthenticationInput from '../authenticationInput'
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { UUID } from '../../helpers/generateUUID'
 import firestore from '@react-native-firebase/firestore';
@@ -16,7 +15,7 @@ import styles from './styles'
 const CreateRoomModal: React.FC = () => {
     const [roomName, setRoomName] = useState('')
     const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
-    const{t} = useTranslation()
+    const { t } = useTranslation()
     const isModalVisible = useCreateChatRoomModalVisible()
 
     const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
@@ -49,8 +48,9 @@ const CreateRoomModal: React.FC = () => {
             })
 
             setRoomName('')
+            setIsCreateChatRoomModalVisible(false)
         } catch (e) {
-            console.log(e);
+            console.log(e)
 
         }
     }
@@ -63,17 +63,22 @@ const CreateRoomModal: React.FC = () => {
                 <Text style={styles.title}> {t('createRoom')}</Text>
 
                 <TouchableOpacity onPress={() => setIsCreateChatRoomModalVisible(false)} style={styles.close_modal_button}>
-                    <Ant name="close" color={colors.primary} size={24} />
+                    <Ant name="close" color={colors.primary} size={20} />
                 </TouchableOpacity>
 
-                <View>
-                    <Text style={styles.roomname_label}>Room Name</Text>
-                    <AuthenticationInput isSecret={false} placeholder='' setValue={setRoomName} value={roomName} />
-                </View>
+                <KeyboardAvoidingView keyboardVerticalOffset={50}  behavior="padding">
+                    <TextInput
+                        placeholder='Room Name'
+                        onChangeText={setRoomName}
+                        value={roomName}
+                        style={styles.input}
+                        placeholderTextColor={colors.secondary}
+                    />
+                </KeyboardAvoidingView>
 
                 <View style={styles.create_room_button_container}>
                     <TouchableOpacity style={styles.create_room_button} onPress={handleCreateRoom}>
-                        <Text>Create</Text>
+                        <Text style={styles.button_text}>Create</Text>
                     </TouchableOpacity>
                 </View>
 
