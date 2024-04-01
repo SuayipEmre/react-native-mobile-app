@@ -1,9 +1,8 @@
-import { Alert, Dimensions, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { colors } from '../../styles/colors'
 import Entypo from 'react-native-vector-icons/Entypo'
 import firestore from '@react-native-firebase/firestore';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import CreateRoomModal from '../../components/createRoomModal';
 import { RoomsTypes } from '../../types/RoomsDB';
 import { NavigationProp, useNavigation } from '@react-navigation/native'
@@ -11,6 +10,7 @@ import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
 import { UserDBData } from '../../types/UserDBdata'
 import { getUserFromDB } from '../../utils/getUserFromDB';
 import { joinToRoom } from '../../utils/joinToRoom';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -18,7 +18,7 @@ import { joinToRoom } from '../../utils/joinToRoom';
 const RoomsScreen = () => {
   const [rooms, setRooms] = useState<RoomsTypes[] | []>([])
   const [user, setUser] = useState<UserDBData>()
-
+const{t} = useTranslation()
   const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
 
 
@@ -75,16 +75,16 @@ const RoomsScreen = () => {
     } else {
       Alert.alert(
         'MM',
-        'You will join the room. Please adhere to the community guidelines."',
+        t('adhereGuidelines'),
         [
           {
-            text: 'Cancel',
+            text: t('cancel'),
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
 
           {
-            text: 'Agree',
+            text: t('agree'),
             onPress: async () => {
               await joinToRoom(roomid, roomName, rooms, user, navigation);
             },

@@ -30,5 +30,8 @@
     "cancel" : "Cancel",
     "emptyList" : "Your List is empty 🥱" ,
     "searchMovie" : "Search a Movie",
-    "searchTV" : "Search a TV Series"
+    "searchTV" : "Search a TV Series",
+    "adhereGuidelines" : "You will join the room. Please adhere to the community guidelines.",
+    "agree" : "Agree",
+    "succesfullyDeleted":  "Succesfully deleted chat room"
 }

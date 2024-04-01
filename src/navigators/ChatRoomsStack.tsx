@@ -10,6 +10,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import Evil from 'react-native-vector-icons/EvilIcons'
 import { deleteChatRoom } from '../utils/deleteChatRoom';
+import { useTranslation } from 'react-i18next';
 
 const Stack = createNativeStackNavigator<ChatRoomsNavigatorStackParamList>()
 
@@ -17,11 +18,11 @@ const Stack = createNativeStackNavigator<ChatRoomsNavigatorStackParamList>()
 export const ChatRoomsStack: React.FC = () => {
 
     const navigation = useNavigation<NavigationProp<ChatRoomsNavigatorStackParamList>>()
-
+    const { t } = useTranslation()
     const handleDeleteRoom = async (roomid: string) => {
-        deleteChatRoom(roomid)
+        await deleteChatRoom(roomid)
         navigation.navigate('RoomsScreen')
-        Alert.alert('MM', 'Succesfully deleted')
+        Alert.alert('MM', t('succesfullyDeleted'))
     }
 
     return (

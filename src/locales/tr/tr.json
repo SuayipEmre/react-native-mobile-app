@@ -30,7 +30,8 @@
     "cancel" : "İptal",
     "emptyList" : "Listen boş 🥱" ,
     "searchMovie" : "Film ara",
-    "searchTV" : "Dizi ara"
-
-    
+    "searchTV" : "Dizi ara",
+    "adhereGuidelines" : "Odaya katılacaksınız. Lütfen topluluk kurallarına uyun.",
+    "agree" : "Kabul Ediyorum",
+    "succesfullyDeleted":  "Sohbet odası başarıyla silindi"
 }
