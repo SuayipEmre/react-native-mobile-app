@@ -69,20 +69,15 @@ const ContentBySearchScreen: React.FC<ProfileProps> = ({ route }) => {
   }
 
 
-  const renderNoMatchesText = () => (
-    activeContent == ActiveContent.Movie ?
-      moviesData.results.length == 0 &&
-      <NoMatchesText searchValue={value} /> :
-      tvData.results.length == 0 &&
-      <NoMatchesText searchValue={value} />
-
-  )
-
-
 
   return (
     <View style={{ backgroundColor: colors.third, flex: 1 }}>
-      {renderNoMatchesText()}
+      {
+        activeContent == ActiveContent.Movie ?
+          moviesData?.results?.length == 0 && <NoMatchesText searchValue={value} /> :
+          tvData?.results?.length == 0 &&
+          <NoMatchesText searchValue={value} />
+      }
       {renderContent()}
     </View>
   )

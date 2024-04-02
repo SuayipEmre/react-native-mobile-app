@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import Header from '../../components/header'
 import FeaturedMovie from '../../components/featuredMovie'
 import { MovieTypes } from '../../types/movie'
@@ -8,10 +8,10 @@ import { ActiveContent } from '../../types/activeContent'
 
 
 type HomeScreenContainerPropsType = {
-    trendingMovies?: Array<MovieTypes>,
+    trendingMovies: MovieTypes,
     children: React.ReactNode
 }
-const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
+const HomeScreenContainer: React.FC<PropsWithChildren<HomeScreenContainerPropsType>>= ({
     trendingMovies,
     children,
 }) => {
@@ -21,7 +21,7 @@ const HomeScreenContainer: React.FC<HomeScreenContainerPropsType> = ({
         <>
             <ContentLayout>
                 <Header />
-                <FeaturedMovie content={trendingMovies && trendingMovies[0]} activeContent={ActiveContent.Movie} />
+                <FeaturedMovie content={trendingMovies} activeContent={ActiveContent.Movie} />
                 {children}
             </ContentLayout>
         </ >

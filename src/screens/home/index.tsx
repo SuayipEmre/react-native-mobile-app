@@ -75,7 +75,7 @@ const HomeScreen: React.FC = () => {
 
         <StatusBar barStyle={'light-content'} />
 
-        <HomeScreenContainer>
+        <HomeScreenContainer trendingMovies={trendingMovies?.results[0]}>
 
           {renderTrendingMovies()}
           {renderTrendingTV()}

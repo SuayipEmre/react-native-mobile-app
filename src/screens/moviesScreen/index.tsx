@@ -21,8 +21,6 @@ const MoviesScreen = () => {
     const {t} = useTranslation()
 
 
-    if (isTrendingMoviesError || popularMoviesError || topRatedMoviesError || upComingMoviesError) return <Error />
-    else if (isTrendingMoviesLoading || popularMoviesLoading || topRatedMoviesLoading || upComingMoviesLoading) return <Loading />
 
     const renderTrendingMovies = () => {
       if(isTrendingMoviesError) return <Text>{t('contentError')}</Text>

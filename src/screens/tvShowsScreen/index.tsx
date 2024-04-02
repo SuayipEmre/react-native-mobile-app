@@ -28,19 +28,16 @@ const TvShowsScreen = () => {
     const { data: onAirTvShows, isError: onAirTvShowsError, isLoading: onAirTvShowsLoading } = useFetchOnTheAirTVShowsQuery(language)
 
 
-    if (trendingTvShowsError || popularTvShowsError || topRatedTvShowsError || onAirTvShowsError) return <Error />
-    else if (trendingTvShowsLoading || popularTvShowsLoading || topRatedTvShowsLoading || onAirTvShowsLoading) return <Loading />
-
 
     const renderOnTheAirTV = () => {
-        if (trendingTvShowsError) return <Text>{t('contentError')}</Text>
-        else if (trendingTvShowsLoading) return <ActivityIndicator />
+        if (onAirTvShowsError) return <Text>{t('contentError')}</Text>
+        else if (onAirTvShowsLoading) return <ActivityIndicator />
         return <ContentListContainer title={t('onTheAir')} content={onAirTvShows.results} fadeDirection={fadeDirection.FadeInLeft} delaytime={100} activeContent={ActiveContent.TVShow} />
     }
 
     const renderTrendingTV = () => {
-        if (onAirTvShowsError) return <Text>{t('contentError')}</Text>
-        else if (onAirTvShowsLoading) return <ActivityIndicator />
+        if (trendingTvShowsError) return <Text>{t('contentError')}</Text>
+        else if (trendingTvShowsLoading) return <ActivityIndicator />
         return <ContentListContainer title={t('trendTv')} content={trendingTvShows.results} fadeDirection={fadeDirection.FadeInRight} delaytime={900} activeContent={ActiveContent.TVShow} />
     }
 
