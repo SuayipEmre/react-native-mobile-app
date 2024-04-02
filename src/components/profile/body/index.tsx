@@ -14,7 +14,7 @@ import { saveUserLanguagePreference } from '../../../utils/saveLanguagePreferenc
 import { useLanguage } from '../../../store/features/language/hooks'
 import { Language } from '../../../types/language'
 import ProfileSectionItem from './sectionItem'
-
+import styles from './styles'
 
 const ProfileBody : React.FC = () => {
   const currentUser: FirebaseAuthTypes.User | null = auth().currentUser
@@ -118,14 +118,3 @@ const ProfileBody : React.FC = () => {
 }
 
 export default ProfileBody
-
-const styles = StyleSheet.create({
-
-  subtitle: {
-    color: colors.primary,
-    fontSize: 12,
-    fontWeight: '300',
-    marginTop: 12,
-  },
-
-})

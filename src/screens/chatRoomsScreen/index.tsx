@@ -109,7 +109,7 @@ const{t} = useTranslation()
           rooms.map(item => (
             <TouchableOpacity key={item.id} style={styles.room_item} onPress={() => handleJoinToRoomReguest(item.id, item.roomName)}>
               <Text style={{ color: '#fff' }}>{item.roomName}</Text>
-              <Text style={styles.member_info}>{item.members.length} Members</Text>
+              <Text style={styles.member_info}>{item.members.length} {t('members')}</Text>
               <Entypo name='chevron-down' color={colors.primary} size={24} />
             </TouchableOpacity>
           ))

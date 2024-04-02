@@ -20,7 +20,6 @@ const LoginScreen: React.FC = () => {
 
     try {
       await auth().signInWithEmailAndPassword(email, password)
-      Alert.alert('MM', 'sucsessfuly')
     } catch (error: any | undefined) {
       Alert.alert('MM', error.code)
     }

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {  Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { setIsGenresModalVisible } from '../../../store/features/modals/genres/actions'
 import { colors } from '../../../styles/colors'

@@ -56,6 +56,7 @@ export const ChatRoomsStack: React.FC = () => {
                 component={RoomsScreen}
                 options={{
                     headerTintColor: '#fff',
+                    headerTitle : 'Chat Rooms',
                     headerStyle: {
                         backgroundColor: colors.third
                     },

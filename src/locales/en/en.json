@@ -38,5 +38,7 @@
     "app" : "App",
     "yourAccount" : "Your Account",
     "doYouApprove" : "The chat room will be deleted, do you approve?",
-    "yes" : "Yes"
+    "yes" : "Yes",
+    "contentError" : "An error occurred while loading the content.",
+    "members" : "Members"
 }

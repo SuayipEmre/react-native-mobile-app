@@ -46,10 +46,7 @@ const ContentDetailsScreen: React.FC<ProfileProps> = ({ route }) => {
 
 
   return (
-    <View style={{
-      backgroundColor: colors.third,
-      flex: 1,
-    }}>
+    <View style={{backgroundColor: colors.third, flex: 1}}>
       <ContentDetailScreenContainer
         movie={movieData}
         tvShow={tvData}

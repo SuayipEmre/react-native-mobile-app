@@ -12,7 +12,7 @@ import { ActiveContent } from '../../types/activeContent'
 
 
 type FeaturedMoviePropsTypes = {
-    content: MovieTypes | TvShowsTypes
+    content?: MovieTypes | TvShowsTypes
     activeContent : ActiveContent
 }
 

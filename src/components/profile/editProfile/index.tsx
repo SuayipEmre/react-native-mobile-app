@@ -199,7 +199,7 @@ const EditProfile: React.FC = () => {
                         {
                             isUpdatingProfile && <ActivityIndicator />
                         }
-                        <TouchableOpacity style={styles.save_button} disabled={userName.length < 6} onPress={handleUpdateProfile}>
+                        <TouchableOpacity style={styles.save_button} disabled={userName.length < 3} onPress={handleUpdateProfile}>
                             <Text style={styles.save_button_text}>{t('save')}</Text>
                         </TouchableOpacity>
                     </View>

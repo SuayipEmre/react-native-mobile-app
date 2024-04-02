@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { MovieTypes } from '../../types/movie'
 import { Image } from 'react-native'

@@ -38,5 +38,7 @@
     "app" : "Uygulama",
     "yourAccount" : "Hesabın",
     "doYouApprove" : "Sohbet odası silinecektir, onaylıyor musunuz?",
-    "yes" : "Evet"
+    "yes" : "Evet",
+    "contentError" : "Içerikler yüklenirken bir hata oluştu.",
+    "members" : "Katılımcı"
 }

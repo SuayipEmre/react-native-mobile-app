@@ -1,4 +1,4 @@
-import { StyleSheet,  View } from 'react-native'
+import {  StyleSheet,  View } from 'react-native'
 import React from 'react'
 import { colors } from '../../styles/colors';
 import { useFetchMoviesBygenreQuery } from '../../Services/MoviesService';
@@ -29,21 +29,29 @@ const ContentByGenreScreen: React.FC<ProfileProps> = ({ route }) => {
 
 
 
-    if (activeContent == ActiveContent.Movie) {
+  
 
-        if (movieError) return <Error />
-        else if (movieLoading) return <Loading />
-        
-    } else{
-        if (tvError) return <Error />
-        else if (tvLoading) return <Loading />
+
+    const renderContent = () => {
+      
+        if (activeContent == ActiveContent.Movie) {
+
+            if (movieError) return  <Error/>
+            else if (movieLoading) return <Loading/>
+            return <ContentByGenreScreenContainer  content={movieData.results} activeContent={activeContent} />
+            
+        } else{
+            if (tvError) return <Error/>
+            else if (tvLoading) return <Loading/>
+            return <ContentByGenreScreenContainer  content={tvData.results} activeContent={activeContent} />
+        }
+    
+
     }
-
-
 
     return (
         <View style={styles.container}>
-            <ContentByGenreScreenContainer  content={activeContent == ActiveContent.Movie ? movieData.results : tvData.results} activeContent={activeContent} />
+           {renderContent()}
         </View>
     )
 }

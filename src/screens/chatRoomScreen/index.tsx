@@ -1,4 +1,4 @@
-import { Text, View, FlatList, ListRenderItem, Image, ActivityIndicator, KeyboardAvoidingView, TouchableOpacity } from 'react-native'
+import { Text, View, FlatList, ListRenderItem, Image, ActivityIndicator, KeyboardAvoidingView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { ChatRoomsNavigatorStackParamList } from '../../navigators/types'
@@ -10,8 +10,6 @@ import { getRoomsDBRef, sendMessage } from '../../utils/sendMessage';
 import styles from './styles'
 import { colors } from '../../styles/colors';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
-import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 type ChatRoomScreenPropsTypes = NativeStackScreenProps<ChatRoomsNavigatorStackParamList, 'ChatRoomScreen'>
 
@@ -51,9 +49,14 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
     }, [roomID])
 
 
+    const getMessageSendTime = (datetime :string) => {
+        const date = new Date(datetime)
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    }
     const renderMovies: ListRenderItem<MessagesItemType> = ({ item }) => {
 
-
+        const date = new Date(item.date)
+        const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         return (
             <View style={{
                 flexDirection: 'row',
@@ -64,12 +67,16 @@ const ChatRoomScreen: React.FC<ChatRoomScreenPropsTypes> = ({ route }) => {
                 {
                     item.owner.photo ? <Image source={{ uri: item.owner.photo }} style={styles.profile_photo} /> : <ActivityIndicator />
                 }
-                <View style={{ width: '100%' }}>
-                    <Text style={{ color: colors.secondary }}>
-                        {
-                            currentUser?.displayName == item.owner.name ? 'You' : item.owner.name
-                        }
-                    </Text>
+                <View style={styles.right_content}>
+                    <View style={styles.right_content_top_content}>
+                        <Text style={styles.message_owner_username}>
+                            {
+                                currentUser?.displayName == item.owner.name ? 'You' : item.owner.name
+                            }
+
+                        </Text>
+                        <Text style={styles.message_time}>{getMessageSendTime(item.date)}</Text>
+                    </View>
                     <Text style={{ color: '#fff', width: '80%' }}>{item.message}</Text>
                 </View>
             </View>

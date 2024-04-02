@@ -28,6 +28,7 @@ const ContentListContainer: React.FC<ContentListContainerPropsType> = ({
 }
 ) => {
 
+    
     return (
         <Animated.View
             entering={fadeDirection == 'FadeInLeft' ? FadeInLeft.delay(delaytime) : FadeInRight.delay(delaytime).duration(delaytime).springify().damping(12)}
