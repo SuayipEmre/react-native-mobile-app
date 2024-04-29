@@ -33,5 +33,19 @@ Common Ground for TV and movie enthusiasts
   
 
 
+<div style="display: flex; "> 
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/signup.png" alt="signup" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/home.png" alt="homescreen" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/tv.png" alt="tvseries" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/categories.png" alt="categories" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/content%20by%20category.png" alt="content by category" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/detail.png" alt="content details" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/similar.png" alt="similar content" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/videos.png" alt="content videos" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/profile.png" alt="profile" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/list.png" alt="list" width="300"/>
+<img src="https://raw.githubusercontent.com/SuayipEmre/world-of-the-content/main/src/assets/imagesOfApp/message.png" alt="messages" width="300"/>
+</div>
+
 
 
